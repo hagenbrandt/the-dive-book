@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="54px" viewBox="0 0 375 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>footer</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-81.2%" y="-65.0%" width="262.5%" height="230.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path d="M2.5,0 L16,0 L16,20 L2.5,20 C1.11928813,20 0,18.8807119 0,17.5 L0,2.5 C0,1.11928813 1.11928813,0 2.5,0 Z" id="path-2"></path>
+        <filter x="-18.8%" y="-15.0%" width="137.5%" height="130.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner2"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner2" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-11-Pro-Copy" transform="translate(0.000000, -758.000000)">
+            <g id="app_pg_one" transform="translate(-10.000000, -40.000000)">
+                <g id="footer" transform="translate(0.000000, 798.000000)">
+                    <rect id="footer_bg" fill="#000D41" x="0" y="0" width="385" height="54"></rect>
+                    <g id="ICO/general/book" filter="url(#filter-1)" transform="translate(247.000000, 19.000000)" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M0,18 C0,16.3431458 1.11928813,15 2.5,15 L16,15" id="Shape" stroke="#B2FCFF" stroke-width="2"></path>
+                        <g id="Shape">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                            <use stroke="#B2FCFF" stroke-width="2" xlink:href="#path-2"></use>
+                        </g>
+                    </g>
+                    <g id="ICO/gerenal/home" transform="translate(41.000000, 17.500000)" stroke="#B2FCFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M0,7 L9,0 L18,7 L18,18 C18,19.1045695 17.1045695,20 16,20 L2,20 C0.8954305,20 0,19.1045695 0,18 L0,7 Z" id="Shape"></path>
+                        <polyline id="Shape" points="6 20 6 10 12 10 12 20"></polyline>
+                    </g>
+                    <g id="ICO/gerenal/world" transform="translate(336.000000, 19.000000)" stroke="#B2FCFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <circle id="Oval" cx="10" cy="10" r="10"></circle>
+                        <line x1="0" y1="10" x2="20" y2="10" id="Shape"></line>
+                        <path d="M10,0 C12.5012804,2.73835289 13.9227528,6.29203385 14,10 C13.9227528,13.7079661 12.5012804,17.2616471 10,20 C7.49871962,17.2616471 6.07724724,13.7079661 6,10 C6.07724724,6.29203385 7.49871962,2.73835289 10,0 L10,0 Z" id="Shape"></path>
+                    </g>
+                    <g id="ICO/general/lupe" transform="translate(136.000000, 19.000000)" stroke="#B2FCFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <circle id="Oval" cx="7.5" cy="7.5" r="7.5"></circle>
+                        <line x1="18" y1="18" x2="13" y2="13" id="Shape"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="23px" viewBox="0 0 18 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ICO/general/book</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-205.000000, -97.000000)" stroke="#B2FCFF" stroke-width="2">
+            <g id="ICO/general/book" transform="translate(206.000000, 98.500000)">
+                <path d="M0,18 C0,16.3431458 1.11928813,15 2.5,15 L16,15" id="Shape"></path>
+                <path d="M2.5,0 L16,0 L16,20 L2.5,20 C1.11928813,20 0,18.8807119 0,17.5 L0,2.5 C0,1.11928813 1.11928813,0 2.5,0 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

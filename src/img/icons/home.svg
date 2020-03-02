@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="22px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ICO/gerenal/home</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-6.000000, -96.000000)" stroke="#B2FCFF" stroke-width="2">
+            <g id="ICO/gerenal/home" transform="translate(7.000000, 97.000000)">
+                <path d="M0,7 L9,0 L18,7 L18,18 C18,19.1045695 17.1045695,20 16,20 L2,20 C0.8954305,20 0,19.1045695 0,18 L0,7 Z" id="Shape"></path>
+                <polyline id="Shape" points="6 20 6 10 12 10 12 20"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

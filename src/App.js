@@ -3,6 +3,7 @@ import DiveLogs from './DiveLog'
 import GlobalStyle from './common/GlobalStyles'
 import styled from 'styled-components'
 import img from './img/app_pg_one_bg.svg'
+import Footer from './Footer'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <DiveLogs />
         <DiveLogs />
         <DiveLogs />
+        <Footer />
       </BackgroundLog>
     </div>
   )
