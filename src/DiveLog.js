@@ -1,5 +1,4 @@
 import React from 'react'
-import logCard from './img/card.svg'
 import styled from 'styled-components'
 import img from './img/app_pg_one_bg.svg'
 import exampleImg from './img/diving_example.jpg'
@@ -27,7 +26,9 @@ export default function DiveLogs() {
       </div>
       <div className="dive__log__icon">
         <img src={bubble} alt="bubble" />
+        <p className="dive__log__icon__counter">17</p>
         <img src={heart} alt="heart" />
+        <p className="dive__log__icon__counter">17</p>
         <img src={mark} alt="mark" />
         <img src={connect} alt="connect" />
       </div>
@@ -89,5 +90,15 @@ const DiveLog = styled.div`
     width: auto;
     gap: 16px;
     margin: 12px 16px;
+    align-items: center;
+    justify-content: flex-start;
+
+    img:last-child {
+      margin-left: 14px;
+    }
+  }
+
+  .dive__log__icon__counter {
+    font-size: 6px;
   }
 `
