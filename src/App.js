@@ -1,9 +1,12 @@
 import React from 'react'
+import DiveLogs from './DiveLog'
+import GlobalStyle from './common/GlobalStyles'
 
 function App() {
   return (
     <div id="root">
-      <h1>Capstone Project</h1>
+      <GlobalStyle />
+      <DiveLogs />
     </div>
   )
 }

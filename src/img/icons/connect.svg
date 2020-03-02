@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ICO/general/connect</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-172.000000, -221.000000)" stroke="#3E64FF" stroke-width="2">
+            <g id="ICO/general/connect" transform="translate(173.000000, 222.000000)">
+                <circle id="Oval" cx="10" cy="2" r="2"></circle>
+                <circle id="Oval" cx="2" cy="7" r="2"></circle>
+                <circle id="Oval" cx="10" cy="11" r="2"></circle>
+                <line x1="4" y1="8" x2="9" y2="10" id="Shape"></line>
+                <line x1="9" y1="3" x2="4" y2="5" id="Shape"></line>
+            </g>
+        </g>
+    </g>
+</svg>
