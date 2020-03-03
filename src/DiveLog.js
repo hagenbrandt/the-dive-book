@@ -59,7 +59,6 @@ const DiveLog = styled.div`
   box-shadow: 3px 5px 7px #000d41;
 
   .dive__log__img {
-    /* display: flex; */
     height: 40%;
     border-radius: 12px 12px 0 0;
     background-repeat: no-repeat;

@@ -19,14 +19,10 @@ function App() {
   )
 }
 
-// const App = styled.div`
-// `
-
 const BackgroundLog = styled.div`
   background-image: url(${img});
   background-repeat: no-repeat;
   background-size: cover;
-  /* padding-top: 4px; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

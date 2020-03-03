@@ -4,6 +4,9 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
     }
+    #root {
+        height: 100%;
+    }
     body {
         display: grid;
         margin: 0;
@@ -11,9 +14,6 @@ const GlobalStyle = createGlobalStyle`
         width: 100vw;
         font-family: "Futura";
         color: #000d41;
-    }
-    #root {
-        height: 100%;
     }
     a {
         text-decoration: none;
