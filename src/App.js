@@ -8,7 +8,7 @@ import Footer from './Footer'
 function App() {
   return (
     <div id="root">
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <BackgroundLog>
         <DiveLogs />
         <DiveLogs />
