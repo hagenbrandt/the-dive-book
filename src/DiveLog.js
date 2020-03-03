@@ -15,22 +15,35 @@ export default function DiveLogs() {
         style={{ backgroundImage: `url(${exampleImg})` }}
         className="dive__log__img"
       />
-      <h1 className="dive__log__header">Thailand - Kho Tao - Diving Spot</h1>
-      <div className="dive__log__user">
+      <a className="dive__log__header__link" href="#">
+        <h1 className="dive__log__header">Thailand - Kho Tao - Diving Spot</h1>
+      </a>
+      <a className="dive__log__user__link" href="#">
         <div className="dive__log__user">
-          <img className="dive__log__portrait" src={portrait} alt="" />
+          <div className="dive__log__user">
+            <img className="dive__log__portrait" src={portrait} alt="" />
+          </div>
+          <div className="dive__log__name">
+            <h3 className="dive__log__name__header">Hagen Brandt</h3>
+          </div>
         </div>
-        <div className="dive__log__name">
-          <h3 className="dive__log__name__header">Hagen Brandt</h3>
-        </div>
-      </div>
+      </a>
       <div className="dive__log__icon">
-        <img src={bubble} alt="bubble" />
+        <a href="#">
+          <img src={bubble} alt="bubble" />
+        </a>
+
         <p className="dive__log__icon__counter">17</p>
-        <img src={heart} alt="heart" />
+        <a className="dive__log__icon__link" href="#">
+          <img src={heart} alt="heart" />
+        </a>
         <p className="dive__log__icon__counter">17</p>
-        <img src={mark} alt="mark" />
-        <img src={connect} alt="connect" />
+        <a className="dive__log__icon__link" href="#">
+          <img src={mark} alt="mark" />
+        </a>
+        <a className="dive__log__icon__link" href="#">
+          <img src={connect} alt="connect" />
+        </a>
       </div>
     </DiveLog>
   )
@@ -38,6 +51,7 @@ export default function DiveLogs() {
 
 const DiveLog = styled.div`
   background-color: #ecfcff;
+  color: #000d41;
   width: 287px;
   height: 188px;
   margin-top: 60px;
@@ -57,6 +71,7 @@ const DiveLog = styled.div`
     position: relative;
     margin-top: 12px;
     font-size: 14px;
+    color: #000d41;
     text-align: left;
     margin-left: 8px;
   }
@@ -81,7 +96,8 @@ const DiveLog = styled.div`
   }
 
   .dive__log__name__header {
-    font-size: 8px;
+    font-size: 10px;
+    color: #000d41;
   }
 
   .dive__log__icon {
@@ -100,5 +116,6 @@ const DiveLog = styled.div`
 
   .dive__log__icon__counter {
     font-size: 6px;
+    color: #3e64ff;
   }
 `

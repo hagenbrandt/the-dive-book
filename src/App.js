@@ -19,16 +19,20 @@ function App() {
   )
 }
 
+// const App = styled.div`
+// `
+
 const BackgroundLog = styled.div`
   background-image: url(${img});
   background-repeat: no-repeat;
-  height: 100vh;
   background-size: cover;
   /* padding-top: 4px; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: scroll;
+  height: 100%;
 `
 
 export default App

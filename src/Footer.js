@@ -8,23 +8,29 @@ import world from './img/icons/world.svg'
 export default function Footer() {
   return (
     <FooterStyle>
-      <img src={home} alt="home" />
-      <img src={lens} alt="lens" />
-      <img src={book} alt="book" />
-      <img src={world} alt="world" />
+      <a className="footer__link__icon" href="#">
+        <img src={home} alt="home" />
+      </a>
+      <a className="footer__link__icon" href="#">
+        <img src={lens} alt="lens" />
+      </a>
+      <a className="footer__link__icon" href="#">
+        <img src={book} alt="book" />
+      </a>
+      <a className="footer__link__icon" href="#">
+        <img src={world} alt="world" />
+      </a>
     </FooterStyle>
   )
 }
 
 const FooterStyle = styled.footer`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex;
-  align-self: flex-end;
+  align-items: center;
   justify-content: space-around;
   background-color: #000d41;
   height: 54px;
   width: 100vw;
-  margin-bottom: 0;
-  padding-bottom: -10;
 `
