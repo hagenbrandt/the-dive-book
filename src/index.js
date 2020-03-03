@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom'
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import DetailLog from './DetailLog'
+import Footer from './Footer'
 import * as serviceWorker from './serviceWorker'
 import GlobalStyle from './common/GlobalStyles'
+import BackgroundLog from './BackgroundLog'
 
 const routing = (
   <Router>
-    <div>
+    <GlobalStyle />
+    <BackgroundLog>
       <Route exact path="/" component={App} />
       <Route path="/DetailLog" component={DetailLog} />
-    </div>
+    </BackgroundLog>
+
+    <Footer />
   </Router>
 )
 
