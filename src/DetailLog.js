@@ -149,8 +149,7 @@ const LogBackground = styled.article`
       list-style-type: none;
       padding-left: 0;
 
-      > li {
-        /* display: inline-block; */
+      li {
         background-color: rgb(0, 13, 65);
         color: rgb(236, 252, 255);
         border-radius: 8px;
@@ -159,98 +158,4 @@ const LogBackground = styled.article`
       }
     }
   }
-  /* 
-  .log__detail__header__text {
-  }
-
-  .log__detail__hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(
-      to right,
-      rgba(0, 13, 65, 0),
-      rgba(0, 13, 65, 0.75),
-      rgba(0, 13, 65, 0)
-    );
-  } */
-
-  /* background-color: rgba(236, 252, 255, 0.8); */
-  /* margin: 46px;
-  padding: 12px;
-  border-radius: 24px; */
-  /* .log__detail__img {
-    position: relative;
-    bottom: 0;
-    border-radius: 12px 12px 0 0;
-    width: 100%;
-    size: cover;
-    margin: 0;
-  }
-
-  .log__detail__bg {
-    height: 60%;
-    border-radius: 12px 12px 0 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y: top;
-  }
-
-  .log__detail__img {
-    margin: 0;
-    padding: 0;
-  }
-  .log__detail__icons {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 12px;
-    height: 20px;
-    width: 100%;
-
-    > img {
-      width: 20px;
-    }
-
-    > p {
-      text-align: justify;
-      margin: 10px;
-      opacity: 0.8;
-    }
-  }
-
-  .log__detail__icons__text {
-    display: flex;
-    margin-right: 8px;
-    margin-top: 0;
-  }
-
-  .log__detail__tags {
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 4px;
-
-    > li {
-      background-color: rgb(0, 13, 65);
-      color: rgb(236, 252, 255);
-      border-radius: 8px;
-      margin-left: 6px;
-      padding: 2px;
-    }
-  }
-
-  .log__detail__info {
-    list-style-type: none;
-  }
-
-  .log__detail__hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(
-      to right,
-      rgba(0, 13, 65, 0),
-      rgba(0, 13, 65, 0.75),
-      rgba(0, 13, 65, 0)
-    );
-  } */
 `
