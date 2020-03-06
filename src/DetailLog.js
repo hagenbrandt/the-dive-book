@@ -45,7 +45,7 @@ export default function DetailLog() {
           obcaecati est? Eum, saepe tenetur. Vero quis commodi nam totam
           consectetur in a corrupti. At eveniet tenetur cupiditate voluptates
           totam cum nihil sed nemo sequi earum laborum accusamus et, blanditiis
-          necessitatibus ipsam esse id doloribus?{' '}
+          necessitatibus ipsam esse id doloribus?
         </p>
         <ul className="log__detail__tags">
           <li>saltwater</li>
