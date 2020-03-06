@@ -1,4 +1,6 @@
 import React from 'react'
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import home from './img/icons/home.svg'
 import lens from './img/icons/lupe.svg'
@@ -8,9 +10,9 @@ import world from './img/icons/world.svg'
 export default function Footer() {
   return (
     <FooterStyle>
-      <a className="footer__link__icon" href="#">
+      <Link to="/" className="footer__link__icon">
         <img src={home} alt="home" />
-      </a>
+      </Link>
       <a className="footer__link__icon" href="#">
         <img src={lens} alt="lens" />
       </a>
