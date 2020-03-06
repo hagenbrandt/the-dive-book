@@ -1,6 +1,6 @@
 import React from 'react'
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import styled from 'styled-components'
-import img from './img/app_pg_one_bg.svg'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
 import bubble from './img/icons/bubble.svg'
@@ -15,9 +15,9 @@ export default function DiveLogs() {
         style={{ backgroundImage: `url(${exampleImg})` }}
         className="dive__log__img"
       />
-      <a className="dive__log__header__link" href="#">
+      <Link to="/DetailLog" className="dive__log__header__link">
         <h1 className="dive__log__header">Thailand - Kho Tao - Diving Spot</h1>
-      </a>
+      </Link>
       <a className="dive__log__user__link" href="#">
         <div className="dive__log__user">
           <div className="dive__log__user">
