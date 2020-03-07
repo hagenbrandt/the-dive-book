@@ -3,10 +3,9 @@ import axios from 'axios'
 import DiveLogs from './DiveLog'
 import Footer from './Footer'
 
-const App = () => {
-  const [dives, setDives] = useState([])
-  const [newDive, setNewDive] = useState([])
-  const [showAll, setShowAll] = useState(true)
+const App = props => {
+  const { country, city, point } = props
+  const [dives, setDives] = useState([props])
 
   const hookDives = () => {
     console.log('effect')
@@ -17,17 +16,14 @@ const App = () => {
   }
   useEffect(hookDives, [])
   console.log('render', dives.length, 'dives')
-  console.log(dives.id)
+  console.log(dives[0].country)
 
   return (
     <div id="root">
-      {/* <BackgroundLog> */}
-      <DiveLogs />
-      <DiveLogs />
-      <DiveLogs />
-      <DiveLogs />
+      {dives.map(dive => (
+        <DiveLogs country={dive.country} city={dive.city} point={dive.point} />
+      ))}
       <Footer />
-      {/* </BackgroundLog> */}
     </div>
   )
 }

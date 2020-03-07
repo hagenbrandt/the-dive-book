@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function LogBook() {
+const LogBook = props => {
   return (
     <LogBookForm>
       <section className="form__dates">
@@ -116,6 +116,7 @@ export default function LogBook() {
         <textarea name="description" id="" cols="30" rows="10"></textarea>
       </section>
       <button type="submit">Submit</button>
+      {/* <button onClick={() => setDives()} */}
     </LogBookForm>
   )
 }
@@ -207,3 +208,4 @@ const LogBookForm = styled.form`
     justify-content: space-between;
   }
 `
+export default LogBook
