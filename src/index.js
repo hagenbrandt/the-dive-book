@@ -7,6 +7,7 @@ import Footer from './Footer'
 import * as serviceWorker from './serviceWorker'
 import GlobalStyle from './common/GlobalStyles'
 import BackgroundLog from './BackgroundLog'
+import LogBook from './Logbook'
 
 const routing = (
   <Router>
@@ -14,6 +15,7 @@ const routing = (
     <BackgroundLog>
       <Route exact path="/" component={App} />
       <Route path="/DetailLog" component={DetailLog} />
+      <Route path="/LogBook" component={LogBook} />
     </BackgroundLog>
 
     <Footer />

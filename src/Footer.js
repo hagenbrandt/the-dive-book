@@ -16,9 +16,9 @@ export default function Footer() {
       <a className="footer__link__icon" href="#">
         <img src={lens} alt="lens" />
       </a>
-      <a className="footer__link__icon" href="#">
+      <Link to="/LogBook" className="footer__link__icon">
         <img src={book} alt="book" />
-      </a>
+      </Link>
       <a className="footer__link__icon" href="#">
         <img src={world} alt="world" />
       </a>
