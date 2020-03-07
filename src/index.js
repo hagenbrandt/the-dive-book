@@ -8,7 +8,12 @@ import * as serviceWorker from './serviceWorker'
 import GlobalStyle from './common/GlobalStyles'
 import BackgroundLog from './BackgroundLog'
 import LogBook from './Logbook'
+import axios from 'axios'
 
+// axios.get('http://localhost:3001/dives').then(response => {
+//   const dives = response.data
+//   ReactDOM.render(<App dives={dives} />, document.getElementById('root'))
+// })
 const routing = (
   <Router>
     <GlobalStyle />
