@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import exampleImg from './img/diving_example.jpg'
 import goggles from './img/icons/goggles.svg'
 import watch from './img/icons/watch.svg'
 import depth from './img/icons/depth.svg'
 
-export default function DetailLog() {
+const DetailLog = props => {
+  const { point, id } = props
+
   return (
     <LogBackground className="log__detail">
       <header
@@ -13,7 +16,7 @@ export default function DetailLog() {
         style={{ backgroundImage: `url(${exampleImg})` }}
       ></header>
       <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">Diving Spot</h2>
+        <h2 className="log__detail__header__three">{`${point}`}</h2>
         <hr className="log__detail__hr" />
       </section>
       <section className="log__detail__icons">
@@ -159,3 +162,4 @@ const LogBackground = styled.article`
     }
   }
 `
+export default DetailLog

@@ -14,20 +14,14 @@ import axios from 'axios'
 //   const dives = response.data
 //   ReactDOM.render(<App dives={dives} />, document.getElementById('root'))
 // })
-const routing = (
-  <Router>
+
+ReactDOM.render(
+  <>
     <GlobalStyle />
-    <BackgroundLog>
-      <Route exact path="/" component={App} />
-      <Route path="/DetailLog" component={DetailLog} />
-      <Route path="/LogBook" component={LogBook} />
-    </BackgroundLog>
-
-    <Footer />
-  </Router>
+    <App />
+  </>,
+  document.getElementById('root')
 )
-
-ReactDOM.render(routing, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
