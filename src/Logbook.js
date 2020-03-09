@@ -4,9 +4,15 @@ import styled from 'styled-components'
 const LogBook = props => {
   return (
     <LogBookForm>
+      {/* <LogBookForm onSubmit={handleSubmit}> */}
       <section className="form__dates">
         <h4>Date</h4>
-        <input type="date" className="form__input" />
+        <input
+          type="date"
+          className="form__input"
+          value={'date'}
+          onChange={''}
+        />
         <h4>Dive No.</h4>
         <input type="number" className="form__input" />
       </section>
@@ -119,6 +125,8 @@ const LogBook = props => {
       {/* <button onClick={() => setDives()} */}
     </LogBookForm>
   )
+
+  const handleSubmit = () => {}
 }
 
 const LogBookForm = styled.form`

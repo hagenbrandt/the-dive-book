@@ -1,5 +1,10 @@
 import React from 'react'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import {
+  Route,
+  Link,
+  BrowserRouter as Router,
+  useParams,
+} from 'react-router-dom'
 import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
@@ -8,14 +13,14 @@ import heart from './img/icons/heart.svg'
 import mark from './img/icons/mark.svg'
 import connect from './img/icons/connect.svg'
 
-export default function DiveLogs({ country, city, point }) {
+export default function DiveLogs({ country, city, point, id }) {
   return (
     <DiveLog className="dive__log">
       <div
         style={{ backgroundImage: `url(${exampleImg})` }}
         className="dive__log__img"
       />
-      <Link to="/DetailLog" className="dive__log__header__link">
+      <Link to={'/DetailLog/' + id} className="dive__log__header__link">
         <h1 className="dive__log__header">
           {country} - {city} - {point}
         </h1>

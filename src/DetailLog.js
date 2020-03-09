@@ -1,22 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { getDives } from './services'
 import exampleImg from './img/diving_example.jpg'
 import goggles from './img/icons/goggles.svg'
 import watch from './img/icons/watch.svg'
 import depth from './img/icons/depth.svg'
 
-const DetailLog = props => {
-  const { point, id } = props
+const DetailLog = () => {
+  let { id } = useParams()
+  const [dives, setDives] = useState([])
 
-  return (
+  useEffect(() => {
+    getDives(id).then(res => {
+      setDives(res.data)
+    })
+  }, [id])
+  console.log(dives)
+  console.log(!!dives)
+
+  return !!dives ? (
     <LogBackground className="log__detail">
       <header
         className="log__detail__header"
         style={{ backgroundImage: `url(${exampleImg})` }}
       ></header>
       <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">{`${point}`}</h2>
+        <h2 className="log__detail__header__three">{`${dives.point}`}</h2>
         <hr className="log__detail__hr" />
       </section>
       <section className="log__detail__icons">
@@ -51,11 +61,14 @@ const DetailLog = props => {
           necessitatibus ipsam esse id doloribus?
         </p>
         <ul className="log__detail__tags">
-          <li>saltwater</li>
+          <li>{`${dives.watertype}`}</li>
+          <li>{`${dives.country}`}</li>
           <li>fun dive</li>
         </ul>
       </section>
     </LogBackground>
+  ) : (
+    'no dives'
   )
 }
 

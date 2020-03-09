@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 import DiveLogs from './DiveLog'
 import { getDives } from './services'
+import LogList from './LogList'
 import BackgroundLog from './BackgroundLog'
 import DetailLog from './DetailLog'
 import LogBook from './Logbook'
@@ -34,18 +35,8 @@ const App = props => {
     <Router>
       <BackgroundLog>
         <Switch>
-          <Route exact path="/abc" />
-          {/* <div>
-            {dives.map(dive => (
-              <DiveLogs
-                country={dive.country}
-                city={dive.city}
-                point={dive.point}
-                id={dive.id}
-              />
-            ))}
-          </div> */}
-          <Route path="/DetailLog" component={DetailLog} />
+          <Route exact path="/" component={LogList} />
+          <Route exact path="/DetailLog/:id" component={DetailLog} />
           <Route path="/LogBook" component={LogBook} />
         </Switch>
       </BackgroundLog>

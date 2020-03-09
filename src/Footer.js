@@ -13,20 +13,18 @@ import world from './img/icons/world.svg'
 export default function Footer() {
   return (
     <FooterStyle>
-      <Router>
-        <Link to="/" className="footer__link__icon">
-          <img src={home} alt="home" />
-        </Link>
-        <a className="footer__link__icon" href="#">
-          <img src={lens} alt="lens" />
-        </a>
-        <Link to="/LogBook" className="footer__link__icon">
-          <img src={book} alt="book" />
-        </Link>
-        <a className="footer__link__icon" href="#">
-          <img src={world} alt="world" />
-        </a>
-      </Router>
+      <Link to="/" className="footer__link__icon">
+        <img src={home} alt="home" />
+      </Link>
+      <a className="footer__link__icon" href="#">
+        <img src={lens} alt="lens" />
+      </a>
+      <Link to="/LogBook" className="footer__link__icon">
+        <img src={book} alt="book" />
+      </Link>
+      <a className="footer__link__icon" href="#">
+        <img src={world} alt="world" />
+      </a>
     </FooterStyle>
   )
 }

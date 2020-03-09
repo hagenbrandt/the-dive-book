@@ -17,7 +17,7 @@ import axios from 'axios'
 
 ReactDOM.render(
   <>
-    {/* <GlobalStyle /> */}
+    <GlobalStyle />
     <App />
   </>,
   document.getElementById('root')
