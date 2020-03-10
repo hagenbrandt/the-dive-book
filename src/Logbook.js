@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import log from './log'
+import { getDives, postDives } from './services'
 
-const LogBook = props => {
+function LogBook({ onSubmit }) {
+  const [dives, setDives] = useState()
+
+  // useEffect(() => {
+  //   getDives().then(res => {
+  //     setDives(res.data)
+  //   })
+  // }, [])
+  // console.log(dives)
+
   return (
-    <LogBookForm>
-      {/* <LogBookForm onSubmit={handleSubmit}> */}
+    // <LogBookForm>
+    <LogBookForm onSubmit={handleSubmit}>
       <section className="form__dates">
         <h4>Date</h4>
-        <input
-          type="date"
-          className="form__input"
-          value={'date'}
-          onChange={''}
-        />
+        <input type="date" className="form__input" value={'date'} />
         <h4>Dive No.</h4>
-        <input type="number" className="form__input" />
+        <input type="number" name="divenumber" className="form__input" />
       </section>
       <section className="form__position">
         <input type="text" className="form__input" placeholder="Country" />
@@ -126,7 +132,19 @@ const LogBook = props => {
     </LogBookForm>
   )
 
-  const handleSubmit = () => {}
+  function handleSubmit(event) {
+    event.preventDefault()
+    console.log(event.target.values)
+    setDives(event.target.values)
+    const data = new FormData(event.target)
+    console.log(data.get)
+
+    // postDives(data).then(() => {
+    //   getDives().then(res => {
+    //     setDives(res.data)
+    //   })
+    // })
+  }
 }
 
 const LogBookForm = styled.form`
