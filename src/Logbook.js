@@ -1,62 +1,130 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import log from './log'
-import { getDives, postDives } from './services'
+import { postDives, postLogs } from './services'
 
-function LogBook({ onSubmit }) {
-  const [dives, setDives] = useState()
-
-  // useEffect(() => {
-  //   getDives().then(res => {
-  //     setDives(res.data)
-  //   })
-  // }, [])
-  // console.log(dives)
-
+const LogBook = () => {
+  const [dives, setDives] = useState({})
+  console.log('dives.date', dives.date)
+  console.log('!!dives.date', !!dives.date)
   return (
-    // <LogBookForm>
     <LogBookForm onSubmit={handleSubmit}>
       <section className="form__dates">
         <h4>Date</h4>
-        <input type="date" className="form__input" value={'date'} />
+        <input
+          type="date"
+          className="form__input"
+          name="date"
+          value={!!dives.date && dives.date}
+          onChange={handleChange}
+        />
         <h4>Dive No.</h4>
-        <input type="number" name="divenumber" className="form__input" />
+        <input
+          type="number"
+          className="form__input"
+          name="diveNumber"
+          value={!!dives.diveNumber && dives.diveNumber}
+          onChange={handleChange}
+        />
       </section>
       <section className="form__position">
-        <input type="text" className="form__input" placeholder="Country" />
-        <input type="text" className="form__input" placeholder="City" />
-        <input type="text" className="form__input" placeholder="Point" />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Country"
+          name="country"
+          value={!!dives.country && dives.country}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="City"
+          name="city"
+          value={!!dives.city && dives.city}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Point"
+          name="point"
+          value={!!dives.point && dives.point}
+          onChange={handleChange}
+        />
       </section>
       <section className="form__values__entry">
         <h4>Entry</h4>
         <p>Time</p>
-        <input type="time" className="form__input" />
+        <input
+          type="time"
+          className="form__input"
+          name="entryTime"
+          value={!!dives.entryTime && dives.entryTime}
+          onChange={handleChange}
+        />
         <p>Air</p>
-        <input type="number" className="form__input" placeholder="bar" />
+        <input
+          type="number"
+          className="form__input"
+          placeholder="bar"
+          name="entryAir"
+          value={!!dives.entryAir && dives.entryAir}
+          onChange={handleChange}
+        />
       </section>
       <section className="form__values__exit">
         <h4>Exit</h4>
         <p>Time</p>
-        <input type="time" className="form__input" />
+        <input
+          type="time"
+          className="form__input"
+          name="exitTime"
+          value={!!dives.exitTime && dives.exitTime}
+          onChange={handleChange}
+        />
         <p>Air</p>
-        <input type="number" className="form__input" placeholder="bar" />
+        <input
+          type="number"
+          className="form__input"
+          placeholder="bar"
+          name="exitAir"
+          value={!!dives.exitAir && dives.exitAir}
+          onChange={handleChange}
+        />
       </section>
       <section className="form__dive">
         <h4>Water type</h4>
-        <select name="water-type" id="wt">
-          <option value="salt-water">salt water</option>
-          <option value="fresh-water">fresh water</option>
-          <option value="brackish-water">brackish water</option>
+        <select
+          name="water-type"
+          id="wt"
+          value={!!dives.waterType && dives.waterType}
+          onChange={handleChange}
+        >
+          <option value="default" name="default">
+            --choose water type--
+          </option>
+          <option value="salt-water" name="saltWater">
+            salt water
+          </option>
+          {/* <option value="salt-water" name="saltWater" value={!!dives.saltWater && (dives.saltWater===true):(dives.saltWater===false)} >salt water</option> */}
+          <option value="fresh-water" name="saltWater">
+            fresh water
+          </option>
+          <option value="brackish-water" name="saltWater">
+            brackish water
+          </option>
         </select>
         <h4>Type of Dive</h4>
         <div className="form__dive__checkboxes">
-          <div className="checkbox">
+          <div className="checkbox" name="fun">
             <p>fun</p>
             <input
               type="checkbox"
               className="form__input"
               name="fun"
               id="fun"
+              value={(dives.fun = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -66,6 +134,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="drift"
               id="drift"
+              value={(dives.drift = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -75,6 +145,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="night"
               id="night"
+              value={(dives.night = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -84,6 +156,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="deep"
               id="deep"
+              value={(dives.deep = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -93,6 +167,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="cave"
               id="cave"
+              value={(dives.cave = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -102,6 +178,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="wreck"
               id="wreck"
+              value={(dives.wreck = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -111,6 +189,8 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="rescue"
               id="rescue"
+              value={(dives.rescue = true)}
+              onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -120,33 +200,40 @@ function LogBook({ onSubmit }) {
               className="form__input"
               name="ice"
               id="ice"
+              value={(dives.ice = true)}
+              onChange={handleChange}
             />
           </div>
         </div>
       </section>
       <section className="form__text">
-        <textarea name="description" id="" cols="30" rows="10"></textarea>
+        <textarea
+          id=""
+          cols="30"
+          rows="10"
+          name="description"
+          value={!!dives.description ? dives.description : ''}
+          onChange={handleChange}
+        ></textarea>
       </section>
       <button type="submit">Submit</button>
       {/* <button onClick={() => setDives()} */}
     </LogBookForm>
   )
-
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(event.target.values)
-    setDives(event.target.values)
-    const data = new FormData(event.target)
-    console.log(data.get)
-
-    // postDives(data).then(() => {
-    //   getDives().then(res => {
-    //     setDives(res.data)
-    //   })
-    // })
+    console.log('form submitted:')
+    console.log('event.target:', event.target)
+    console.log('event.target.value:', event.target.value)
+    postDives(dives)
+    postLogs(dives)
+  }
+  function handleChange(event) {
+    console.log('change on event.target:', event.target)
+    setDives({ ...dives, [event.target.name]: event.target.value })
+    console.log('dive:', dives)
   }
 }
-
 const LogBookForm = styled.form`
   display: grid;
   position: relative;
@@ -155,7 +242,6 @@ const LogBookForm = styled.form`
   padding: 12px;
   gap: 12px;
   margin-bottom: 80px;
-
   .form__input {
     border-radius: 4px;
     background-color: #3e64ff;
@@ -165,16 +251,13 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
     /* box-shadow: inset 0px 4px 8px 2px , 0.4); */
-
     ::placeholder {
       color: #ecfcff;
     }
-
     input {
       color: #ecfcff;
     }
   }
-
   .form__position {
     /* margin: 8px; */
     > input {
@@ -182,7 +265,6 @@ const LogBookForm = styled.form`
       margin-bottom: 12px;
     }
   }
-
   select {
     background-color: #3e64ff;
     color: #ecfcff;
@@ -192,11 +274,9 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
   }
-
   input[type='checkbox'] {
     box-shadow: none;
   }
-
   textarea {
     background-color: #3e64ff;
     color: #ecfcff;
@@ -208,7 +288,6 @@ const LogBookForm = styled.form`
     /* margin-left: 8px;
     margin-right: 8px; */
   }
-
   button {
     background-color: #000d41;
     color: #ecfcff;
@@ -219,14 +298,12 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
   }
-
   .form__dive__checkboxes {
     display: flex;
     /* flex-direction: row; */
     align-items: center;
     flex-wrap: wrap;
   }
-
   div {
     display: flex;
     align-items: center;

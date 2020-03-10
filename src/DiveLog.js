@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Route,
-  Link,
-  BrowserRouter as Router,
-  useParams,
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'

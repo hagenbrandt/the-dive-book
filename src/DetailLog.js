@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getDives } from './services'
 import exampleImg from './img/diving_example.jpg'
 import goggles from './img/icons/goggles.svg'
@@ -84,15 +84,12 @@ const LogBackground = styled.article`
     background-size: cover;
     background-position: center;
     height: 200px;
-    /* width: auto; */
     border-radius: 12px 12px 0 0;
   }
 
   .log__detail__header__text {
     height: auto;
-    /* padding: 12px; */
     background-color: rgba(236, 252, 255, 0.8);
-    /* align-items: center; */
 
     .log__detail__header__three {
       text-align: center;
