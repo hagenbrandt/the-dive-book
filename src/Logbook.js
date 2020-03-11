@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import uuid from 'react-uuid'
+import uid from 'react-uid'
 import styled from 'styled-components'
 import { postDives, postLogs, getLogs } from './services'
 
 export default function LogBook() {
   const [dives, setDives] = useState([])
   const { register, handleSubmit, getValues } = useForm({
-    defaultValues: {},
+    defaultValues: { id: uuid() },
   })
 
   // useEffect(() => {
@@ -24,6 +26,9 @@ export default function LogBook() {
     postLogs(data)
   }
 
+  // const onSubmit = () => {
+  //   console.log(uuid())
+  // }
   // console.log('dives.date', dives.date)
   // console.log('!!dives.date', !!dives.date)
 
@@ -31,6 +36,7 @@ export default function LogBook() {
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
       <section className="form__dates">
         <h4>Date</h4>
+        <input className="form__dates__id" name="id" ref={register} />
         <input
           type="date"
           className="form__input"
@@ -288,6 +294,11 @@ const LogBookForm = styled.form`
   padding: 12px;
   gap: 12px;
   margin-bottom: 80px;
+
+  .form__dates__id {
+    display: none;
+  }
+
   .form__input {
     border-radius: 4px;
     background-color: #3e64ff;
