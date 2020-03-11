@@ -2,16 +2,15 @@ import axios from 'axios'
 import { logsRef } from './firebase'
 
 export function getDives(id = '') {
-  return axios.get(`http://localhost:3001/dives/` + id)
+  // return axios.get(`http://localhost:3001/dives/` + id)
+  return fetchLogs()
 }
 
 export function postDives(object) {
   return axios.post('http://localhost:3001/dives/', object)
 }
 
-export function getLogs() {
-  return fetchLogs()
-}
+export function getLogs(documentId, data) {}
 
 export function postLogs(data) {
   return logsRef
@@ -52,11 +51,11 @@ export function patchLogs(documentId, data) {
 
 function fetchLogs() {
   return logsRef.get().then(querySnapshot => {
-    let cardsData = []
+    let logsData = []
     querySnapshot.forEach(doc => {
-      cardsData.push(doc.data())
+      logsData.push(doc.data())
     })
-
-    return cardsData
+    // debugger
+    return logsData
   })
 }

@@ -1,29 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import { postDives, postLogs } from './services'
+import { postDives, postLogs, getLogs } from './services'
 
-const LogBook = () => {
-  const [dives, setDives] = useState({})
-  console.log('dives.date', dives.date)
-  console.log('!!dives.date', !!dives.date)
+export default function LogBook() {
+  const [dives, setDives] = useState([])
+  const { register, handleSubmit, getValues } = useForm({
+    defaultValues: {},
+  })
+
+  // useEffect(() => {
+  //   getLogs().then(res => {
+  //     // setDives(res.data)
+  //     console.log(res)
+  //   })
+  // }, [dives])
+
+  const onSubmit = data => {
+    console.log('selected data: ', data)
+    // const values = getValues()
+    setDives([...dives, { data }])
+    console.log('dives: ', dives)
+    postLogs(data)
+  }
+
+  // console.log('dives.date', dives.date)
+  // console.log('!!dives.date', !!dives.date)
+
   return (
-    <LogBookForm onSubmit={handleSubmit}>
+    <LogBookForm onSubmit={handleSubmit(onSubmit)}>
       <section className="form__dates">
         <h4>Date</h4>
         <input
           type="date"
           className="form__input"
           name="date"
-          value={!!dives.date && dives.date}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.date && dives.date}
+          // onChange={handleChange}
         />
         <h4>Dive No.</h4>
         <input
           type="number"
           className="form__input"
           name="diveNumber"
-          value={!!dives.diveNumber && dives.diveNumber}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.diveNumber && dives.diveNumber}
+          // onChange={handleChange}
         />
       </section>
       <section className="form__position">
@@ -32,24 +55,27 @@ const LogBook = () => {
           className="form__input"
           placeholder="Country"
           name="country"
-          value={!!dives.country && dives.country}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.country ? dives.country : ''}
+          // onChange={handleChange}
         />
         <input
           type="text"
           className="form__input"
           placeholder="City"
           name="city"
-          value={!!dives.city && dives.city}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.city && dives.city}
+          // onChange={handleChange}
         />
         <input
           type="text"
           className="form__input"
           placeholder="Point"
           name="point"
-          value={!!dives.point && dives.point}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.point && dives.point}
+          // onChange={handleChange}
         />
       </section>
       <section className="form__values__entry">
@@ -59,8 +85,9 @@ const LogBook = () => {
           type="time"
           className="form__input"
           name="entryTime"
-          value={!!dives.entryTime && dives.entryTime}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.entryTime && dives.entryTime}
+          // onChange={handleChange}
         />
         <p>Air</p>
         <input
@@ -68,8 +95,9 @@ const LogBook = () => {
           className="form__input"
           placeholder="bar"
           name="entryAir"
-          value={!!dives.entryAir && dives.entryAir}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.entryAir && dives.entryAir}
+          // onChange={handleChange}
         />
       </section>
       <section className="form__values__exit">
@@ -79,8 +107,9 @@ const LogBook = () => {
           type="time"
           className="form__input"
           name="exitTime"
-          value={!!dives.exitTime && dives.exitTime}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.exitTime && dives.exitTime}
+          // onChange={handleChange}
         />
         <p>Air</p>
         <input
@@ -88,8 +117,9 @@ const LogBook = () => {
           className="form__input"
           placeholder="bar"
           name="exitAir"
-          value={!!dives.exitAir && dives.exitAir}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.exitAir && dives.exitAir}
+          // onChange={handleChange}
         />
       </section>
       <section className="form__dive">
@@ -97,20 +127,21 @@ const LogBook = () => {
         <select
           name="water-type"
           id="wt"
-          value={!!dives.waterType && dives.waterType}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.waterType && dives.waterType}
+          // onChange={handleChange}
         >
           <option value="default" name="default">
             --choose water type--
           </option>
-          <option value="salt-water" name="saltWater">
+          <option value="salt-water" name="saltWater" ref={register}>
             salt water
           </option>
           {/* <option value="salt-water" name="saltWater" value={!!dives.saltWater && (dives.saltWater===true):(dives.saltWater===false)} >salt water</option> */}
-          <option value="fresh-water" name="saltWater">
+          <option value="fresh-water" name="saltWater" ref={register}>
             fresh water
           </option>
-          <option value="brackish-water" name="saltWater">
+          <option value="brackish-water" name="saltWater" ref={register}>
             brackish water
           </option>
         </select>
@@ -122,9 +153,10 @@ const LogBook = () => {
               type="checkbox"
               className="form__input"
               name="fun"
+              ref={register}
               id="fun"
-              value={(dives.fun = true)}
-              onChange={handleChange}
+              // value={dives.fun ? dives.fun.checked : false}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -133,9 +165,10 @@ const LogBook = () => {
               type="checkbox"
               className="form__input"
               name="drift"
+              ref={register}
               id="drift"
-              value={(dives.drift = true)}
-              onChange={handleChange}
+              // value={(dives.drift = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -145,8 +178,9 @@ const LogBook = () => {
               className="form__input"
               name="night"
               id="night"
-              value={(dives.night = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.night = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -156,8 +190,9 @@ const LogBook = () => {
               className="form__input"
               name="deep"
               id="deep"
-              value={(dives.deep = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.deep = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -167,8 +202,9 @@ const LogBook = () => {
               className="form__input"
               name="cave"
               id="cave"
-              value={(dives.cave = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.cave = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -178,8 +214,9 @@ const LogBook = () => {
               className="form__input"
               name="wreck"
               id="wreck"
-              value={(dives.wreck = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.wreck = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -189,8 +226,9 @@ const LogBook = () => {
               className="form__input"
               name="rescue"
               id="rescue"
-              value={(dives.rescue = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.rescue = true)}
+              // onChange={handleChange}
             />
           </div>
           <div className="checkbox">
@@ -200,8 +238,9 @@ const LogBook = () => {
               className="form__input"
               name="ice"
               id="ice"
-              value={(dives.ice = true)}
-              onChange={handleChange}
+              ref={register}
+              // value={(dives.ice = true)}
+              // onChange={handleChange}
             />
           </div>
         </div>
@@ -212,27 +251,34 @@ const LogBook = () => {
           cols="30"
           rows="10"
           name="description"
-          value={!!dives.description ? dives.description : ''}
-          onChange={handleChange}
+          ref={register}
+          // value={!!dives.description ? dives.description : ''}
+          // onChange={handleChange}
         ></textarea>
       </section>
       <button type="submit">Submit</button>
       {/* <button onClick={() => setDives()} */}
     </LogBookForm>
+
+    // function handleSubmit(event) {
+    //   event.preventDefault()
+    //   console.log('form submitted:')
+    //   console.log('event.target:', event.target)
+    //   console.log('event.target.value:', event.target.value)
+    //   postLogs(dives)
+    // }
+
+    //   function handleChange(event) {
+    //     console.log('change on event.target:', event.target.checked)
+    //     console.log('checked:', dives.fun)
+    //     setDives({
+    //       ...dives,
+    //       [event.target.name]: event.target.value || event.target.checked,
+    //     })
+    //     console.log('dive:', dives)
+    //   }
+    // }
   )
-  function handleSubmit(event) {
-    event.preventDefault()
-    console.log('form submitted:')
-    console.log('event.target:', event.target)
-    console.log('event.target.value:', event.target.value)
-    postDives(dives)
-    postLogs(dives)
-  }
-  function handleChange(event) {
-    console.log('change on event.target:', event.target)
-    setDives({ ...dives, [event.target.name]: event.target.value })
-    console.log('dive:', dives)
-  }
 }
 const LogBookForm = styled.form`
   display: grid;
@@ -311,4 +357,4 @@ const LogBookForm = styled.form`
     justify-content: space-between;
   }
 `
-export default LogBook
+// export default LogBook

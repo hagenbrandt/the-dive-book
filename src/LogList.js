@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getDives } from './services'
+import { getDives, getLogs } from './services'
 import DiveLogs from './DiveLog'
 
 export default function LogList() {
@@ -7,9 +7,11 @@ export default function LogList() {
 
   useEffect(() => {
     getDives().then(res => {
-      setDives(res.data)
+      //   debugger
+      setDives(res)
     })
   }, [])
+  console.log(dives)
 
   return (
     <div>
