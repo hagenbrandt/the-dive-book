@@ -88,17 +88,17 @@ export default function LogBook() {
       </section>
       <section className="form__dive">
         <h4>Water type</h4>
-        <select name="water-type" id="wt" ref={register}>
+        <select name="watertype" id="wt" ref={register}>
           <option value="default" name="default">
             --choose water type--
           </option>
-          <option value="salt-water" name="saltWater" ref={register}>
+          <option value="salt water" name="saltWater" ref={register}>
             salt water
           </option>
-          <option value="fresh-water" name="saltWater" ref={register}>
+          <option value="fresh water" name="saltWater" ref={register}>
             fresh water
           </option>
-          <option value="brackish-water" name="saltWater" ref={register}>
+          <option value="brackish water" name="saltWater" ref={register}>
             brackish water
           </option>
         </select>

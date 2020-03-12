@@ -69,9 +69,15 @@ const DetailLog = () => {
           necessitatibus ipsam esse id doloribus?
         </p>
         <ul className="log__detail__tags">
-          <li>{`${dives.watertype}`}</li>
-          <li>{`${dives.country}`}</li>
-          <li>fun dive</li>
+          {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
+          {!!dive.fun ? <li>fun</li> : ''}
+          {!!dive.drift ? <li>drift</li> : ''}
+          {!!dive.night ? <li>night</li> : ''}
+          {!!dive.deep ? <li>deep</li> : ''}
+          {!!dive.cave ? <li>cave</li> : ''}
+          {!!dive.wreck ? <li>wreck</li> : ''}
+          {!!dive.rescue ? <li>rescue</li> : ''}
+          {!!dive.ice ? <li>ice</li> : ''}
         </ul>
       </section>
     </LogBackground>
