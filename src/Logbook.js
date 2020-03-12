@@ -7,7 +7,7 @@ import { postDives, postLogs, getLogs } from './services'
 
 export default function LogBook() {
   const [dives, setDives] = useState([])
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, errors, handleSubmit, getValues } = useForm({
     defaultValues: { id: uuid() },
   })
 
@@ -41,19 +41,23 @@ export default function LogBook() {
           type="date"
           className="form__input"
           name="date"
-          ref={register}
+          ref={register({ required: true })}
           // value={!!dives.date && dives.date}
           // onChange={handleChange}
         />
+        {errors.singleErrorInput && 'Your input is required'}
         <h4>Dive No.</h4>
         <input
           type="number"
           className="form__input"
           name="diveNumber"
-          ref={register}
+          ref={register({ max: 10000 })}
           // value={!!dives.diveNumber && dives.diveNumber}
           // onChange={handleChange}
         />
+        {/* {errors.multipleErrorInput.type === 'min' && (
+          <p className="error">Your input is greater than 10000. Sorry bot!</p>
+        )} */}
       </section>
       <section className="form__position">
         <input
@@ -61,7 +65,7 @@ export default function LogBook() {
           className="form__input"
           placeholder="Country"
           name="country"
-          ref={register}
+          ref={register({ pattern: /[A-Za-z]{3}/ })}
           // value={!!dives.country ? dives.country : ''}
           // onChange={handleChange}
         />
@@ -294,6 +298,15 @@ const LogBookForm = styled.form`
   padding: 12px;
   gap: 12px;
   margin-bottom: 80px;
+
+  .error {
+    color: #bf1650;
+  }
+
+  .error::before {
+    display: inline;
+    content: '⚠ ';
+  }
 
   .form__dates__id {
     display: none;

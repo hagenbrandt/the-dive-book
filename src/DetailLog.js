@@ -8,25 +8,26 @@ import watch from './img/icons/watch.svg'
 import depth from './img/icons/depth.svg'
 
 const DetailLog = () => {
-  let { id } = useParams()
+  let { id, point } = useParams()
   const [dives, setDives] = useState([])
 
   useEffect(() => {
     getDives(id).then(res => {
-      setDives(res.data)
+      const filteredDive = res.filter(dive => dive.id === id)
+      setDives(filteredDive)
     })
   }, [id])
-  console.log(dives)
-  console.log(!!dives)
 
-  return !!dives ? (
+  let dive = dives ? dives[0] : ''
+
+  return !!dives && dive ? (
     <LogBackground className="log__detail">
       <header
         className="log__detail__header"
         style={{ backgroundImage: `url(${exampleImg})` }}
       ></header>
       <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">{`${dives.point}`}</h2>
+        <h2 className="log__detail__header__three">{`${dive.point}`}</h2>
         <hr className="log__detail__hr" />
       </section>
       <section className="log__detail__icons">
