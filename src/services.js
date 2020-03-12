@@ -55,7 +55,6 @@ function fetchLogs() {
     querySnapshot.forEach(doc => {
       logsData.push(doc.data())
     })
-    // debugger
     return logsData
   })
 }

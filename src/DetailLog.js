@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { getDives } from './services'
@@ -8,7 +9,7 @@ import watch from './img/icons/watch.svg'
 import depth from './img/icons/depth.svg'
 
 const DetailLog = () => {
-  let { id, point } = useParams()
+  let { id } = useParams()
   const [dives, setDives] = useState([])
 
   useEffect(() => {
@@ -20,7 +21,14 @@ const DetailLog = () => {
 
   let dive = dives ? dives[0] : ''
 
-  return !!dives && dive ? (
+  function countDuration(timeDateOne, timeDateTwo) {
+    const entryTime = moment(timeDateOne, 'LT')
+    const exitTime = moment(timeDateTwo, 'LT')
+    const timeDiff = exitTime.diff(entryTime) / 1000 / 60
+    return <p>{timeDiff}</p>
+  }
+
+  return !!dives && !!dive ? (
     <LogBackground className="log__detail">
       <header
         className="log__detail__header"
@@ -38,7 +46,7 @@ const DetailLog = () => {
         </div>
         <div>
           <img src={watch} alt="watch" />
-          <p>30</p>
+          {countDuration(`${dive.entryTime}`, `${dive.exitTime}`)}
           <h4>Duration</h4>
         </div>
         <div>
@@ -47,7 +55,6 @@ const DetailLog = () => {
           <h4>Visability</h4>
         </div>
       </section>
-      {/* <section className="log__detail__icons__text"></section> */}
       <section className="log__detail__description">
         <p className="log__detail__description__text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
@@ -76,7 +83,6 @@ const DetailLog = () => {
 const LogBackground = styled.article`
   display: flex;
   width: 100vw;
-  /* height: 100vh; */
   flex-direction: column;
   overflow: scroll;
   margin-bottom: 40px;

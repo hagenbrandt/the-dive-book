@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getDives, getLogs } from './services'
+import { getDives } from './services'
 import DiveLogs from './DiveLog'
 import uuid from 'react-uuid'
 
@@ -8,14 +8,12 @@ export default function LogList() {
 
   useEffect(() => {
     getDives().then(res => {
-      //   debugger
       setDives(res)
     })
   }, [])
-  console.log(dives)
 
   return (
-    <div>
+    <>
       {dives.map(dive => (
         <DiveLogs
           country={dive.country}
@@ -25,6 +23,6 @@ export default function LogList() {
           id={dive.id}
         />
       ))}
-    </div>
+    </>
   )
 }
