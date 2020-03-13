@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
@@ -8,17 +8,19 @@ import heart from './img/icons/heart.svg'
 import mark from './img/icons/mark.svg'
 import connect from './img/icons/connect.svg'
 
-export default function DiveLogs() {
+export default function DiveLogs({ country, city, point, id }) {
   return (
     <DiveLog className="dive__log">
       <div
         style={{ backgroundImage: `url(${exampleImg})` }}
         className="dive__log__img"
       />
-      <Link to="/DetailLog" className="dive__log__header__link">
-        <h1 className="dive__log__header">Thailand - Kho Tao - Diving Spot</h1>
+      <Link to={'/DetailLog/' + id} className="dive__log__header__link">
+        <h1 className="dive__log__header">
+          {country} - {city} - {point}
+        </h1>
       </Link>
-      <a className="dive__log__user__link" href="#">
+      <a className="dive__log__user__link" href="/">
         <div className="dive__log__user">
           <div className="dive__log__user">
             <img className="dive__log__portrait" src={portrait} alt="" />
@@ -29,19 +31,19 @@ export default function DiveLogs() {
         </div>
       </a>
       <div className="dive__log__icon">
-        <a href="#">
+        <a href="/">
           <img src={bubble} alt="bubble" />
         </a>
 
         <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="#">
+        <a className="dive__log__icon__link" href="/">
           <img src={heart} alt="heart" />
         </a>
         <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="#">
+        <a className="dive__log__icon__link" href="/">
           <img src={mark} alt="mark" />
         </a>
-        <a className="dive__log__icon__link" href="#">
+        <a className="dive__log__icon__link" href="/">
           <img src={connect} alt="connect" />
         </a>
       </div>

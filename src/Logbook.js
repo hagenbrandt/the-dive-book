@@ -1,49 +1,116 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import uuid from 'react-uuid'
 import styled from 'styled-components'
+import { postLogs } from './services'
 
 export default function LogBook() {
+  const [dives, setDives] = useState([])
+  const { register, handleSubmit } = useForm({ defaultValues: { id: uuid() } })
+
+  const onSubmit = data => {
+    setDives([...dives, { data }])
+    postLogs(data)
+  }
+
   return (
-    <LogBookForm>
+    <LogBookForm onSubmit={handleSubmit(onSubmit)}>
       <section className="form__dates">
         <h4>Date</h4>
-        <input type="date" className="form__input" />
+        <input className="form__dates__id" name="id" ref={register} />
+        <input type="date" className="form__input" name="date" ref={register} />
         <h4>Dive No.</h4>
-        <input type="number" className="form__input" />
+        <input
+          type="number"
+          className="form__input"
+          name="diveNumber"
+          ref={register}
+        />
       </section>
       <section className="form__position">
-        <input type="text" className="form__input" placeholder="Country" />
-        <input type="text" className="form__input" placeholder="City" />
-        <input type="text" className="form__input" placeholder="Point" />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Country"
+          name="country"
+          ref={register}
+        />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="City"
+          name="city"
+          ref={register}
+        />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Point"
+          name="point"
+          ref={register}
+        />
       </section>
       <section className="form__values__entry">
         <h4>Entry</h4>
         <p>Time</p>
-        <input type="time" className="form__input" />
+        <input
+          type="time"
+          className="form__input"
+          name="entryTime"
+          ref={register}
+        />
         <p>Air</p>
-        <input type="number" className="form__input" placeholder="bar" />
+        <input
+          type="number"
+          className="form__input"
+          placeholder="bar"
+          name="entryAir"
+          ref={register}
+        />
       </section>
       <section className="form__values__exit">
         <h4>Exit</h4>
         <p>Time</p>
-        <input type="time" className="form__input" />
+        <input
+          type="time"
+          className="form__input"
+          name="exitTime"
+          ref={register}
+        />
         <p>Air</p>
-        <input type="number" className="form__input" placeholder="bar" />
+        <input
+          type="number"
+          className="form__input"
+          placeholder="bar"
+          name="exitAir"
+          ref={register}
+        />
       </section>
       <section className="form__dive">
         <h4>Water type</h4>
-        <select name="water-type" id="wt">
-          <option value="salt-water">salt water</option>
-          <option value="fresh-water">fresh water</option>
-          <option value="brackish-water">brackish water</option>
+        <select name="watertype" id="wt" ref={register}>
+          <option value="default" name="default">
+            --choose water type--
+          </option>
+          <option value="salt water" name="saltWater" ref={register}>
+            salt water
+          </option>
+          <option value="fresh water" name="saltWater" ref={register}>
+            fresh water
+          </option>
+          <option value="brackish water" name="saltWater" ref={register}>
+            brackish water
+          </option>
         </select>
         <h4>Type of Dive</h4>
         <div className="form__dive__checkboxes">
-          <div className="checkbox">
+          <div className="checkbox" name="fun">
             <p>fun</p>
             <input
               type="checkbox"
               className="form__input"
               name="fun"
+              ref={register}
               id="fun"
             />
           </div>
@@ -53,6 +120,7 @@ export default function LogBook() {
               type="checkbox"
               className="form__input"
               name="drift"
+              ref={register}
               id="drift"
             />
           </div>
@@ -63,6 +131,7 @@ export default function LogBook() {
               className="form__input"
               name="night"
               id="night"
+              ref={register}
             />
           </div>
           <div className="checkbox">
@@ -72,6 +141,7 @@ export default function LogBook() {
               className="form__input"
               name="deep"
               id="deep"
+              ref={register}
             />
           </div>
           <div className="checkbox">
@@ -81,6 +151,7 @@ export default function LogBook() {
               className="form__input"
               name="cave"
               id="cave"
+              ref={register}
             />
           </div>
           <div className="checkbox">
@@ -90,6 +161,7 @@ export default function LogBook() {
               className="form__input"
               name="wreck"
               id="wreck"
+              ref={register}
             />
           </div>
           <div className="checkbox">
@@ -99,6 +171,7 @@ export default function LogBook() {
               className="form__input"
               name="rescue"
               id="rescue"
+              ref={register}
             />
           </div>
           <div className="checkbox">
@@ -108,12 +181,19 @@ export default function LogBook() {
               className="form__input"
               name="ice"
               id="ice"
+              ref={register}
             />
           </div>
         </div>
       </section>
       <section className="form__text">
-        <textarea name="description" id="" cols="30" rows="10"></textarea>
+        <textarea
+          id=""
+          cols="30"
+          rows="10"
+          name="description"
+          ref={register}
+        ></textarea>
       </section>
       <button type="submit">Submit</button>
     </LogBookForm>
@@ -129,6 +209,19 @@ const LogBookForm = styled.form`
   gap: 12px;
   margin-bottom: 80px;
 
+  .error {
+    color: #bf1650;
+  }
+
+  .error::before {
+    display: inline;
+    content: '⚠ ';
+  }
+
+  .form__dates__id {
+    display: none;
+  }
+
   .form__input {
     border-radius: 4px;
     background-color: #3e64ff;
@@ -138,16 +231,13 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
     /* box-shadow: inset 0px 4px 8px 2px , 0.4); */
-
     ::placeholder {
       color: #ecfcff;
     }
-
     input {
       color: #ecfcff;
     }
   }
-
   .form__position {
     /* margin: 8px; */
     > input {
@@ -155,7 +245,6 @@ const LogBookForm = styled.form`
       margin-bottom: 12px;
     }
   }
-
   select {
     background-color: #3e64ff;
     color: #ecfcff;
@@ -165,11 +254,9 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
   }
-
   input[type='checkbox'] {
     box-shadow: none;
   }
-
   textarea {
     background-color: #3e64ff;
     color: #ecfcff;
@@ -181,7 +268,6 @@ const LogBookForm = styled.form`
     /* margin-left: 8px;
     margin-right: 8px; */
   }
-
   button {
     background-color: #000d41;
     color: #ecfcff;
@@ -192,14 +278,12 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
   }
-
   .form__dive__checkboxes {
     display: flex;
     /* flex-direction: row; */
     align-items: center;
     flex-wrap: wrap;
   }
-
   div {
     display: flex;
     align-items: center;

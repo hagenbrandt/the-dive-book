@@ -1,19 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import { getDives } from './services'
 import exampleImg from './img/diving_example.jpg'
 import goggles from './img/icons/goggles.svg'
 import watch from './img/icons/watch.svg'
 import depth from './img/icons/depth.svg'
 
-export default function DetailLog() {
-  return (
+const DetailLog = () => {
+  let { id } = useParams()
+  const [dives, setDives] = useState([])
+
+  useEffect(() => {
+    getDives(id).then(res => {
+      const filteredDive = res.filter(dive => dive.id === id)
+      setDives(filteredDive)
+    })
+  }, [id])
+
+  let dive = dives ? dives[0] : ''
+
+  function countDuration(timeDateOne, timeDateTwo) {
+    const entryTime = moment(timeDateOne, 'LT')
+    const exitTime = moment(timeDateTwo, 'LT')
+    const timeDiff = exitTime.diff(entryTime) / 1000 / 60
+    return <p>{timeDiff}</p>
+  }
+
+  return !!dives && !!dive ? (
     <LogBackground className="log__detail">
       <header
         className="log__detail__header"
         style={{ backgroundImage: `url(${exampleImg})` }}
       ></header>
       <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">Diving Spot</h2>
+        <h2 className="log__detail__header__three">{`${dive.point}`}</h2>
         <hr className="log__detail__hr" />
       </section>
       <section className="log__detail__icons">
@@ -24,7 +46,7 @@ export default function DetailLog() {
         </div>
         <div>
           <img src={watch} alt="watch" />
-          <p>30</p>
+          {countDuration(`${dive.entryTime}`, `${dive.exitTime}`)}
           <h4>Duration</h4>
         </div>
         <div>
@@ -33,7 +55,6 @@ export default function DetailLog() {
           <h4>Visability</h4>
         </div>
       </section>
-      {/* <section className="log__detail__icons__text"></section> */}
       <section className="log__detail__description">
         <p className="log__detail__description__text">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
@@ -48,18 +69,26 @@ export default function DetailLog() {
           necessitatibus ipsam esse id doloribus?
         </p>
         <ul className="log__detail__tags">
-          <li>saltwater</li>
-          <li>fun dive</li>
+          {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
+          {!!dive.fun ? <li>fun</li> : ''}
+          {!!dive.drift ? <li>drift</li> : ''}
+          {!!dive.night ? <li>night</li> : ''}
+          {!!dive.deep ? <li>deep</li> : ''}
+          {!!dive.cave ? <li>cave</li> : ''}
+          {!!dive.wreck ? <li>wreck</li> : ''}
+          {!!dive.rescue ? <li>rescue</li> : ''}
+          {!!dive.ice ? <li>ice</li> : ''}
         </ul>
       </section>
     </LogBackground>
+  ) : (
+    'no dives'
   )
 }
 
 const LogBackground = styled.article`
   display: flex;
   width: 100vw;
-  /* height: 100vh; */
   flex-direction: column;
   overflow: scroll;
   margin-bottom: 40px;
@@ -68,15 +97,12 @@ const LogBackground = styled.article`
     background-size: cover;
     background-position: center;
     height: 200px;
-    /* width: auto; */
     border-radius: 12px 12px 0 0;
   }
 
   .log__detail__header__text {
     height: auto;
-    /* padding: 12px; */
     background-color: rgba(236, 252, 255, 0.8);
-    /* align-items: center; */
 
     .log__detail__header__three {
       text-align: center;
@@ -159,3 +185,4 @@ const LogBackground = styled.article`
     }
   }
 `
+export default DetailLog

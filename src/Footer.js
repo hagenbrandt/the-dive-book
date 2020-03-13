@@ -1,6 +1,5 @@
 import React from 'react'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import home from './img/icons/home.svg'
 import lens from './img/icons/lupe.svg'
@@ -13,13 +12,13 @@ export default function Footer() {
       <Link to="/" className="footer__link__icon">
         <img src={home} alt="home" />
       </Link>
-      <a className="footer__link__icon" href="#">
+      <a className="footer__link__icon" href="/">
         <img src={lens} alt="lens" />
       </a>
       <Link to="/LogBook" className="footer__link__icon">
         <img src={book} alt="book" />
       </Link>
-      <a className="footer__link__icon" href="#">
+      <a className="footer__link__icon" href="/">
         <img src={world} alt="world" />
       </a>
     </FooterStyle>
