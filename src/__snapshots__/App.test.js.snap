@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-AxirZ cpRNeF"
+  />
+  <footer
+    class="sc-AxhUy cXlWFx"
+  >
+    <a
+      class="footer__link__icon"
+      href="/"
+    >
+      <img
+        alt="home"
+        src="home.svg"
+      />
+    </a>
+    <a
+      class="footer__link__icon"
+      href="/"
+    >
+      <img
+        alt="lens"
+        src="lupe.svg"
+      />
+    </a>
+    <a
+      class="footer__link__icon"
+      href="/LogBook"
+    >
+      <img
+        alt="book"
+        src="book.svg"
+      />
+    </a>
+    <a
+      class="footer__link__icon"
+      href="/"
+    >
+      <img
+        alt="world"
+        src="world.svg"
+      />
+    </a>
+  </footer>
+</DocumentFragment>
+`;
