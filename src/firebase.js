@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 
 var firebaseConfig = {
   apiKey: 'AIzaSyD_2sEqRYzBOHvFvTg7c6myHpqYShWSxyc',
@@ -14,5 +15,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 const db = firebase.firestore()
+
+export const storage = firebase.storage()
 
 export const logsRef = db.collection('logs')

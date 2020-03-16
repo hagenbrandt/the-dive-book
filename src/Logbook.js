@@ -1,16 +1,52 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'
 
 export default function LogBook() {
   const [dives, setDives] = useState([])
-  const { register, handleSubmit } = useForm({ defaultValues: { id: uuid() } })
+  const [image, setImage] = useState(null)
+  const [url, setUrl] = useState()
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: { id: uuid(), img: url },
+  })
 
-  const onSubmit = data => {
-    setDives([...dives, { data }])
-    postLogs(data)
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image)
+    uploadTask.on(
+      'state_changed',
+      snapshot => {},
+      error => {
+        console.error(error)
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            console.log(url)
+            console.log('send image to firebase')
+            setUrl(url)
+          })
+      }
+    )
+  }
+
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+
+  console.log('image: ', image)
+
+  function onSubmit(data, url) {
+    // setDives([...dives, { data, url }])
+    console.log(data, url)
+    postLogs(data, { img: url })
   }
 
   return (
@@ -18,6 +54,12 @@ export default function LogBook() {
       <section className="form__dates">
         <h4>Date</h4>
         <input className="form__dates__id" name="id" ref={register} />
+        <input
+          className="form__dates__id"
+          name="img"
+          value={url}
+          ref={register}
+        />
         <input type="date" className="form__input" name="date" ref={register} />
         <h4>Dive No.</h4>
         <input
@@ -184,6 +226,15 @@ export default function LogBook() {
               ref={register}
             />
           </div>
+          {/* <FileUploader accept="image/*" name="image" ref={register} /> */}
+          <input
+            type="file"
+            name="image"
+            // ref={register}
+            onChange={handleChange}
+            onSubmit={handleUpload}
+          />
+          <button onClick={handleUpload}>Upload</button>
         </div>
       </section>
       <section className="form__text">
