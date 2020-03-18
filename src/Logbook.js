@@ -6,10 +6,9 @@ import styled from 'styled-components'
 import { postLogs } from './services'
 
 export default function LogBook() {
-  const [dives, setDives] = useState([])
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState()
-  const { register, handleSubmit, setValue } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: { id: uuid(), img: url },
   })
 
@@ -27,8 +26,6 @@ export default function LogBook() {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            console.log(url)
-            console.log('send image to firebase')
             setUrl(url)
           })
       }
@@ -44,8 +41,6 @@ export default function LogBook() {
   console.log('image: ', image)
 
   function onSubmit(data, url) {
-    // setDives([...dives, { data, url }])
-    console.log(data, url)
     postLogs(data, { img: url })
   }
 
@@ -226,11 +221,9 @@ export default function LogBook() {
               ref={register}
             />
           </div>
-          {/* <FileUploader accept="image/*" name="image" ref={register} /> */}
           <input
             type="file"
             name="image"
-            // ref={register}
             onChange={handleChange}
             onSubmit={handleUpload}
           />
@@ -281,7 +274,6 @@ const LogBookForm = styled.form`
     color: #ecfcff;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
-    /* box-shadow: inset 0px 4px 8px 2px , 0.4); */
     ::placeholder {
       color: #ecfcff;
     }
@@ -290,7 +282,6 @@ const LogBookForm = styled.form`
     }
   }
   .form__position {
-    /* margin: 8px; */
     > input {
       margin-right: 12px;
       margin-bottom: 12px;
@@ -316,8 +307,6 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
     width: 90vw;
-    /* margin-left: 8px;
-    margin-right: 8px; */
   }
   button {
     background-color: #000d41;
@@ -331,7 +320,6 @@ const LogBookForm = styled.form`
   }
   .form__dive__checkboxes {
     display: flex;
-    /* flex-direction: row; */
     align-items: center;
     flex-wrap: wrap;
   }

@@ -21,6 +21,7 @@ export default function LogList() {
           key={uuid()}
           point={dive.point}
           id={dive.id}
+          img={dive.img}
         />
       ))}
     </>
