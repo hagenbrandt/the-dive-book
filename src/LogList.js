@@ -36,4 +36,5 @@ const DiveList = styled.section`
   align-items: center;
   overflow: scroll;
   height: 100%;
+  padding-bottom: 120px;
 `

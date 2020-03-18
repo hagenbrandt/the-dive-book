@@ -30,14 +30,16 @@ const DetailLog = () => {
 
   return !!dives && !!dive && !!dive.img ? (
     <LogBackground className="log__detail">
-      <header
-        className="log__detail__header"
-        style={{
-          backgroundImage: !!dive.img
-            ? `url(${dive.img})`
-            : `url(${exampleImg})`,
-        }}
-      ></header>
+      <header className="log__detail__container">
+        <div
+          className="log__detail__header"
+          style={{
+            backgroundImage: !!dive.img
+              ? `url(${dive.img})`
+              : `url(${exampleImg})`,
+          }}
+        ></div>
+      </header>
       <section className="log__detail__header__text">
         <h2 className="log__detail__header__three">{`${dive.point}`}</h2>
         <hr className="log__detail__hr" />
@@ -83,15 +85,31 @@ const DetailLog = () => {
 
 const LogBackground = styled.article`
   display: flex;
+  /* display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 960px 80px auto; */
+  height: 100vh;
   width: 100vw;
   flex-direction: column;
   overflow: scroll;
-  margin-bottom: 40px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+
+  .log__detail__container {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
 
   .log__detail__header {
+    /* display: flex; */
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    height: 200px;
+    /* width: auto; */
+    width: auto;
+    height: 460px;
+    padding-top: 12%;
     border-radius: 12px 12px 0 0;
   }
 
