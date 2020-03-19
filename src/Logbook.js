@@ -1,16 +1,47 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'
 
 export default function LogBook() {
-  const [dives, setDives] = useState([])
-  const { register, handleSubmit } = useForm({ defaultValues: { id: uuid() } })
+  const [image, setImage] = useState(null)
+  const [url, setUrl] = useState()
+  const { register, handleSubmit } = useForm({
+    defaultValues: { id: uuid(), img: url },
+  })
 
-  const onSubmit = data => {
-    setDives([...dives, { data }])
-    postLogs(data)
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image)
+    uploadTask.on(
+      'state_changed',
+      snapshot => {},
+      error => {
+        console.error(error)
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            setUrl(url)
+          })
+      }
+    )
+  }
+
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+
+  console.log('image: ', image)
+
+  function onSubmit(data, url) {
+    postLogs(data, { img: url })
   }
 
   return (
@@ -18,6 +49,12 @@ export default function LogBook() {
       <section className="form__dates">
         <h4>Date</h4>
         <input className="form__dates__id" name="id" ref={register} />
+        <input
+          className="form__dates__id"
+          name="img"
+          value={url}
+          ref={register}
+        />
         <input type="date" className="form__input" name="date" ref={register} />
         <h4>Dive No.</h4>
         <input
@@ -184,6 +221,13 @@ export default function LogBook() {
               ref={register}
             />
           </div>
+          <input
+            type="file"
+            name="image"
+            onChange={handleChange}
+            onSubmit={handleUpload}
+          />
+          <button onClick={handleUpload}>Upload</button>
         </div>
       </section>
       <section className="form__text">
@@ -230,7 +274,6 @@ const LogBookForm = styled.form`
     color: #ecfcff;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
-    /* box-shadow: inset 0px 4px 8px 2px , 0.4); */
     ::placeholder {
       color: #ecfcff;
     }
@@ -239,7 +282,6 @@ const LogBookForm = styled.form`
     }
   }
   .form__position {
-    /* margin: 8px; */
     > input {
       margin-right: 12px;
       margin-bottom: 12px;
@@ -265,8 +307,6 @@ const LogBookForm = styled.form`
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff;
     width: 90vw;
-    /* margin-left: 8px;
-    margin-right: 8px; */
   }
   button {
     background-color: #000d41;
@@ -280,7 +320,6 @@ const LogBookForm = styled.form`
   }
   .form__dive__checkboxes {
     display: flex;
-    /* flex-direction: row; */
     align-items: center;
     flex-wrap: wrap;
   }

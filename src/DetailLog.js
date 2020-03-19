@@ -28,11 +28,15 @@ const DetailLog = () => {
     return <p>{timeDiff}</p>
   }
 
-  return !!dives && !!dive ? (
+  return !!dives && !!dive && !!dive.img ? (
     <LogBackground className="log__detail">
       <header
         className="log__detail__header"
-        style={{ backgroundImage: `url(${exampleImg})` }}
+        style={{
+          backgroundImage: !!dive.img
+            ? `url(${dive.img})`
+            : `url(${exampleImg})`,
+        }}
       ></header>
       <section className="log__detail__header__text">
         <h2 className="log__detail__header__three">{`${dive.point}`}</h2>
@@ -57,16 +61,7 @@ const DetailLog = () => {
       </section>
       <section className="log__detail__description">
         <p className="log__detail__description__text">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
-          possimus aut delectus, laboriosam fugit eius. Qui aperiam voluptates
-          rerum itaque minima sapiente magnam! Doloremque eveniet temporibus, ex
-          quo error sint? Earum beatae soluta velit sed minus minima voluptate
-          optio debitis, modi culpa reiciendis impedit ab voluptatum quaerat
-          incidunt iure voluptatem reprehenderit doloribus cum ipsa enim
-          obcaecati est? Eum, saepe tenetur. Vero quis commodi nam totam
-          consectetur in a corrupti. At eveniet tenetur cupiditate voluptates
-          totam cum nihil sed nemo sequi earum laborum accusamus et, blanditiis
-          necessitatibus ipsam esse id doloribus?
+          {`${dive.description}`}
         </p>
         <ul className="log__detail__tags">
           {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}

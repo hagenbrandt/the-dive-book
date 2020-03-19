@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { logsRef } from './firebase'
 
-export function getDives(id = '') {
-  // return axios.get(`http://localhost:3001/dives/` + id)
-  return fetchLogs()
+export function getDives(documentId = '') {
+  return fetchLogs(documentId)
 }
 
 export function postDives(object) {
