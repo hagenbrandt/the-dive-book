@@ -85,9 +85,6 @@ const DetailLog = () => {
 
 const LogBackground = styled.article`
   display: flex;
-  /* display: grid;
-  grid-template-columns: 100vw;
-  grid-template-rows: 960px 80px auto; */
   height: 100vh;
   width: 100vw;
   flex-direction: column;
@@ -102,11 +99,9 @@ const LogBackground = styled.article`
   }
 
   .log__detail__header {
-    /* display: flex; */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    /* width: auto; */
     width: auto;
     height: 460px;
     padding-top: 12%;

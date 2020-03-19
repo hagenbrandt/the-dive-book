@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
-import bubble from './img/icons/bubble.svg'
-import heart from './img/icons/heart.svg'
-import mark from './img/icons/mark.svg'
-import connect from './img/icons/connect.svg'
 
 export default function DiveLogs({ country, city, point, id, img }) {
   return (
@@ -32,23 +28,6 @@ export default function DiveLogs({ country, city, point, id, img }) {
           </div>
         </div>
       </a>
-      {/* <div className="dive__log__icon">
-        <a href="/">
-          <img src={bubble} alt="bubble" />
-        </a>
-
-        <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="/">
-          <img src={heart} alt="heart" />
-        </a>
-        <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="/">
-          <img src={mark} alt="mark" />
-        </a>
-        <a className="dive__log__icon__link" href="/">
-          <img src={connect} alt="connect" />
-        </a>
-      </div> */}
     </DiveLog>
   )
 }
