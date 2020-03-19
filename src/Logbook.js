@@ -4,6 +4,7 @@ import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'
+import { CameraSite } from './Camera'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)
@@ -239,6 +240,7 @@ export default function LogBook() {
           ref={register}
         ></textarea>
       </section>
+      <CameraSite />
       <button type="submit">Submit</button>
     </LogBookForm>
   )

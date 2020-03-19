@@ -4,6 +4,7 @@ import LogList from './LogList'
 import BackgroundLog from './BackgroundLog'
 import DetailLog from './DetailLog'
 import LogBook from './Logbook'
+import { CameraSite } from './Camera'
 import Footer from './Footer'
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
           <Route exact path="/" component={LogList} />
           <Route exact path="/DetailLog/:id" component={DetailLog} />
           <Route path="/LogBook" component={LogBook} />
+          <Route path="/Camera" component={CameraSite} />
         </Switch>
       </BackgroundLog>
       <Footer />
