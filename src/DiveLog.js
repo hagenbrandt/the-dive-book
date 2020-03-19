@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
-import bubble from './img/icons/bubble.svg'
-import heart from './img/icons/heart.svg'
-import mark from './img/icons/mark.svg'
-import connect from './img/icons/connect.svg'
 
 export default function DiveLogs({ country, city, point, id, img }) {
   return (
@@ -32,55 +28,45 @@ export default function DiveLogs({ country, city, point, id, img }) {
           </div>
         </div>
       </a>
-      <div className="dive__log__icon">
-        <a href="/">
-          <img src={bubble} alt="bubble" />
-        </a>
-
-        <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="/">
-          <img src={heart} alt="heart" />
-        </a>
-        <p className="dive__log__icon__counter">17</p>
-        <a className="dive__log__icon__link" href="/">
-          <img src={mark} alt="mark" />
-        </a>
-        <a className="dive__log__icon__link" href="/">
-          <img src={connect} alt="connect" />
-        </a>
-      </div>
     </DiveLog>
   )
 }
 
 const DiveLog = styled.div`
   background-color: #ecfcff;
+  display: grid;
+  gap: 5px;
+  grid-template-rows: 50% auto auto auto;
   color: #000d41;
   width: 287px;
-  height: 188px;
-  margin-top: 60px;
+  height: 500;
+  margin-top: 50px;
   border-radius: 12px;
   box-shadow: 3px 5px 7px #000d41;
 
   .dive__log__img {
-    height: 40%;
+    height: 100px;
+    width: auto;
     border-radius: 12px 12px 0 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position-y: top;
+    background-position-y: center;
   }
 
   .dive__log__header {
     position: relative;
-    margin-top: 12px;
-    font-size: 14px;
+    padding-left: 8px;
+    margin: 12px 8px;
+    font-size: 0.75rem;
     color: #000d41;
     text-align: left;
     margin-left: 8px;
   }
 
   .dive__log__user {
-    margin: 10px 8px;
+    margin: 0px 0px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .dive__log__portrait {

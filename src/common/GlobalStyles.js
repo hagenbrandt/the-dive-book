@@ -12,7 +12,9 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         height: 100vh;
         width: 100vw;
-        font-family: "Futura";
+        font-family: "Sonorous";
+        /* font-family: "Lovelo"; */
+        /* font-family: "Aquarius"; */
         color: #000d41;
     }
     a {
