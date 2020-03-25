@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { storage } from './firebase'
 import { Camera } from './camera/index'
 
-export function CameraSite() {
+export function CameraSite({ cardImage, setCardImage }) {
   const [isCameraOpen, setIsCameraOpen] = useState(false)
-  const [cardImage, setCardImage] = useState()
+
+  let effectImage = cardImage
+
+  //   console.log('effectImage :', effectImage)
 
   function handleCamUpload() {
     // debugger
@@ -58,6 +61,8 @@ export function CameraSite() {
         Close Camera
       </button>
       <button onClick={handleCamUpload}>Upload Cam pic</button>
+      {/* <>[cardImage,setCardImage]</> */}
+      {/* {console.log('Log from Camera: ', !!cardImage ? cardImage : '')} */}
     </>
   )
 }
@@ -77,3 +82,6 @@ const Preview = styled.img`
   width: 100%;
   height: auto;
 `
+export const ImageContext = React.createContext(CameraSite.effectImage)
+
+// export let ImageContext = React.createContext(CameraSite.effectImage)

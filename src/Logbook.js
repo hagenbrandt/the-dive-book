@@ -4,7 +4,7 @@ import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'
-import { CameraSite } from './Camera'
+import { CameraSite, ImageContext } from './Camera'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)
@@ -16,7 +16,7 @@ export default function LogBook() {
 
   useEffect(() => {
     console.log('CardImage :', cardImage)
-  })
+  }, [cardImage])
 
   const handleUpload = () => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
@@ -68,7 +68,7 @@ export default function LogBook() {
       console.log(e.target)
     }
   }
-
+  // console.log('CardImage: ', cardImage)
   console.log('image: ', image)
 
   function onSubmit(data, url) {
@@ -287,7 +287,7 @@ export default function LogBook() {
           ref={register}
         ></Description>
       </section>
-      <CameraSite />
+      <CameraSite cardImage={cardImage} setCardImage={setCardImage} />
       <button type="submit">Submit</button>
     </LogBookForm>
   )
