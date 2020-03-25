@@ -61,6 +61,12 @@ export function Camera({ onCapture, onClear }) {
     )
 
     canvasRef.current.toBlob(blob => onCapture(blob), 'image/jpeg', 1)
+
+    context.save()
+    console.log(context)
+    const dataURL = context.toDataURL
+    console.log(dataURL)
+
     setIsCanvasEmpty(false)
     setIsFlashing(true)
   }
@@ -88,26 +94,28 @@ export function Camera({ onCapture, onClear }) {
               height: `${container.height}px`,
             }}
           >
-            <Video
-              ref={videoRef}
-              hidden={!isVideoPlaying}
-              onCanPlay={handleCanPlay}
-              autoPlay
-              playsInline
-              muted
-              style={{
-                top: `-${offsets.y}px`,
-                left: `-${offsets.x}px`,
-              }}
-            />
+            <Preview>
+              <Video
+                ref={videoRef}
+                hidden={!isVideoPlaying}
+                onCanPlay={handleCanPlay}
+                autoPlay
+                playsInline
+                muted
+                style={{
+                  top: `-${offsets.y}px`,
+                  left: `-${offsets.x}px`,
+                }}
+              />
 
-            <Overlay hidden={!isVideoPlaying} />
+              <Overlay hidden={!isVideoPlaying} />
 
-            <Canvas
-              ref={canvasRef}
-              width={container.width}
-              height={container.height}
-            />
+              <Canvas
+                ref={canvasRef}
+                width={container.width}
+                height={container.height}
+              />
+            </Preview>
 
             <Flash
               flash={isFlashing}
@@ -151,10 +159,17 @@ const Container = styled.div`
   max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
 `
 
+const Preview = styled.div`
+  display: grid;
+  grid-template-columns: 80%;
+  grid-template-rows: auto;
+  justify-items: center;
+`
+
 const Canvas = styled.canvas`
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
 `
 
 const Video = styled.video`

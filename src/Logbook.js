@@ -8,9 +8,14 @@ import { CameraSite } from './Camera'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)
+  const [cardImage, setCardImage] = useState()
   const [url, setUrl] = useState()
   const { register, handleSubmit } = useForm({
     defaultValues: { id: uuid(), img: url },
+  })
+
+  useEffect(() => {
+    console.log('CardImage :', cardImage)
   })
 
   const handleUpload = () => {
@@ -32,23 +37,50 @@ export default function LogBook() {
       }
     )
   }
+  // const handleCamUpload = () => {
+  //   debugger
+  //   var storageRef = storage.ref()
+  //   storageRef.put(cardImage).then(function(snapshot) {
+  //     console.log('Uploaded a blob or file!')
+  //   })
+  //   const uploadTask = storage.ref(`campics`).put(cardImage)
+  //   uploadTask.on(
+  //     'state_changed',
+  //     snapshot => {},
+  //     error => {
+  //       console.error(error)
+  //     },
+  //     () => {
+  //       storage
+  //         .ref('campics')
+  //         .child(cardImage)
+  //         .getDownloadURL()
+  //         .then(url => {
+  //           setUrl(url)
+  //         })
+  //     }
+  //   )
+  // }
 
   const handleChange = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
+      console.log(e.target)
     }
   }
 
   console.log('image: ', image)
 
   function onSubmit(data, url) {
-    postLogs(data, { img: url })
+    // postLogs(data, { img: url })
   }
 
   return (
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
-      <section className="form__dates">
-        <h4>Date</h4>
+      <section className="form__dates container">
+        <label htmlFor="date">
+          <h4>Date</h4>
+        </label>
         <input className="form__dates__id" name="id" ref={register} />
         <input
           className="form__dates__id"
@@ -57,7 +89,9 @@ export default function LogBook() {
           ref={register}
         />
         <input type="date" className="form__input" name="date" ref={register} />
-        <h4>Dive No.</h4>
+        <label htmlFor="diveNumber">
+          <h4>Dive No.</h4>
+        </label>
         <input
           type="number"
           className="form__input"
@@ -65,7 +99,7 @@ export default function LogBook() {
           ref={register}
         />
       </section>
-      <section className="form__position">
+      <section className="form__position container">
         <input
           type="text"
           className="form__input"
@@ -88,16 +122,20 @@ export default function LogBook() {
           ref={register}
         />
       </section>
-      <section className="form__values__entry">
-        <h4>Entry</h4>
-        <p>Time</p>
+      <section className="form__values__entry container">
+        <label htmlFor="entryTime">
+          <h4>Entry</h4>
+          <p>Time</p>
+        </label>
         <input
           type="time"
           className="form__input"
           name="entryTime"
           ref={register}
         />
-        <p>Air</p>
+        <label htmlFor="entryAir">
+          <p>Air</p>
+        </label>
         <input
           type="number"
           className="form__input"
@@ -106,16 +144,20 @@ export default function LogBook() {
           ref={register}
         />
       </section>
-      <section className="form__values__exit">
-        <h4>Exit</h4>
-        <p>Time</p>
+      <section className="form__values__exit container">
+        <label htmlFor="exitTimw">
+          <h4>Exit</h4>
+          <p>Time</p>
+        </label>
         <input
           type="time"
           className="form__input"
           name="exitTime"
           ref={register}
         />
-        <p>Air</p>
+        <label htmlFor="exitAir">
+          <p>Air</p>
+        </label>
         <input
           type="number"
           className="form__input"
@@ -124,8 +166,10 @@ export default function LogBook() {
           ref={register}
         />
       </section>
-      <section className="form__dive">
-        <h4>Water type</h4>
+      <section className="form__dive container">
+        <label htmlFor="waterType">
+          <h4>Water type</h4>
+        </label>
         <select name="watertype" id="wt" ref={register}>
           <option value="default" name="default">
             --choose water type--
@@ -140,7 +184,9 @@ export default function LogBook() {
             brackish water
           </option>
         </select>
-        <h4>Type of Dive</h4>
+        <label htmlFor="typeOfDive">
+          <h4>Type of Dive</h4>
+        </label>
         <div className="form__dive__checkboxes">
           <div className="checkbox" name="fun">
             <p>fun</p>
@@ -231,14 +277,15 @@ export default function LogBook() {
           <button onClick={handleUpload}>Upload</button>
         </div>
       </section>
-      <section className="form__text">
-        <textarea
+      <section className="form__text container">
+        <Description
           id=""
+          style={{ resize: 'none' }}
           cols="30"
           rows="10"
           name="description"
           ref={register}
-        ></textarea>
+        ></Description>
       </section>
       <CameraSite />
       <button type="submit">Submit</button>
@@ -248,12 +295,26 @@ export default function LogBook() {
 
 const LogBookForm = styled.form`
   display: grid;
+  justify-items: center;
+  width: 100vw;
+  margin: 0;
   position: relative;
   background-color: #001a83;
-  color: #ecfcff;
+  color: #661a83;
   padding: 12px;
+  padding-bottom: 80px;
   gap: 12px;
-  margin-bottom: 80px;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1) inset,
+      6px 6px 8px rgba(0, 0, 0, 0.1) inset;
+    border-radius: 12px;
+    padding: 20px;
+    /* margin: 16px; */
+    width: 80%;
+  }
 
   .error {
     color: #bf1650;
@@ -270,14 +331,15 @@ const LogBookForm = styled.form`
 
   .form__input {
     border-radius: 4px;
-    background-color: #3e64ff;
+    background-color: #001a83;
     border: 1px solid transparent;
     height: 28px;
     color: #ecfcff;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
-      0 1px 0 #fff;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1), 6px 6px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
+      0 1px 0 #fff; */
     ::placeholder {
-      color: #ecfcff;
+      color: #661a83;
     }
     input {
       color: #ecfcff;
@@ -290,26 +352,19 @@ const LogBookForm = styled.form`
     }
   }
   select {
-    background-color: #3e64ff;
+    background-color: #001a83;
+    /* background-color: #3e64ff; */
     color: #ecfcff;
     border-radius: 4px;
-    border: 1px solid transparent;
+    border: none;
+    /* border: 1px solid transparent; */
     height: 28px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
-      0 1px 0 #fff;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1), 6px 6px 8px rgba(0, 0, 0, 0.1);
   }
   input[type='checkbox'] {
     box-shadow: none;
   }
-  textarea {
-    background-color: #3e64ff;
-    color: #ecfcff;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
-      0 1px 0 #fff;
-    width: 90vw;
-  }
+
   button {
     background-color: #000d41;
     color: #ecfcff;
@@ -331,4 +386,15 @@ const LogBookForm = styled.form`
     padding-right: 20px;
     justify-content: space-between;
   }
+`
+
+const Description = styled.textarea`
+  background-color: #001a83;
+  color: #ecfcff;
+  border: none;
+  /* border-radius: 4px; */
+  /* border: 1px solid transparent; */
+  /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
+    0 1px 0 #fff; */
+  width: 95%;
 `
