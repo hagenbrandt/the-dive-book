@@ -18,7 +18,8 @@ export default function LogBook() {
     console.log('CardImage :', cardImage)
   }, [cardImage])
 
-  const handleUpload = () => {
+  const handleUpload = e => {
+    e.preventDefault()
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
     uploadTask.on(
       'state_changed',
@@ -75,6 +76,8 @@ export default function LogBook() {
     // postLogs(data, { img: url })
   }
 
+  const checkboxes = []
+
   return (
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
       <section className="form__dates container">
@@ -88,7 +91,13 @@ export default function LogBook() {
           value={url}
           ref={register}
         />
-        <input type="date" className="form__input" name="date" ref={register} />
+        <input
+          type="date"
+          className="form__input"
+          name="date"
+          value=""
+          ref={register}
+        />
         <label htmlFor="diveNumber">
           <h4>Dive No.</h4>
         </label>
@@ -121,6 +130,63 @@ export default function LogBook() {
           name="point"
           ref={register}
         />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Dive Center"
+          name="divecenter"
+          ref={register}
+        />
+        <input
+          type="text"
+          className="form__input"
+          placeholder="Buddy"
+          name="buddy"
+          ref={register}
+        />
+      </section>
+      <section className="form__values__conditions container">
+        <label htmlFor="suit">
+          <h4>Suit Type</h4>
+        </label>
+        <select name="suitType" id="wt" ref={register}>
+          <option value="default" name="default">
+            --choose suit type--
+          </option>
+          <option value="threeMmShort" name="threeMmShort" ref={register}>
+            3mm Short
+          </option>
+          <option value="fiveMmShort" name="fiveMmShort" ref={register}>
+            5mm Short
+          </option>
+          <option value="threeMmLong" name="threeMmLong" ref={register}>
+            3mm Long
+          </option>
+          <option value="fiveMmLong" name="fiveMmLong" ref={register}>
+            5mm Long
+          </option>
+          <option value="sevenMmLong" name="sevenMmLong" ref={register}>
+            7mm Long
+          </option>
+          <option value="dry" name="dry" ref={register}>
+            Dry
+          </option>
+        </select>
+        <input
+          type="number"
+          className="form__input"
+          placeholder="Weight in kg"
+          name="weight"
+          ref={register}
+        />
+        <Radiogroup>
+          <input type="radio" name="sunny" id="sunny" />
+          <span>Sunny</span>
+          <input type="radio" name="cloudy" id="cloudy" />
+          <span>Cloudy</span>
+          <input type="radio" name="rainy" id="rainy" />
+          <span>Rainy</span>
+        </Radiogroup>
       </section>
       <section className="form__values__entry container">
         <label htmlFor="entryTime">
@@ -166,7 +232,7 @@ export default function LogBook() {
           ref={register}
         />
       </section>
-      <section className="form__dive container">
+      <section className="form__dive conditions container">
         <label htmlFor="waterType">
           <h4>Water type</h4>
         </label>
@@ -184,10 +250,17 @@ export default function LogBook() {
             brackish water
           </option>
         </select>
+      </section>
+      <section className="form__dive typeOfDive container">
         <label htmlFor="typeOfDive">
           <h4>Type of Dive</h4>
         </label>
         <div className="form__dive__checkboxes">
+          {/* checkboxes.map => checkbox {
+            <div className="checkbox">
+            <p>{checkbox}</p>
+            <input type="checkbox" className="form__input" name={checkbox} ref={{register}} id={checkbox} />
+          } */}
           <div className="checkbox" name="fun">
             <p>fun</p>
             <input
@@ -268,14 +341,16 @@ export default function LogBook() {
               ref={register}
             />
           </div>
-          <input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            onSubmit={handleUpload}
-          />
-          <button onClick={handleUpload}>Upload</button>
         </div>
+      </section>
+      <section className="form__dive conditions container">
+        <input
+          type="file"
+          name="image"
+          onChange={handleChange}
+          onSubmit={handleUpload}
+        />
+        <button onClick={handleUpload}>Upload</button>
       </section>
       <section className="form__text container">
         <Description
@@ -284,10 +359,13 @@ export default function LogBook() {
           cols="30"
           rows="10"
           name="description"
+          placeholder="Describe your dive..."
           ref={register}
         ></Description>
       </section>
-      <CameraSite cardImage={cardImage} setCardImage={setCardImage} />
+      <section className="container">
+        <CameraSite cardImage={cardImage} setCardImage={setCardImage} />
+      </section>
       <button type="submit">Submit</button>
     </LogBookForm>
   )
@@ -298,21 +376,22 @@ const LogBookForm = styled.form`
   justify-items: center;
   width: 100vw;
   margin: 0;
-  position: relative;
+  /* position: relative; */
   background-color: #001a83;
-  color: #661a83;
-  padding: 12px;
+  color: #3e64ff;
+  /* padding: 12px; */
   padding-bottom: 80px;
   gap: 12px;
 
   .container {
     display: flex;
     flex-direction: column;
-    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1) inset,
-      6px 6px 8px rgba(0, 0, 0, 0.1) inset;
-    border-radius: 12px;
-    padding: 20px;
-    /* margin: 16px; */
+    align-items: center;
+    background: #001a83;
+    box-shadow: inset 13px 13px 50px #00166f, inset -13px -13px 50px #001e97;
+    border-radius: 50px;
+    padding: 40px;
+    margin: 40px 10px 10px;
     width: 80%;
   }
 
@@ -331,19 +410,35 @@ const LogBookForm = styled.form`
 
   .form__input {
     border-radius: 4px;
-    background-color: #001a83;
-    border: 1px solid transparent;
+    background: #001a83;
+    /* border: 1px solid transparent; */
+    border: none;
     height: 28px;
     color: #ecfcff;
-    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1), 6px 6px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
     /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
       0 1px 0 #fff; */
     ::placeholder {
-      color: #661a83;
+      color: rgba(62, 100, 255, 0.3);
     }
     input {
       color: #ecfcff;
+      /* color: #661a83; */
     }
+  }
+  input[type='date'],
+  focus {
+    color: rgba(62, 100, 255, 0.3);
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+  input[type='time'],
+  focus {
+    color: rgba(62, 100, 255, 0.3);
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
   }
   .form__position {
     > input {
@@ -354,7 +449,7 @@ const LogBookForm = styled.form`
   select {
     background-color: #001a83;
     /* background-color: #3e64ff; */
-    color: #ecfcff;
+    color: rgba(62, 100, 255, 0.3);
     border-radius: 4px;
     border: none;
     /* border: 1px solid transparent; */
@@ -392,9 +487,17 @@ const Description = styled.textarea`
   background-color: #001a83;
   color: #ecfcff;
   border: none;
+  border-radius: 40px;
+  padding: 12px;
   /* border-radius: 4px; */
   /* border: 1px solid transparent; */
   /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
     0 1px 0 #fff; */
   width: 95%;
+  ::placeholder {
+    color: rgba(62, 100, 255, 0.3);
+  }
+`
+const Radiogroup = styled.div`
+  margin: 8px 0;
 `
