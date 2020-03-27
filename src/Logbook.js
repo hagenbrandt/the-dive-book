@@ -10,8 +10,9 @@ export default function LogBook() {
   const [image, setImage] = useState(null)
   const [cardImage, setCardImage] = useState()
   const [url, setUrl] = useState()
-  const { register, handleSubmit } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     defaultValues: { id: uuid(), img: url },
+    submitFocusError: true,
   })
 
   useEffect(() => {
@@ -93,10 +94,9 @@ export default function LogBook() {
         />
         <input
           type="date"
-          className="form__input"
+          className="form__input date"
           name="date"
-          value=""
-          ref={register}
+          ref={register({ required: true })}
         />
         <label htmlFor="diveNumber">
           <h4>Dive No.</h4>
@@ -114,36 +114,78 @@ export default function LogBook() {
           className="form__input"
           placeholder="Country"
           name="country"
-          ref={register}
+          ref={register({ required: true, maxLength: 74, pattern: /[A-Za-z]/ })}
         />
+        {errors.country && errors.country.type === 'required' && (
+          <p className="error">Please set a country</p>
+        )}
+        {errors.country && errors.country.type === 'maxLength' && (
+          <p className="error">Nice try bot!</p>
+        )}
+        {errors.country && errors.country.type === 'pattern' && (
+          <p className="error">You sure, this is a country?</p>
+        )}
         <input
           type="text"
           className="form__input"
           placeholder="City"
           name="city"
-          ref={register}
+          ref={register({ required: true, maxLength: 28, pattern: /[A-Za-z]/ })}
         />
+        {errors.city && errors.city.type === 'required' && (
+          <p className="error">Please set a city</p>
+        )}
+        {errors.city && errors.city.type === 'maxLength' && (
+          <p className="error">Nice try bot!</p>
+        )}
+        {errors.city && errors.city.type === 'pattern' && (
+          <p className="error">You sure, this is a city?</p>
+        )}
         <input
           type="text"
           className="form__input"
           placeholder="Point"
           name="point"
-          ref={register}
+          ref={register({ required: true, maxLength: 40, pattern: /[A-Za-z]/ })}
         />
+        {errors.point && errors.point.type === 'required' && (
+          <p className="error">Please set a point</p>
+        )}
+        {errors.point && errors.point.type === 'maxLength' && (
+          <p className="error">Nice try bot!</p>
+        )}
+        {errors.point && errors.point.type === 'pattern' && (
+          <p className="error">You sure, this is a point?</p>
+        )}
         <input
           type="text"
           className="form__input"
           placeholder="Dive Center"
           name="divecenter"
-          ref={register}
+          ref={register({ required: true, maxLength: 40, pattern: /[A-Za-z]/ })}
         />
+        {errors.point && errors.point.type === 'required' && (
+          <p className="error">Please set a Dive Center</p>
+        )}
+        {errors.point && errors.point.type === 'maxLength' && (
+          <p className="error">Nice try bot!</p>
+        )}
+        {errors.divecenter && errors.divecenter.type === 'pattern' && (
+          <p className="error">You sure, this is a Dive Center?</p>
+        )}
         <input
           type="text"
           className="form__input"
           placeholder="Buddy"
           name="buddy"
-          ref={register}
+          ref={register({ maxLength: 30, pattern: /[A-Za-z]/ })}
         />
+        {errors.buddy && errors.buddy.type === 'maxLength' && (
+          <p className="error">Nice try bot!</p>
+        )}
+        {errors.buddy && errors.buddy.type === 'pattern' && (
+          <p className="error">You sure, this is a human?</p>
+        )}
       </section>
       <section className="form__values__conditions container">
         <label htmlFor="suit">
@@ -177,8 +219,11 @@ export default function LogBook() {
           className="form__input"
           placeholder="Weight in kg"
           name="weight"
-          ref={register}
+          ref={register({ max: 20 })}
         />
+        {errors.weight && errors.weight.type === 'max' && (
+          <p className="error">Nice try bot!</p>
+        )}
         <Radiogroup>
           <input type="radio" name="sunny" id="sunny" />
           <span>Sunny</span>
@@ -207,11 +252,14 @@ export default function LogBook() {
           className="form__input"
           placeholder="bar"
           name="entryAir"
-          ref={register}
+          ref={register({ max: 300 })}
         />
+        {errors.entryAir && errors.entryAir.type === 'max' && (
+          <p className="error">Are you sure, you need that much?</p>
+        )}
       </section>
       <section className="form__values__exit container">
-        <label htmlFor="exitTimw">
+        <label htmlFor="exitTime">
           <h4>Exit</h4>
           <p>Time</p>
         </label>
@@ -229,14 +277,17 @@ export default function LogBook() {
           className="form__input"
           placeholder="bar"
           name="exitAir"
-          ref={register}
+          ref={register({ max: 290 })}
         />
+        {errors.exitAir && errors.exitAir.type === 'max' && (
+          <p className="error">You sure, you didn't breathe?</p>
+        )}
       </section>
       <section className="form__dive conditions container">
         <label htmlFor="waterType">
           <h4>Water type</h4>
         </label>
-        <select name="watertype" id="wt" ref={register}>
+        <select name="watertype" id="wt" ref={register({ required: true })}>
           <option value="default" name="default">
             --choose water type--
           </option>
@@ -250,6 +301,9 @@ export default function LogBook() {
             brackish water
           </option>
         </select>
+        {errors.watertype && (
+          <p className="error">Please set a type of water</p>
+        )}
       </section>
       <section className="form__dive typeOfDive container">
         <label htmlFor="typeOfDive">
@@ -360,8 +414,11 @@ export default function LogBook() {
           rows="10"
           name="description"
           placeholder="Describe your dive..."
-          ref={register}
+          ref={register({ maxLength: 160 })}
         ></Description>
+        {errors.description && errors.description.type === 'maxLength' && (
+          <p className="error">Please dont write a book.</p>
+        )}
       </section>
       <section className="container">
         <CameraSite cardImage={cardImage} setCardImage={setCardImage} />
