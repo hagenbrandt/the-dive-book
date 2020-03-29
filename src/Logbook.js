@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { postLogs } from './services'
 import Radio from './form/Radio'
 import Checkbox from './form/Checkboxes'
+import FileInput from './form/FileInput'
 import { CameraSite, ImageContext } from './Camera'
 import Fun from './img/icons/checkboxes/Fun.svg'
 
@@ -404,12 +405,20 @@ export default function LogBook() {
         </label>
         {/* <Checkbox name="fun" id="fun" ref={register} image={Fun} /> */}
         <div className="form__dive__checkboxes">
+          <Checkbox name="fun" id="fun" ref={register} />
+          <Checkbox name="drift" id="drift" ref={register} />
+          <Checkbox name="night" id="night" ref={register} />
+          <Checkbox name="deep" id="deep" ref={register} />
+          <Checkbox name="cave" id="cave" ref={register} />
+          <Checkbox name="wreck" id="wreck" ref={register} />
+          <Checkbox name="rescue" id="rescue" ref={register} />
+          <Checkbox name="ice" id="ice" ref={register} />
           {/* checkboxes.map => checkbox {
             <div className="checkbox">
             <p>{checkbox}</p>
             <input type="checkbox" className="form__input" name={checkbox} ref={{register}} id={checkbox} />
           } */}
-          <div className="checkbox" name="fun">
+          {/* <div className="checkbox" name="fun">
             <p>fun</p>
             <input
               type="checkbox"
@@ -488,17 +497,24 @@ export default function LogBook() {
               id="ice"
               ref={register}
             />
-          </div>
+          </div> */}
         </div>
       </section>
       <section className="form__dive conditions container">
-        <input
+        <h4>Time for a picture of your dive</h4>
+        <FileInput
+          name="image"
+          onChange={handleChange}
+          onSubmit={handleUpload}
+          text="Upload"
+        />
+        {/* <input
           type="file"
           name="image"
           onChange={handleChange}
           onSubmit={handleUpload}
-        />
-        <button onClick={handleUpload}>Upload</button>
+        /> */}
+        {/* <button onClick={handleUpload}>Upload</button> */}
       </section>
       <section className="form__text container">
         <Description
@@ -530,7 +546,7 @@ const LogBookForm = styled.form`
   /* position: relative; */
   background-color: #001a83;
   color: #3e64ff;
-  /* padding: 12px; */
+  padding: 12px;
   padding-bottom: 80px;
   gap: 12px;
 
@@ -541,7 +557,7 @@ const LogBookForm = styled.form`
     background: #001a83;
     box-shadow: inset 13px 13px 50px #00166f, inset -13px -13px 50px #001e97;
     border-radius: 50px;
-    padding: 20px;
+    padding: 40px;
     margin: 40px 10px 10px;
     width: 80%;
   }
@@ -628,9 +644,12 @@ const LogBookForm = styled.form`
       0 1px 0 #fff;
   }
   .form__dive__checkboxes {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 5px;
+    /* align-items: center;
+    flex-wrap: wrap; */
   }
   div {
     display: flex;

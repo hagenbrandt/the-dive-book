@@ -10,7 +10,8 @@ export function CameraSite({ cardImage, setCardImage }) {
 
   //   console.log('effectImage :', effectImage)
 
-  function handleCamUpload() {
+  function handleCamUpload(e) {
+    e.preventDefault()
     // debugger
     // var storageRef = storage.ref()
     // storageRef.put(cardImage).then(function(snapshot) {
@@ -19,7 +20,7 @@ export function CameraSite({ cardImage, setCardImage }) {
     const uploadTask = storage.ref(`campics/name`).put(cardImage)
     uploadTask.on(
       'state_changed',
-      snapshot => {},
+      // snapshot => {},
       error => {
         console.error(error)
       },
@@ -51,9 +52,17 @@ export function CameraSite({ cardImage, setCardImage }) {
           {console.log(cardImage)}
         </ContainerTwo>
       )}
-      <button onClick={() => setIsCameraOpen(true)}>Open Camera</button>
       <button
-        onClick={() => {
+        onClick={e => {
+          e.preventDefault()
+          setIsCameraOpen(true)
+        }}
+      >
+        Open Camera
+      </button>
+      <button
+        onClick={e => {
+          e.preventDefault()
           setIsCameraOpen(false)
           setCardImage()
         }}

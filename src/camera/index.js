@@ -85,7 +85,11 @@ export function Camera({ onCapture, onClear }) {
   return (
     <Measure bounds onResize={handleResize}>
       {({ measureRef }) => (
-        <Wrapper>
+        <Wrapper
+          onSubmit={e => {
+            e.preventDefault()
+          }}
+        >
           <Container
             ref={measureRef}
             maxHeight={videoRef.current && videoRef.current.videoHeight}
@@ -124,7 +128,10 @@ export function Camera({ onCapture, onClear }) {
           </Container>
 
           {isVideoPlaying && (
-            <Button onClick={isCanvasEmpty ? handleCapture : handleClear}>
+            <Button
+              type="button"
+              onClick={isCanvasEmpty ? handleCapture : handleClear}
+            >
               {isCanvasEmpty ? 'Take a picture' : 'Take another picture'}
             </Button>
           )}
