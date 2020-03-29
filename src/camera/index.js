@@ -153,8 +153,10 @@ const flashAnimation = keyframes`
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  /* align-items: center; */
   width: 100%;
 `
 
@@ -218,10 +220,11 @@ const Flash = styled.div`
 `
 
 const Button = styled.button`
-  width: 75%;
+  width: auto;
   min-width: 100px;
-  max-width: 250px;
+  align-self: center;
+  /* max-width: 250px; */
   margin-top: 24px;
-  padding: 12px 24px;
+  /* padding: 12px 24px; */
   background: silver;
 `

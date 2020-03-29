@@ -551,7 +551,8 @@ const LogBookForm = styled.form`
   gap: 12px;
 
   .container {
-    display: flex;
+    display: grid;
+    justify-items: center;
     flex-direction: column;
     align-items: center;
     background: #001a83;
@@ -634,14 +635,17 @@ const LogBookForm = styled.form`
   }
 
   button {
-    background-color: #000d41;
     color: #ecfcff;
-    height: 24px;
-    width: 80px;
+    height: auto;
+    width: 60%;
+    padding: 6px;
     border-radius: 4px;
-    border: 1px solid transparent;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
-      0 1px 0 #fff;
+    /* border: 1px solid transparent; */
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #000d41;
+    box-shadow: inset 13px 13px 40px #000a31, inset -13px -13px 40px #001051;
   }
   .form__dive__checkboxes {
     display: grid;
@@ -654,7 +658,7 @@ const LogBookForm = styled.form`
   div {
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    /* padding-right: 20px; */
     justify-content: space-between;
   }
 `
