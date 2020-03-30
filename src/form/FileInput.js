@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const FileInput = ({ image, handleChange, handleUpload, text }) => (
+const FileInput = ({ name, onChange, handleUpload, text }) => (
   <>
-    <Label htmlFor={image}>
+    {console.log('FileInput', name, onChange, text)}
+    <Label htmlFor={name}>
       <Input
         type="file"
-        name={image}
-        id={image}
+        name={name}
+        id={name}
         className="inputfile"
-        onChange={handleChange}
+        onChange={onChange}
         onSubmit={handleUpload}
       />
       <span>{text}</span>

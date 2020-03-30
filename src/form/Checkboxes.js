@@ -91,6 +91,7 @@ import styled from 'styled-components'
 
 const Checkbox = ({ name, id, register }) => (
   <Label>
+    {console.log('Checkbox', name, id, register)}
     <Input type="checkbox" name={name} id={id} ref={register} />
     <Text>{name}</Text>
   </Label>

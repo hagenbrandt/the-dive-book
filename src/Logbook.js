@@ -23,26 +23,26 @@ export default function LogBook() {
     console.log('CardImage :', cardImage)
   }, [cardImage])
 
-  const handleUpload = e => {
-    e.preventDefault()
-    const uploadTask = storage.ref(`images/${image.name}`).put(image)
-    uploadTask.on(
-      'state_changed',
-      snapshot => {},
-      error => {
-        console.error(error)
-      },
-      () => {
-        storage
-          .ref('images')
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            setUrl(url)
-          })
-      }
-    )
-  }
+  // const handleUpload = e => {
+  //   e.preventDefault()
+  //   const uploadTask = storage.ref(`images/${image.name}`).put(image)
+  //   uploadTask.on(
+  //     'state_changed',
+  //     snapshot => {},
+  //     error => {
+  //       console.error(error)
+  //     },
+  //     () => {
+  //       storage
+  //         .ref('images')
+  //         .child(image.name)
+  //         .getDownloadURL()
+  //         .then(url => {
+  //           setUrl(url)
+  //         })
+  //     }
+  //   )
+  // }
   const handleUpload2 = cb => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
     uploadTask.on(
@@ -62,35 +62,36 @@ export default function LogBook() {
       }
     )
   }
-  // const handleCamUpload = () => {
-  //   debugger
-  //   var storageRef = storage.ref()
-  //   storageRef.put(cardImage).then(function(snapshot) {
-  //     console.log('Uploaded a blob or file!')
-  //   })
-  //   const uploadTask = storage.ref(`campics`).put(cardImage)
-  //   uploadTask.on(
-  //     'state_changed',
-  //     snapshot => {},
-  //     error => {
-  //       console.error(error)
-  //     },
-  //     () => {
-  //       storage
-  //         .ref('campics')
-  //         .child(cardImage)
-  //         .getDownloadURL()
-  //         .then(url => {
-  //           setUrl(url)
-  //         })
-  //     }
-  //   )
-  // }
+  const handleCamUpload = () => {
+    // debugger
+    var storageRef = storage.ref()
+    storageRef.put(cardImage).then(function(snapshot) {
+      console.log('Uploaded a blob or file!')
+    })
+    const uploadTask = storage.ref(`campics/name`).put(cardImage)
+    uploadTask.on(
+      'state_changed',
+      snapshot => {},
+      error => {
+        console.error(error)
+      },
+      () => {
+        storage
+          .ref('campics')
+          .child(cardImage)
+          .getDownloadURL()
+          .then(url => {
+            setUrl(url)
+          })
+      }
+    )
+  }
 
   const handleChange = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
-      console.log(e.target)
+      debugger
+      console.log('Check image:', e.target)
     }
   }
   // console.log('CardImage: ', cardImage)
@@ -329,13 +330,13 @@ export default function LogBook() {
               <span className="radio__text">Rainy</span>
             </label>
           </div> */}
-          <Radio name="weather" id="sunny" ref={register}>
+          <Radio name="weather" id="sunny" register={register}>
             Sunny
           </Radio>
-          <Radio name="weather" id="cloudy" ref={register}>
+          <Radio name="weather" id="cloudy" register={register}>
             Cloudy
           </Radio>
-          <Radio name="weather" id="rainy" ref={register}>
+          <Radio name="weather" id="rainy" register={register}>
             Rainy
           </Radio>
         </Radiogroup>
@@ -405,14 +406,15 @@ export default function LogBook() {
         </label>
         {/* <Checkbox name="fun" id="fun" ref={register} image={Fun} /> */}
         <div className="form__dive__checkboxes">
-          <Checkbox name="fun" id="fun" ref={register} />
-          <Checkbox name="drift" id="drift" ref={register} />
-          <Checkbox name="night" id="night" ref={register} />
-          <Checkbox name="deep" id="deep" ref={register} />
-          <Checkbox name="cave" id="cave" ref={register} />
-          <Checkbox name="wreck" id="wreck" ref={register} />
-          <Checkbox name="rescue" id="rescue" ref={register} />
-          <Checkbox name="ice" id="ice" ref={register} />
+          {console.log('register', register)}
+          <Checkbox name="fun" id="fun" register={register} />
+          <Checkbox name="drift" id="drift" register={register} />
+          <Checkbox name="night" id="night" register={register} />
+          <Checkbox name="deep" id="deep" register={register} />
+          <Checkbox name="cave" id="cave" register={register} />
+          <Checkbox name="wreck" id="wreck" register={register} />
+          <Checkbox name="rescue" id="rescue" register={register} />
+          <Checkbox name="ice" id="ice" register={register} />
           {/* checkboxes.map => checkbox {
             <div className="checkbox">
             <p>{checkbox}</p>
@@ -505,7 +507,7 @@ export default function LogBook() {
         <FileInput
           name="image"
           onChange={handleChange}
-          onSubmit={handleUpload}
+          // onSubmit={handleUpload}
           text="Upload"
         />
         {/* <input
