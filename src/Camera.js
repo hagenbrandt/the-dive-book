@@ -3,38 +3,48 @@ import styled from 'styled-components'
 import { storage } from './firebase'
 import { Camera } from './camera/index'
 
-export function CameraSite({ cardImage, setCardImage }) {
+export function CameraSite({
+  cardImage,
+  setCardImage,
+  camUrl,
+  setCamUrl,
+  handleCamUpload,
+}) {
   const [isCameraOpen, setIsCameraOpen] = useState(false)
+  // const [camUrl, setCamUrl] = useState()
 
   let effectImage = cardImage
 
   //   console.log('effectImage :', effectImage)
 
-  function handleCamUpload(e) {
-    e.preventDefault()
-    // debugger
-    // var storageRef = storage.ref()
-    // storageRef.put(cardImage).then(function(snapshot) {
-    //   console.log('Uploaded a blob or file!')
-    // })
-    const uploadTask = storage.ref(`campics/name`).put(cardImage)
-    uploadTask.on(
-      'state_changed',
-      // snapshot => {},
-      error => {
-        console.error(error)
-      },
-      () => {
-        // storage
-        //   .ref('campics')
-        //   .child(cardImage)
-        //   .getDownloadURL()
-        //   .then(url => {
-        //     setUrl(url)
-        //   })
-      }
-    )
-  }
+  // function handleCamUpload() {
+  //   // debugger
+  //   // var storageRef = storage.ref()
+  //   // storageRef.put(cardImage).then(function(snapshot) {
+  //   //   console.log('Uploaded a blob or file!')
+  //   // })
+  //   const camPicName = String(Date.now())
+  //   const uploadTask = storage.ref(`campics/${camPicName}`).put(cardImage)
+  //   uploadTask.on(
+  //     'state_changed',
+  //     snapshot => {},
+  //     error => {
+  //       console.error(error)
+  //     },
+  //     () => {
+  //       storage
+  //         .ref('campics')
+  //         .child(camPicName)
+  //         .getDownloadURL()
+  //         .then(url => {
+  //           console.log(url)
+
+  //           setCamUrl(url)
+  //           // console.log(camUrl)
+  //         })
+  //     }
+  //   )
+  // }
 
   return (
     <>
@@ -52,24 +62,21 @@ export function CameraSite({ cardImage, setCardImage }) {
           {console.log(cardImage)}
         </ContainerTwo>
       )}
-      <button
-        onClick={e => {
-          e.preventDefault()
-          setIsCameraOpen(true)
-        }}
-      >
+      <button type="button" onClick={() => setIsCameraOpen(true)}>
         Open Camera
       </button>
       <button
-        onClick={e => {
-          e.preventDefault()
+        type="button"
+        onClick={() => {
           setIsCameraOpen(false)
           setCardImage()
         }}
       >
         Close Camera
       </button>
-      <button onClick={handleCamUpload}>Upload Cam pic</button>
+      <button type="button" onClick={handleCamUpload}>
+        Upload Cam pic
+      </button>
       {/* <>[cardImage,setCardImage]</> */}
       {/* {console.log('Log from Camera: ', !!cardImage ? cardImage : '')} */}
     </>

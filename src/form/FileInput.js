@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const FileInput = ({ name, onChange, handleUpload, text }) => (
   <>
-    {console.log('FileInput', name, onChange, text)}
     <Label htmlFor={name}>
       <Input
         type="file"
