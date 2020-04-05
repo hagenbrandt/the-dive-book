@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import exampleImg from './img/diving_example.jpg'
 import portrait from './img/portrait.jpg'
 
-export default function DiveLogs({ country, city, point, id, img }) {
+export default function DiveLogs({ country, city, divesite, point, id, img }) {
   return (
     <DiveLog className="dive__log">
       <div
@@ -15,7 +15,7 @@ export default function DiveLogs({ country, city, point, id, img }) {
       />
       <Link to={'/DetailLog/' + id} className="dive__log__header__link">
         <h1 className="dive__log__header">
-          {country} - {city} - {point}
+          {country} - {city} - {divesite}
         </h1>
       </Link>
       <a className="dive__log__user__link" href="/">

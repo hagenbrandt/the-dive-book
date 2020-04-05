@@ -20,7 +20,7 @@ export default function LogList() {
           country={dive.country}
           city={dive.city}
           key={uuid()}
-          point={dive.point}
+          divesite={dive.divesite}
           id={dive.id}
           img={dive.img}
         />

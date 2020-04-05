@@ -41,13 +41,13 @@ const DetailLog = () => {
         ></div>
       </header>
       <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">{`${dive.point}`}</h2>
+        <h2 className="log__detail__header__three">{`${dive.divesite}`}</h2>
         <hr className="log__detail__hr" />
       </section>
       <section className="log__detail__icons">
         <div>
           <img src={depth} alt="depth" />
-          <p>30</p>
+          <p>{`${dive.depth}`}</p>
           <h4>Depth</h4>
         </div>
         <div>
@@ -57,7 +57,7 @@ const DetailLog = () => {
         </div>
         <div>
           <img src={goggles} alt="goggles" />
-          <p>30</p>
+          <p>{`${dive.visability}`}</p>
           <h4>Visability</h4>
         </div>
       </section>
@@ -77,6 +77,13 @@ const DetailLog = () => {
           {!!dive.ice ? <li>ice</li> : ''}
         </ul>
       </section>
+      <section className="log__detail__description">
+        {!!dive.camPic ? (
+          <img src={`${dive.camPic}`} alt="" className="stamp" />
+        ) : (
+          ''
+        )}
+      </section>
     </LogBackground>
   ) : (
     'no dives'
@@ -90,7 +97,7 @@ const LogBackground = styled.article`
   flex-direction: column;
   overflow: scroll;
   margin: 0 auto;
-  padding-bottom: 24px;
+  padding-bottom: 50px;
 
   .log__detail__container {
     width: 100%;
@@ -105,7 +112,7 @@ const LogBackground = styled.article`
     width: auto;
     height: 460px;
     padding-top: 12%;
-    border-radius: 12px 12px 0 0;
+    /* border-radius: 12px 12px 0 0; */
   }
 
   .log__detail__header__text {
@@ -170,11 +177,18 @@ const LogBackground = styled.article`
     justify-content: flex-start;
     padding: 20px;
     background-color: rgba(236, 252, 255, 0.8);
-    border-radius: 0 0 12px 12px;
+    /* border-radius: 0 0 12px 12px; */
 
     > p {
       text-align: justify;
       line-height: 1.5;
+    }
+
+    .stamp {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
     .log__detail__tags {
