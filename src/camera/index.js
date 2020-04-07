@@ -60,7 +60,7 @@ export function Camera({ onCapture, onClear }) {
       container.height
     )
 
-    canvasRef.current.toBlob(blob => onCapture(blob), 'image/jpeg', 1)
+    canvasRef.current.toBlob((blob) => onCapture(blob), 'image/jpeg', 1)
 
     context.save()
     console.log(context)
@@ -86,7 +86,7 @@ export function Camera({ onCapture, onClear }) {
     <Measure bounds onResize={handleResize}>
       {({ measureRef }) => (
         <Wrapper
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault()
           }}
         >
@@ -220,11 +220,15 @@ const Flash = styled.div`
 `
 
 const Button = styled.button`
-  width: auto;
-  min-width: 100px;
-  align-self: center;
-  /* max-width: 250px; */
-  margin-top: 24px;
-  /* padding: 12px 24px; */
-  background: silver;
+  color: rgba(236, 252, 255, 1);
+  height: auto;
+  width: 60%;
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(145deg, #001c8c, #001776);
+  box-shadow: 5px 5px 10px rgba(0, 15, 77, 1),
+    -5px -5px 10px rgba(0, 37, 185, 1);
 `

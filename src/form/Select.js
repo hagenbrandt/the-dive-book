@@ -1,9 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Select({ name, names, id, register }) {
+export default function Select({
+  name,
+  names,
+  id,
+  placeholderName,
+  registerForSelect,
+  register,
+}) {
   return (
-    <StyledSelect name={name} id={id} ref={register}>
+    <StyledSelect name={name} id={id} ref={registerForSelect}>
       <Option
         disabled
         selected
@@ -11,13 +18,13 @@ export default function Select({ name, names, id, register }) {
         className="selectOption"
         name="default"
       >
-        --choose suit type--
+        {placeholderName}
       </Option>
       {names.map((name) => (
         <>
           <Option
-            value={name}
-            name={name}
+            value={name.split(' ').join('')}
+            name={name.split(' ').join('')}
             className="selectOption"
             ref={register}
           >

@@ -48,10 +48,6 @@ const Input = styled.input`
     left: 0.7rem;
     top: 0.2rem;
   }
-
-  &:active {
-    /* border: 2px solid #34495e; */
-  }
 `
 
 export default Checkbox

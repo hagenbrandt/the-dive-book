@@ -1,13 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Radio = ({ name, children, id, register }) => (
+const Radio = ({ name, categories, children, id, register }) => (
   <RadioWrapper>
-    <Label>
-      <Input type="radio" name={name} id={id} ref={register} />
-      <Mark />
-      <Text>{children}</Text>
-    </Label>
+    {categories.map((category) => (
+      <Label htmlFor={id}>
+        <Input type="radio" name={name} id={category} ref={register} />
+        <Mark />
+        <Text>{category}</Text>
+      </Label>
+    ))}
   </RadioWrapper>
 )
 
@@ -25,21 +27,17 @@ const Mark = styled.span`
   height: 24px;
   left: 0;
   border-radius: 50%;
-  /* margin-right: 4px;
-  margin-left: 4px; */
-  /* margin-right: 5px; */
-  background: linear-gradient(70deg, #001776, #001c8c);
-  box-shadow: 3px 3px 4px #001464, -3px -3px 4px #0020a2;
-  /* vertical-align: middle; */
+  background: #001a83;
+  box-shadow: inset -3px -3px 5px #00166f, inset 3px 3px 5px #001e97;
   &::after {
     content: '';
     display: block;
     border: none;
-    width: 0;
-    height: 0;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background-color: #001a83;
-    box-shadow: inset 3px 3px 4px #001464, inset -3px -3px 4px #0020a2;
+    box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
     opacity: 0;
     left: 50%;
     top: 50%;
@@ -68,9 +66,8 @@ const Label = styled.label`
   justify-content: flex-end;
   align-items: center;
   cursor: pointer;
-  /* padding: 5px 10px 5px 0; */
   position: relative;
-  ${props =>
+  ${(props) =>
     props.disabled &&
     `
         cursor: not-allowed;
@@ -80,6 +77,7 @@ const Label = styled.label`
 
 const Text = styled.span`
   margin-left: 2px;
+  color: rgb(236, 252, 255, 1);
 `
 
 export default Radio

@@ -1,13 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import home from './img/icons/home.svg'
 import diver from './img/icons/Diver.svg'
-import lens from './img/icons/lupe.svg'
-import book from './img/icons/book.svg'
 import logbook from './img/icons/LogBook.svg'
-import world from './img/icons/world.svg'
-import profile from './img/icons/Account.svg'
 
 export default function Footer() {
   return (

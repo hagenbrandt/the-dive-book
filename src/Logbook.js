@@ -1,54 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
-import DatePicker from 'react-datepicker'
-
-import { makeStyles } from '@material-ui/core/styles'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import FormControl from '@material-ui/core/FormControl'
-
 import { postLogs } from './services'
 import StyledSelect from './form/Select'
+import Slider from './form/Slider'
 import Radio from './form/Radio'
 import Checkbox from './form/Checkboxes'
 import FileInput from './form/FileInput'
-import { CameraSite, ImageContext } from './Camera'
-import Fun from './img/icons/checkboxes/Fun.svg'
+import { CameraSite } from './Camera'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)
   const [cardImage, setCardImage] = useState()
   const [camUrl, setCamUrl] = useState()
-  const [url, setUrl] = useState()
+  const [weights, setWeights] = useState(4)
+  const [visability, setVisability] = useState(15)
+  const [depth, setDepth] = useState(18)
+  const [url] = useState()
   const { register, errors, reset, handleSubmit } = useForm({
     defaultValues: { id: uuid(), img: url, camPic: camUrl },
     submitFocusError: true,
   })
-
-  // const useStyles = makeStyles((theme) => ({
-  //   formControl: {
-  //     margin: theme.spacing(1),
-  //     minWidth: 120,
-  //   },
-  //   selectEmpty: {
-  //     marginTop: theme.spacing(2),
-  //   },
-  // }))
-
-  // const classes = useStyles()
-
-  useEffect(() => {
-    console.log('CardImage :', cardImage)
-  }, [cardImage])
-
-  useEffect(() => {
-    console.log('Cam URL ', camUrl)
-  }, [camUrl])
 
   function handleCamUpload() {
     const camPicName = String(Date.now())
@@ -65,15 +39,13 @@ export default function LogBook() {
           .child(camPicName)
           .getDownloadURL()
           .then((url) => {
-            console.log(url)
-
             setCamUrl(url)
           })
       }
     )
   }
 
-  const handleUpload2 = (cb) => {
+  const handleUpload = (cb) => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
     uploadTask.on(
       'state_changed',
@@ -96,13 +68,12 @@ export default function LogBook() {
   const handleChange = (e) => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
-      console.log('Check image:', e.target)
     }
   }
 
   function onSubmit(data) {
     image
-      ? handleUpload2((url) => {
+      ? handleUpload((url) => {
           postLogs({
             ...data,
             img: url,
@@ -113,17 +84,32 @@ export default function LogBook() {
   }
 
   const suitTypes = [
-    '3mmshort',
-    '5mmshort',
-    '3mmlong',
-    '5mmlong',
-    '7mmlong',
+    '3 mm short',
+    '5 mm short',
+    '3 mm long',
+    '5 mm long',
+    '7 mm long',
     'dry',
+  ]
+
+  const waterTypes = ['salt water', 'fresh water', 'brackish water']
+
+  const weatherTypes = ['Sunny', 'Cloudy', 'Rainy']
+
+  const diveTypes = [
+    'Fun',
+    'Drift',
+    'Night',
+    'Deep',
+    'Cave',
+    'Wreck',
+    'Rescue',
+    'Ice',
   ]
 
   return (
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
-      <section className="form__dates container">
+      <Container>
         <label htmlFor="date">
           <h4>Date</h4>
         </label>
@@ -170,8 +156,8 @@ export default function LogBook() {
         {errors.buddy && errors.buddy.type === 'pattern' && (
           <p className="error">You sure, this is a human?</p>
         )}
-      </section>
-      <section className="form__position container">
+      </Container>
+      <Container>
         <h4>Location</h4>
         <Input
           type="text"
@@ -237,8 +223,8 @@ export default function LogBook() {
         {errors.divecenter && errors.divecenter.type === 'pattern' && (
           <p className="error">You sure, this is a Dive Center?</p>
         )}
-      </section>
-      <section className="form__values__conditions container">
+      </Container>
+      <Container>
         <label htmlFor="suit">
           <h4>Suit Type</h4>
         </label>
@@ -246,89 +232,75 @@ export default function LogBook() {
           name="suitType"
           names={suitTypes}
           id="suitType"
+          placeholderName="--choose suit type--"
           register={register}
         />
         <h4>Diving Weights</h4>
-        <input
-          type="number"
+        <Slider
+          type="range"
           className="form__input"
-          placeholder="Weights in kg"
-          name="weight"
-          ref={register({ min: 0, max: 20 })}
+          name="weights"
+          min="0"
+          max="20"
+          step="0.5"
+          value={weights}
+          unit="kg"
+          rangeState={weights}
+          setRangeState={setWeights}
+          register={register}
         />
-        {errors.weight && errors.weight.type === 'min' && (
-          <p className="error">Sorry buddy, but I need a valid number.</p>
-        )}
-        {errors.weight && errors.weight.type === 'max' && (
-          <p className="error">No one can carry that much under water!</p>
-        )}
         <label htmlFor="waterType">
           <h4>Water type</h4>
         </label>
-        <select name="watertype" id="wt" ref={register({ required: true })}>
-          <option value="default" name="default">
-            --choose water type--
-          </option>
-          <option value="salt water" name="saltWater" ref={register}>
-            salt water
-          </option>
-          <option value="fresh water" name="saltWater" ref={register}>
-            fresh water
-          </option>
-          <option value="brackish water" name="saltWater" ref={register}>
-            brackish water
-          </option>
-        </select>
+        <StyledSelect
+          name="watertype"
+          names={waterTypes}
+          id="watertype"
+          placeholderName="--choose water type--"
+          registerForSelect={register({ required: true })}
+          register={register}
+        ></StyledSelect>
         {errors.watertype && (
           <p className="error">Please set a type of water</p>
         )}
         <h4>Visability</h4>
-        <input
-          type="number"
+        <Slider
+          type="range"
           className="form__input"
-          placeholder="Visability"
           name="visability"
-          ref={register({ min: 0, max: 100 })}
+          min="0"
+          max="100"
+          steps="1"
+          value={visability}
+          unit="m"
+          rangeState={visability}
+          setRangeState={setVisability}
+          register={register}
         />
-        {errors.weight && errors.weight.type === 'min' && (
-          <p className="error">Sorry buddy, but I need a valid number.</p>
-        )}
-        {errors.weight && errors.weight.type === 'max' && (
-          <p className="error">You are not an eagle!</p>
-        )}
         <h4>Depth</h4>
-        <input
-          type="number"
+        <Slider
+          type="range"
           className="form__input"
-          placeholder="max depth"
           name="depth"
-          ref={register({ min: 0, max: 60 })}
+          min="0"
+          max="60"
+          step="0.1"
+          value={depth}
+          unit="m"
+          rangeState={depth}
+          setRangeState={setDepth}
+          registerForSelect={register}
+          register={register}
         />
-        {errors.weight && errors.weight.type === 'min' && (
-          <p className="error">Sorry buddy, but I need a valid number.</p>
-        )}
-        {errors.weight && errors.weight.type === 'max' && (
-          <p className="error">Are you sure, that you're allowed to do this?</p>
-        )}
         <h4>Weather Conditions</h4>
-        <Radiogroup className="radiowrapper">
-          <Radio name="weather" id="sunny" register={register}>
-            Sunny
-          </Radio>
-          <Radio name="weather" id="cloudy" register={register}>
-            Cloudy
-          </Radio>
-          <Radio name="weather" id="rainy" register={register}>
-            Rainy
-          </Radio>
-        </Radiogroup>
-      </section>
-      <section className="form__values__entry container">
+        <Radio name="weather" categories={weatherTypes} register={register} />
+      </Container>
+      <Container>
         <label htmlFor="entryTime">
           <h4>Entry</h4>
           <p>Time</p>
         </label>
-        <input
+        <Input
           type="time"
           className="form__input"
           name="entryTime"
@@ -337,7 +309,7 @@ export default function LogBook() {
         <label htmlFor="entryAir">
           <p>Air</p>
         </label>
-        <input
+        <Input
           type="number"
           className="form__input"
           placeholder="bar"
@@ -350,13 +322,13 @@ export default function LogBook() {
         {errors.entryAir && errors.entryAir.type === 'max' && (
           <p className="error">Are you sure, you need that much?</p>
         )}
-      </section>
-      <section className="form__values__exit container">
+      </Container>
+      <Container>
         <label htmlFor="exitTime">
           <h4>Exit</h4>
           <p>Time</p>
         </label>
-        <input
+        <Input
           type="time"
           className="form__input"
           name="exitTime"
@@ -365,7 +337,7 @@ export default function LogBook() {
         <label htmlFor="exitAir">
           <p>Air</p>
         </label>
-        <input
+        <Input
           type="number"
           className="form__input"
           placeholder="bar"
@@ -378,32 +350,23 @@ export default function LogBook() {
         {errors.exitAir && errors.exitAir.type === 'max' && (
           <p className="error">You sure, you didn't breathe?</p>
         )}
-      </section>
-      <section className="form__dive typeOfDive container">
+      </Container>
+      <Container>
         <label htmlFor="typeOfDive">
           <h4>Type of Dive</h4>
         </label>
         <div className="form__dive__checkboxes">
-          <Checkbox name="fun" id="fun" register={register} />
-          <Checkbox name="drift" id="drift" register={register} />
-          <Checkbox name="night" id="night" register={register} />
-          <Checkbox name="deep" id="deep" register={register} />
-          <Checkbox name="cave" id="cave" register={register} />
-          <Checkbox name="wreck" id="wreck" register={register} />
-          <Checkbox name="rescue" id="rescue" register={register} />
-          <Checkbox name="ice" id="ice" register={register} />
+          {diveTypes.map((diveType) => (
+            <Checkbox name={diveType} id={diveType} register={register} />
+          ))}
         </div>
-      </section>
-      <section className="form__dive conditions container">
+      </Container>
+      <Container>
         <h4>Upload a picture</h4>
-        <FileInput
-          name="image"
-          onChange={handleChange}
-          // onSubmit={handleUpload}
-          text="Upload"
-        />
-      </section>
-      <section className="form__text container">
+        <FileInput name="image" onChange={handleChange} text="Upload" />
+        <ImageName>{image ? image.name : ''}</ImageName>
+      </Container>
+      <Container>
         <Description
           id=""
           style={{ resize: 'none' }}
@@ -416,16 +379,16 @@ export default function LogBook() {
         {errors.description && errors.description.type === 'maxLength' && (
           <p className="error">Please dont write a book.</p>
         )}
-      </section>
-      <section className="container">
+      </Container>
+      <Container>
         <h4>Save your stamp</h4>
         <CameraSite
           handleCamUpload={handleCamUpload}
           cardImage={cardImage}
           setCardImage={setCardImage}
         />
-      </section>
-      <button type="submit">Submit</button>
+      </Container>
+      <Button type="submit">Submit</Button>
     </LogBookForm>
   )
 }
@@ -440,21 +403,7 @@ const LogBookForm = styled.form`
   padding: 12px;
   padding-bottom: 80px;
   gap: 12px;
-  .container {
-    display: grid;
-    justify-items: center;
-    flex-direction: column;
-    align-items: center;
-    background: #001a83;
-    box-shadow: inset 13px 13px 50px #00166f, inset -13px -13px 50px #001e97;
-    border-radius: 50px;
-    padding: 40px;
-    margin: 40px 10px 10px;
-    width: 80%;
-  }
-  .datepicker {
-    background: red;
-  }
+
   .error {
     color: #bf1650;
   }
@@ -465,18 +414,7 @@ const LogBookForm = styled.form`
   .form__dates__id {
     display: none;
   }
-  button {
-    color: #ecfcff;
-    height: auto;
-    width: 60%;
-    padding: 6px;
-    border-radius: 4px;
-    border: none;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background: #000d41;
-    box-shadow: inset 13px 13px 40px #000a31, inset -13px -13px 40px #001051;
-  }
+
   .form__dive__checkboxes {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -490,12 +428,25 @@ const LogBookForm = styled.form`
   }
 `
 
+const Container = styled.article`
+  display: grid;
+  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+  background: #001a83;
+  box-shadow: inset 13px 13px 50px #00166f, inset -13px -13px 50px #001e97;
+  border-radius: 50px;
+  padding: 40px;
+  margin: 40px 10px 10px;
+  width: 80%;
+`
+
 const Description = styled.textarea`
-  background-color: #001a83;
+  background-color: hsla(227, 96%, 26%, 1);
   color: rgb(236, 252, 255, 1);
   border: none;
   border-radius: 40px;
-  padding: 12px;
+  padding: 14px;
   width: 95%;
   ::placeholder {
     color: rgb(236, 252, 255, 0.3);
@@ -515,7 +466,6 @@ const Input = styled.input`
 
   ::-webkit-datetime-edit-text {
     color: rgb(236, 252, 255, 0.3);
-    /* padding: 0 0.3em; */
   }
   ::-webkit-datetime-edit-month-field {
     color: rgb(236, 252, 255, 0.3);
@@ -533,59 +483,26 @@ const Input = styled.input`
     opacity: 0.3;
     margin: 0;
   }
-  ::-webkit-datetime-edit {
-    /* padding: 0.5em; */
-  }
   ::placeholder {
     color: rgb(236, 252, 255, 0.3);
   }
 `
 
-const Radiogroup = styled.div`
-  display: flex;
+const ImageName = styled.p`
+  font-size: 10px;
+  color: rgb(236, 252, 255, 1);
+`
+
+const Button = styled.button`
+  color: rgba(236, 252, 255, 1);
+  height: auto;
   width: 80%;
-  .radio__label {
-    display: block;
-    position: relative;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  .radio__label:checked ~ .radio__indicator {
-    background-color: #001a83;
-    box-shadow: inset 3px 3px 4px #001464, inset -3px -3px 4px #0020a2;
-  }
-  .radio__indicator:after {
-    content: '';
-    position: absolute;
-    display: none;
-  }
-  .radio__label input:checked ~ .radio__indicator:after {
-    display: block;
-  }
-  .radio__label .radio__indicator:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-  }
-  .radio__button {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-  .radio__indicator {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background: linear-gradient(70deg, #001776, #001c8c);
-    box-shadow: 3px 3px 4px #001464, -3px -3px 4px #0020a2;
-    border-radius: 50%;
-  }
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(145deg, #001c8c, #001776);
+  box-shadow: 5px 5px 10px rgba(0, 15, 77, 1),
+    -5px -5px 10px rgba(0, 37, 185, 1);
 `

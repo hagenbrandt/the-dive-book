@@ -13,8 +13,8 @@ const DetailLog = () => {
   const [dives, setDives] = useState([])
 
   useEffect(() => {
-    getDives(id).then(res => {
-      const filteredDive = res.filter(dive => dive.id === id)
+    getDives(id).then((res) => {
+      const filteredDive = res.filter((dive) => dive.id === id)
       setDives(filteredDive)
     })
   }, [id])
@@ -66,15 +66,16 @@ const DetailLog = () => {
           {`${dive.description}`}
         </p>
         <ul className="log__detail__tags">
+          {console.log(dive.Cave)}
           {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
-          {!!dive.fun ? <li>fun</li> : ''}
-          {!!dive.drift ? <li>drift</li> : ''}
-          {!!dive.night ? <li>night</li> : ''}
-          {!!dive.deep ? <li>deep</li> : ''}
-          {!!dive.cave ? <li>cave</li> : ''}
-          {!!dive.wreck ? <li>wreck</li> : ''}
-          {!!dive.rescue ? <li>rescue</li> : ''}
-          {!!dive.ice ? <li>ice</li> : ''}
+          {!!dive.Fun ? <li>fun</li> : ''}
+          {!!dive.Drift ? <li>drift</li> : ''}
+          {!!dive.Night ? <li>night</li> : ''}
+          {!!dive.Deep ? <li>deep</li> : ''}
+          {!!dive.Cave ? <li>cave</li> : ''}
+          {!!dive.Wreck ? <li>wreck</li> : ''}
+          {!!dive.Rescue ? <li>rescue</li> : ''}
+          {!!dive.Ice ? <li>ice</li> : ''}
         </ul>
       </section>
       <section className="log__detail__description">
