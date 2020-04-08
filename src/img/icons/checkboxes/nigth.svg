@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="218px" height="73px" viewBox="0 0 218 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Night</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-47.000000, -136.000000)" fill="#B2FCFF" stroke="#B2FCFF">
+            <g id="Night" transform="translate(47.000000, 135.637073)">
+                <path d="M162.5,4.38343832 L117.658663,16.8629266 L0.5,16.8629266 L0.5,72.8629266 L92.3446665,72.8629266 L102.220705,63.2907151 L93.6690547,55.9170758 L86.6177846,62.8629284 L12.5,62.8622802 L12.5,48.8622816 L118.111382,48.862927 L162.5,61.5114903 L162.5,4.38343832 Z" id="Combined-Shape"></path>
+                <path d="M213.280016,3.60570323 L166.964115,13.8115538 L166.374163,19.4245677 L215.391987,19.8051703 L213.280016,3.60570323 Z" id="Rectangle" transform="translate(190.890646, 11.654806) rotate(-6.000000) translate(-190.890646, -11.654806) "></path>
+                <path d="M213.460708,44.9686298 L167.144807,55.1744804 L166.554855,60.7874943 L215.572679,61.1680969 L213.460708,44.9686298 Z" id="Rectangle-Copy" transform="translate(191.071338, 53.017732) scale(1, -1) rotate(-6.000000) translate(-191.071338, -53.017732) "></path>
+                <path d="M217.108792,23.4509707 L167.5,29.8029876 L167.5,35.9136749 L217.108792,41.2331892 L217.108792,23.4509707 Z" id="Rectangle"></path>
+            </g>
+        </g>
+    </g>
+</svg>

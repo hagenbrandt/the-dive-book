@@ -1,56 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { storage } from './firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'
-import StyledSelect from './form/Select'
-import Slider from './form/Slider'
 import Radio from './form/Radio'
 import Checkbox from './form/Checkboxes'
 import FileInput from './form/FileInput'
-import { CameraSite } from './Camera'
+import { CameraSite, ImageContext } from './Camera'
+import Fun from './img/icons/checkboxes/Fun.svg'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)
   const [cardImage, setCardImage] = useState()
+  const [url, setUrl] = useState()
   const [camUrl, setCamUrl] = useState()
-  const [weights, setWeights] = useState(4)
-  const [visability, setVisability] = useState(15)
-  const [depth, setDepth] = useState(18)
-  const [url] = useState()
-  const { register, errors, reset, handleSubmit } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     defaultValues: { id: uuid(), img: url, camPic: camUrl },
     submitFocusError: true,
   })
 
-  function handleCamUpload() {
-    const camPicName = String(Date.now())
-    const uploadTask = storage.ref(`campics/${camPicName}`).put(cardImage)
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {},
-      (error) => {
-        console.error(error)
-      },
-      () => {
-        storage
-          .ref('campics')
-          .child(camPicName)
-          .getDownloadURL()
-          .then((url) => {
-            setCamUrl(url)
-          })
-      }
-    )
-  }
-
-  const handleUpload = (cb) => {
+  const handleUpload2 = cb => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image)
     uploadTask.on(
       'state_changed',
-      (snapshot) => {},
-      (error) => {
+      // snapshot => {},
+      error => {
         console.error(error)
       },
       () => {
@@ -58,69 +33,69 @@ export default function LogBook() {
           .ref('images')
           .child(image.name)
           .getDownloadURL()
-          .then((url) => {
+          .then(url => {
             cb(url)
           })
       }
     )
   }
+  const handleCamUpload = () => {
+    const camPicName = String(Date.now())
+    const uploadTask = storage.ref(`campics/${camPicName}`).put(cardImage)
+    uploadTask.on(
+      'state_changed',
+      // snapshot => {},
+      error => {
+        console.error(error)
+      },
+      () => {
+        storage
+          .ref('campics')
+          .child(camPicName)
+          .getDownloadURL()
+          .then(url => {
+            setCamUrl(url)
+          })
+      }
+    )
+  }
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     if (e.target.files[0]) {
       setImage(e.target.files[0])
+      console.log('Check image:', e.target)
     }
   }
 
   function onSubmit(data) {
-    image
-      ? handleUpload((url) => {
-          postLogs({
-            ...data,
-            img: url,
-          })
-        })
-      : postLogs(data)
-    reset()
+    console.log(data)
+    console.log(image)
+    const newData = image && { ...data }
+
+    handleUpload2(url => {
+      console.log('Root URL ', url)
+      // const newData = image? {...data, img: url}
+      postLogs({
+        ...data,
+        img: url,
+      })
+    })
   }
-
-  const suitTypes = [
-    '3 mm short',
-    '5 mm short',
-    '3 mm long',
-    '5 mm long',
-    '7 mm long',
-    'dry',
-  ]
-
-  const waterTypes = ['salt water', 'fresh water', 'brackish water']
-
-  const weatherTypes = ['Sunny', 'Cloudy', 'Rainy']
-
-  const diveTypes = [
-    'Fun',
-    'Drift',
-    'Night',
-    'Deep',
-    'Cave',
-    'Wreck',
-    'Rescue',
-    'Ice',
-  ]
 
   return (
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
-      <Container>
+      <Container className="form__dates">
         <label htmlFor="date">
           <h4>Date</h4>
         </label>
         <input className="form__dates__id" name="id" ref={register} />
-        <input
+        {/* <input
           className="form__dates__id"
-          name="camPic"
-          value={camUrl}
+          name="img"
+          value={url}
           ref={register}
-        />
-        <Input
+        /> */}
+        <input
           type="date"
           className="form__input date"
           name="date"
@@ -129,7 +104,7 @@ export default function LogBook() {
         <label htmlFor="diveNumber">
           <h4>Dive No.</h4>
         </label>
-        <Input
+        <input
           type="number"
           className="form__input"
           placeholder="Dive Number"
@@ -143,7 +118,7 @@ export default function LogBook() {
           <p className="error">Are you a fish or a human?</p>
         )}
         <h4>Buddy</h4>
-        <Input
+        <input
           type="text"
           className="form__input"
           placeholder="Buddy"
@@ -157,9 +132,9 @@ export default function LogBook() {
           <p className="error">You sure, this is a human?</p>
         )}
       </Container>
-      <Container>
+      <Container className="form__position">
         <h4>Location</h4>
-        <Input
+        <input
           type="text"
           className="form__input"
           placeholder="Country"
@@ -175,7 +150,7 @@ export default function LogBook() {
         {errors.country && errors.country.type === 'pattern' && (
           <p className="error">You sure, this is a country?</p>
         )}
-        <Input
+        <input
           type="text"
           className="form__input"
           placeholder="City"
@@ -191,7 +166,7 @@ export default function LogBook() {
         {errors.city && errors.city.type === 'pattern' && (
           <p className="error">You sure, this is a city?</p>
         )}
-        <Input
+        <input
           type="text"
           className="form__input"
           placeholder="Dive Site"
@@ -207,7 +182,7 @@ export default function LogBook() {
         {errors.divesite && errors.divesite.type === 'pattern' && (
           <p className="error">You sure, this is a Dive Site?</p>
         )}
-        <Input
+        <input
           type="text"
           className="form__input"
           placeholder="Dive Center"
@@ -224,83 +199,86 @@ export default function LogBook() {
           <p className="error">You sure, this is a Dive Center?</p>
         )}
       </Container>
-      <Container>
+      <Container className="form__values__conditions">
         <label htmlFor="suit">
           <h4>Suit Type</h4>
         </label>
-        <StyledSelect
-          name="suitType"
-          names={suitTypes}
-          id="suitType"
-          placeholderName="--choose suit type--"
-          register={register}
-        />
+        <select name="suitType" id="wt" ref={register}>
+          <option value="default" name="default">
+            --choose suit type--
+          </option>
+          <option value="threeMmShort" name="threeMmShort" ref={register}>
+            3mm Short
+          </option>
+          <option value="fiveMmShort" name="fiveMmShort" ref={register}>
+            5mm Short
+          </option>
+          <option value="threeMmLong" name="threeMmLong" ref={register}>
+            3mm Long
+          </option>
+          <option value="fiveMmLong" name="fiveMmLong" ref={register}>
+            5mm Long
+          </option>
+          <option value="sevenMmLong" name="sevenMmLong" ref={register}>
+            7mm Long
+          </option>
+          <option value="dry" name="dry" ref={register}>
+            Dry
+          </option>
+        </select>
         <h4>Diving Weights</h4>
-        <Slider
-          type="range"
+        <input
+          type="number"
           className="form__input"
-          name="weights"
-          min="0"
-          max="20"
-          step="0.5"
-          value={weights}
-          unit="kg"
-          rangeState={weights}
-          setRangeState={setWeights}
-          register={register}
+          placeholder="Weights in kg"
+          name="weight"
+          ref={register({ min: 0, max: 20 })}
         />
+        {errors.weight && errors.weight.type === 'min' && (
+          <p className="error">Sorry buddy, but I need a valid number.</p>
+        )}
+        {errors.weight && errors.weight.type === 'max' && (
+          <p className="error">No one can carry that much under water!</p>
+        )}
         <label htmlFor="waterType">
           <h4>Water type</h4>
         </label>
-        <StyledSelect
-          name="watertype"
-          names={waterTypes}
-          id="watertype"
-          placeholderName="--choose water type--"
-          registerForSelect={register({ required: true })}
-          register={register}
-        ></StyledSelect>
+        <select name="watertype" id="wt" ref={register({ required: true })}>
+          <option value="default" name="default">
+            --choose water type--
+          </option>
+          <option value="salt water" name="saltWater" ref={register}>
+            salt water
+          </option>
+          <option value="fresh water" name="saltWater" ref={register}>
+            fresh water
+          </option>
+          <option value="brackish water" name="saltWater" ref={register}>
+            brackish water
+          </option>
+        </select>
         {errors.watertype && (
           <p className="error">Please set a type of water</p>
         )}
-        <h4>Visability</h4>
-        <Slider
-          type="range"
-          className="form__input"
-          name="visability"
-          min="0"
-          max="100"
-          steps="1"
-          value={visability}
-          unit="m"
-          rangeState={visability}
-          setRangeState={setVisability}
-          register={register}
-        />
-        <h4>Depth</h4>
-        <Slider
-          type="range"
-          className="form__input"
-          name="depth"
-          min="0"
-          max="60"
-          step="0.1"
-          value={depth}
-          unit="m"
-          rangeState={depth}
-          setRangeState={setDepth}
-          registerForSelect={register}
-          register={register}
-        />
         <h4>Weather Conditions</h4>
-        <Radio name="weather" categories={weatherTypes} register={register} />
+        <Radiogroup className="radiowrapper">
+          <Radio name="weather" id="sunny" register={register}>
+            Sunny
+          </Radio>
+          <Radio name="weather" id="cloudy" register={register}>
+            Cloudy
+          </Radio>
+          <Radio name="weather" id="rainy" register={register}>
+            Rainy
+          </Radio>
+        </Radiogroup>
       </Container>
-      <Container>
+      <Container className="form__values__entry">
         <label htmlFor="entryTime">
           <h4>Entry</h4>
           <p>Time</p>
         </label>
-        <Input
+        <input
           type="time"
           className="form__input"
           name="entryTime"
@@ -309,7 +287,7 @@ export default function LogBook() {
         <label htmlFor="entryAir">
           <p>Air</p>
         </label>
-        <Input
+        <input
           type="number"
           className="form__input"
           placeholder="bar"
@@ -323,12 +301,12 @@ export default function LogBook() {
           <p className="error">Are you sure, you need that much?</p>
         )}
       </Container>
-      <Container>
+      <Container className="form__values__exit">
         <label htmlFor="exitTime">
           <h4>Exit</h4>
           <p>Time</p>
         </label>
-        <Input
+        <input
           type="time"
           className="form__input"
           name="exitTime"
@@ -337,7 +315,7 @@ export default function LogBook() {
         <label htmlFor="exitAir">
           <p>Air</p>
         </label>
-        <Input
+        <input
           type="number"
           className="form__input"
           placeholder="bar"
@@ -351,22 +329,26 @@ export default function LogBook() {
           <p className="error">You sure, you didn't breathe?</p>
         )}
       </Container>
-      <Container>
+      <Container className="form__dive typeOfDive">
         <label htmlFor="typeOfDive">
           <h4>Type of Dive</h4>
         </label>
         <div className="form__dive__checkboxes">
-          {diveTypes.map((diveType) => (
-            <Checkbox name={diveType} id={diveType} register={register} />
-          ))}
+          <Checkbox name="fun" id="fun" register={register} />
+          <Checkbox name="drift" id="drift" register={register} />
+          <Checkbox name="night" id="night" register={register} />
+          <Checkbox name="deep" id="deep" register={register} />
+          <Checkbox name="cave" id="cave" register={register} />
+          <Checkbox name="wreck" id="wreck" register={register} />
+          <Checkbox name="rescue" id="rescue" register={register} />
+          <Checkbox name="ice" id="ice" register={register} />
         </div>
       </Container>
-      <Container>
-        <h4>Upload a picture</h4>
+      <Container className="form__dive conditions">
+        <h4>Time for a picture of your dive</h4>
         <FileInput name="image" onChange={handleChange} text="Upload" />
-        <ImageName>{image ? image.name : ''}</ImageName>
       </Container>
-      <Container>
+      <Container className="form__text">
         <Description
           id=""
           style={{ resize: 'none' }}
@@ -374,21 +356,20 @@ export default function LogBook() {
           rows="10"
           name="description"
           placeholder="Describe your dive..."
-          ref={register({ maxLength: 1000 })}
+          ref={register({ maxLength: 160 })}
         ></Description>
         {errors.description && errors.description.type === 'maxLength' && (
           <p className="error">Please dont write a book.</p>
         )}
       </Container>
       <Container>
-        <h4>Save your stamp</h4>
         <CameraSite
           handleCamUpload={handleCamUpload}
           cardImage={cardImage}
           setCardImage={setCardImage}
         />
       </Container>
-      <Button type="submit">Submit</Button>
+      <button type="submit">Submit</button>
     </LogBookForm>
   )
 }
@@ -398,6 +379,7 @@ const LogBookForm = styled.form`
   justify-items: center;
   width: 100vw;
   margin: 0;
+  /* position: relative; */
   background-color: #001a83;
   color: #3e64ff;
   padding: 12px;
@@ -407,14 +389,87 @@ const LogBookForm = styled.form`
   .error {
     color: #bf1650;
   }
+
   .error::before {
     display: inline;
     content: '⚠ ';
   }
+
   .form__dates__id {
     display: none;
   }
 
+  .form__input {
+    border-radius: 4px;
+    background: #001a83;
+    /* border: 1px solid transparent; */
+    border: none;
+    height: 28px;
+    width: 70%;
+    color: #ecfcff;
+    box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
+    /* box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 -1px 1px #fff,
+      0 1px 0 #fff; */
+    ::placeholder {
+      color: rgba(62, 100, 255, 0.3);
+    }
+    input {
+      color: #ecfcff;
+      /* color: #661a83; */
+    }
+  }
+  /* .date {
+    height: 28px;
+  } */
+  input[type='date'] {
+    height: 28px;
+    width: 70%;
+    color: rgba(62, 100, 255, 0.3);
+    box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
+    -webkit-box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
+    -moz-box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
+  }
+  input[type='time'],
+  focus {
+    color: rgba(62, 100, 255, 0.3);
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+  }
+  .form__position {
+    > input {
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+  }
+  select {
+    background-color: #001a83;
+    /* background-color: #3e64ff; */
+    color: rgba(62, 100, 255, 0.3);
+    border-radius: 4px;
+    border: none;
+    /* border: 1px solid transparent; */
+    height: 28px;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.1), 6px 6px 8px rgba(0, 0, 0, 0.1);
+  }
+  input[type='checkbox'] {
+    box-shadow: none;
+    /* color: #ecfcff; */
+  }
+
+  button {
+    color: #ecfcff;
+    height: auto;
+    width: 60%;
+    padding: 6px;
+    border-radius: 4px;
+    /* border: 1px solid transparent; */
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #000d41;
+    box-shadow: inset 13px 13px 40px #000a31, inset -13px -13px 40px #001051;
+  }
   .form__dive__checkboxes {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -428,7 +483,24 @@ const LogBookForm = styled.form`
   }
 `
 
-const Container = styled.article`
+const Description = styled.textarea`
+  background-color: #001a83;
+  color: #ecfcff;
+  border: none;
+  border-radius: 40px;
+  padding: 12px;
+  width: 95%;
+  ::placeholder {
+    color: rgba(62, 100, 255, 0.3);
+  }
+`
+
+const Radiogroup = styled.div`
+  display: flex;
+  width: 80%;
+`
+
+const Container = styled.section`
   display: grid;
   justify-items: center;
   flex-direction: column;
@@ -439,70 +511,4 @@ const Container = styled.article`
   padding: 40px;
   margin: 40px 10px 10px;
   width: 80%;
-`
-
-const Description = styled.textarea`
-  background-color: hsla(227, 96%, 26%, 1);
-  color: rgb(236, 252, 255, 1);
-  border: none;
-  border-radius: 40px;
-  padding: 14px;
-  width: 95%;
-  ::placeholder {
-    color: rgb(236, 252, 255, 0.3);
-  }
-`
-
-const Input = styled.input`
-  border-radius: 4px;
-  background: #001a83;
-  border: none;
-  height: 28px;
-  width: 80%;
-  margin-bottom: 16px;
-  padding: 1em;
-  color: rgb(236, 252, 255, 0.8);
-  box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
-
-  ::-webkit-datetime-edit-text {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-datetime-edit-month-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-datetime-edit-day-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-datetime-edit-year-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-inner-spin-button {
-    display: none;
-  }
-  ::-webkit-calendar-picker-indicator {
-    opacity: 0.3;
-    margin: 0;
-  }
-  ::placeholder {
-    color: rgb(236, 252, 255, 0.3);
-  }
-`
-
-const ImageName = styled.p`
-  font-size: 10px;
-  color: rgb(236, 252, 255, 1);
-`
-
-const Button = styled.button`
-  color: rgba(236, 252, 255, 1);
-  height: auto;
-  width: 80%;
-  padding: 6px;
-  border-radius: 4px;
-  border: none;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: linear-gradient(145deg, #001c8c, #001776);
-  box-shadow: 5px 5px 10px rgba(0, 15, 77, 1),
-    -5px -5px 10px rgba(0, 37, 185, 1);
 `

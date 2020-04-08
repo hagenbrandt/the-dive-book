@@ -3,13 +3,13 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyD_2sEqRYzBOHvFvTg7c6myHpqYShWSxyc',
-  authDomain: 'thedivebook.firebaseapp.com',
-  databaseURL: 'https://thedivebook.firebaseio.com',
-  projectId: 'thedivebook',
-  storageBucket: 'thedivebook.appspot.com',
-  messagingSenderId: '683799707216',
-  appId: '1:683799707216:web:358e0b288c96039a87db55',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSEGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 }
 
 firebase.initializeApp(firebaseConfig)
