@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import moment from 'moment'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import { getDives } from './services'
+import countDuration from './countDuration'
 import exampleImg from './img/diving_example.jpg'
 import goggles from './img/icons/goggles.svg'
 import watch from './img/icons/watch.svg'
@@ -20,13 +20,6 @@ const DetailLog = () => {
   }, [id])
 
   let dive = dives ? dives[0] : ''
-
-  function countDuration(timeDateOne, timeDateTwo) {
-    const entryTime = moment(timeDateOne, 'LT')
-    const exitTime = moment(timeDateTwo, 'LT')
-    const timeDiff = exitTime.diff(entryTime) / 1000 / 60
-    return <p>{timeDiff}</p>
-  }
 
   return !!dives && !!dive && !!dive.img ? (
     <LogBackground className="log__detail">
@@ -52,7 +45,7 @@ const DetailLog = () => {
         </div>
         <div>
           <img src={watch} alt="watch" />
-          {countDuration(`${dive.entryTime}`, `${dive.exitTime}`)}
+          <p>{countDuration(`${dive.entryTime}`, `${dive.exitTime}`)}</p>
           <h4>Duration</h4>
         </div>
         <div>
@@ -66,7 +59,6 @@ const DetailLog = () => {
           {`${dive.description}`}
         </p>
         <ul className="log__detail__tags">
-          {console.log(dive.Cave)}
           {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
           {!!dive.Fun ? <li>fun</li> : ''}
           {!!dive.Drift ? <li>drift</li> : ''}
