@@ -45,7 +45,9 @@ const DetailLog = () => {
         </div>
         <div>
           <img src={watch} alt="watch" />
-          <p>{countDuration(`${dive.entryTime}`, `${dive.exitTime}`)}</p>
+          <p>
+            {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
+          </p>
           <h4>Duration</h4>
         </div>
         <div>
