@@ -2,7 +2,7 @@ import countDuration from './countDuration'
 
 describe('countDuration', () => {
   it('counts the duration between two time stamps', () => {
-    const result = countDuration('11:00', '11:30')
+    const result = countDuration('2020-04-01T11:00', '2020-04-01T11:30')
     expect(result).toBe(30)
   })
 

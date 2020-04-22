@@ -46,6 +46,7 @@ const DetailLog = () => {
         <div>
           <img src={watch} alt="watch" />
           <p>
+            {console.log(dive.entryDateTime)}
             {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
           </p>
           <h4>Duration</h4>

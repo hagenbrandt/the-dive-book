@@ -56,6 +56,7 @@
     "@storybook/react": "5.3.14",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
+    "jest": "25.4.0",
     "json-server": "0.16.1",
     "react-measure": "2.3.0",
     "react-router-dom": "5.1.2",
