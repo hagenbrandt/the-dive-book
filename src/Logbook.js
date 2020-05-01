@@ -110,9 +110,6 @@ export default function LogBook() {
   return (
     <LogBookForm onSubmit={handleSubmit(onSubmit)}>
       <Container>
-        <label htmlFor="date">
-          <h4>Date</h4>
-        </label>
         <input className="form__dates__id" name="id" ref={register} />
         <input
           className="form__dates__id"
@@ -120,12 +117,12 @@ export default function LogBook() {
           value={camUrl}
           ref={register}
         />
-        <Input
+        {/* <Input
           type="date"
           className="form__input date"
           name="date"
           ref={register({ required: true })}
-        />
+        /> */}
         <label htmlFor="diveNumber">
           <h4>Dive No.</h4>
         </label>
@@ -298,12 +295,27 @@ export default function LogBook() {
       <Container>
         <label htmlFor="entryTime">
           <h4>Entry</h4>
-          <p>Time</p>
+          {/* <p>Time</p> */}
         </label>
+        <label htmlFor="entryDate">
+          <h4>Date / Time</h4>
+        </label>
+        {/* <Input
+          type="date"
+          className="form__input"
+          name="entryDate"
+          ref={register}
+        />
         <Input
           type="time"
           className="form__input"
           name="entryTime"
+          ref={register}
+        /> */}
+        <Input
+          type="datetime-local"
+          className="form__input"
+          name="entryDateTime"
           ref={register}
         />
         <label htmlFor="entryAir">
@@ -326,12 +338,14 @@ export default function LogBook() {
       <Container>
         <label htmlFor="exitTime">
           <h4>Exit</h4>
-          <p>Time</p>
+        </label>
+        <label htmlFor="exitDate">
+          <p>Date / Time</p>
         </label>
         <Input
-          type="time"
+          type="datetime-local"
           className="form__input"
-          name="exitTime"
+          name="exitDateTime"
           ref={register}
         />
         <label htmlFor="exitAir">

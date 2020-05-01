@@ -72,5 +72,3 @@ const Button = styled.button`
 `
 
 export const ImageContext = React.createContext(CameraSite.effectImage)
-
-// export let ImageContext = React.createContext(CameraSite.effectImage)
