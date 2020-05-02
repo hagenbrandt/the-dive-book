@@ -130,6 +130,7 @@ export function Camera({ onCapture, onClear }) {
           {isVideoPlaying && (
             <Button
               type="button"
+              name="takeAPicture"
               onClick={isCanvasEmpty ? handleCapture : handleClear}
             >
               {isCanvasEmpty ? 'Take a picture' : 'Take another picture'}
