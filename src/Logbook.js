@@ -117,12 +117,6 @@ export default function LogBook() {
           value={camUrl}
           ref={register}
         />
-        {/* <Input
-          type="date"
-          className="form__input date"
-          name="date"
-          ref={register({ required: true })}
-        /> */}
         <label htmlFor="diveNumber">
           <h4>Dive No.</h4>
         </label>
@@ -290,28 +284,15 @@ export default function LogBook() {
           register={register}
         />
         <h4>Weather Conditions</h4>
-        <Radio name="weather" categories={weatherTypes} register={register} />
+        <Radio name="weather" categories={weatherTypes} value={weatherTypes} register={register} />
       </Container>
       <Container>
         <label htmlFor="entryTime">
           <h4>Entry</h4>
-          {/* <p>Time</p> */}
         </label>
         <label htmlFor="entryDate">
           <h4>Date / Time</h4>
         </label>
-        {/* <Input
-          type="date"
-          className="form__input"
-          name="entryDate"
-          ref={register}
-        />
-        <Input
-          type="time"
-          className="form__input"
-          name="entryTime"
-          ref={register}
-        /> */}
         <Input
           type="datetime-local"
           className="form__input"
@@ -402,7 +383,7 @@ export default function LogBook() {
           setCardImage={setCardImage}
         />
       </Container>
-      <Button type="submit">Submit</Button>
+      <Button name="submitButton" type="submit">Submit</Button>
     </LogBookForm>
   )
 }

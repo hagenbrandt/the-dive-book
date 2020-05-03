@@ -24,10 +24,9 @@ export function CameraSite({
         <ContainerTwo>
           <h2>Preview</h2>
           <Preview src={cardImage && URL.createObjectURL(cardImage)} />
-          {console.log(cardImage)}
         </ContainerTwo>
       )}
-      <Button type="button" onClick={() => setIsCameraOpen(true)}>
+      <Button type="button" name="openCamera" onClick={() => setIsCameraOpen(true)}>
         Open Camera
       </Button>
       <Button
@@ -39,7 +38,7 @@ export function CameraSite({
       >
         Close Camera
       </Button>
-      <Button type="button" onClick={handleCamUpload}>
+      <Button type="button" name="uploadCamPic" onClick={handleCamUpload}>
         Upload Cam pic
       </Button>
     </>
