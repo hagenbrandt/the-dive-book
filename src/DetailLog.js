@@ -31,7 +31,7 @@ const DetailLog = () => {
               ? `url(${dive.img})`
               : `url(${exampleImg})`,
           }}
-        ></div>
+        />
       </header>
       <section className="log__detail__header__text">
         <h2 className="log__detail__header__three">{`${dive.divesite}`}</h2>
@@ -46,7 +46,6 @@ const DetailLog = () => {
         <div>
           <img src={watch} alt="watch" />
           <p>
-            {console.log(dive.entryDateTime)}
             {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
           </p>
           <h4>Duration</h4>
@@ -108,7 +107,6 @@ const LogBackground = styled.article`
     width: auto;
     height: 460px;
     padding-top: 12%;
-    /* border-radius: 12px 12px 0 0; */
   }
 
   .log__detail__header__text {
@@ -173,7 +171,6 @@ const LogBackground = styled.article`
     justify-content: flex-start;
     padding: 20px;
     background-color: rgba(236, 252, 255, 0.8);
-    /* border-radius: 0 0 12px 12px; */
 
     > p {
       text-align: justify;
