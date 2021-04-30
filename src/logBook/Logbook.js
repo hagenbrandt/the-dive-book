@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { storage } from './config/firebase/firebase'
+import { storage } from '../config/firebase/firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
-import { postLogs } from './services'
-import StyledSelect from './form/Select'
-import Slider from './form/Slider'
-import Radio from './form/Radio'
-import Checkbox from './form/Checkboxes'
-import FileInput from './form/FileInput'
-import { CameraSite } from './camera/CameraSite'
+import { postLogs } from '../services'
+import StyledSelect from '../form/Select'
+import Slider from '../form/Slider'
+import Radio from '../form/Radio'
+import Checkbox from '../form/Checkboxes'
+import FileInput from '../form/FileInput'
+import { CameraSite } from '../camera/CameraSite'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)

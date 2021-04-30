@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LogList from './LogList'
 import BackgroundLog from './backgroundLog/BackgroundLog'
 import DetailLog from './detailLog/DetailLog'
-import LogBook from './Logbook'
+import LogBook from './logBook/Logbook'
 import { CameraSite } from './camera/CameraSite'
 import Footer from './footer/Footer'
 
