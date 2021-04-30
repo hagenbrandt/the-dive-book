@@ -9,7 +9,7 @@ import Slider from './form/Slider'
 import Radio from './form/Radio'
 import Checkbox from './form/Checkboxes'
 import FileInput from './form/FileInput'
-import { CameraSite } from './Camera'
+import { CameraSite } from './camera/CameraSite'
 
 export default function LogBook() {
   const [image, setImage] = useState(null)

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Camera } from './camera/index'
+import { Camera } from './index'
 
 export function CameraSite({
   cardImage,
   setCardImage,
-  camUrl,
-  setCamUrl,
   handleCamUpload,
 }) {
   const [isCameraOpen, setIsCameraOpen] = useState(false)

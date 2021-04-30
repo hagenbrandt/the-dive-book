@@ -4,7 +4,7 @@ import LogList from './LogList'
 import BackgroundLog from './BackgroundLog/BackgroundLog'
 import DetailLog from './DetailLog'
 import LogBook from './Logbook'
-import { CameraSite } from './Camera'
+import { CameraSite } from './camera/CameraSite'
 import Footer from './Footer'
 
 export default function App() {
