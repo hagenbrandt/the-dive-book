@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import LogList from './logList/LogList'
-import BackgroundLog from './backgroundLog/BackgroundLog'
-import DetailLog from './detailLog/DetailLog'
-import LogBook from './logBook/Logbook'
-import { CameraSite } from './camera/CameraSite'
-import Footer from './footer/Footer'
+import LogList from '../logList/LogList'
+import BackgroundLog from '../backgroundLog/BackgroundLog'
+import DetailLog from '../detailLog/DetailLog'
+import LogBook from '../logBook/Logbook'
+import { CameraSite } from '../camera/CameraSite'
+import Footer from '../footer/Footer'
 
 export default function App() {
   return (
