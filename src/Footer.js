@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import diver from './img/icons/Diver.svg'
-import logbook from './img/icons/LogBook.svg'
+import diver from './assets/img/icons/Diver.svg'
+import logbook from './assets/img/icons/LogBook.svg'
 
 export default function Footer() {
   return (
