@@ -5,7 +5,7 @@ import BackgroundLog from './backgroundLog/BackgroundLog'
 import DetailLog from './detailLog/DetailLog'
 import LogBook from './Logbook'
 import { CameraSite } from './camera/CameraSite'
-import Footer from './Footer'
+import Footer from './footer/Footer'
 
 export default function App() {
   return (
