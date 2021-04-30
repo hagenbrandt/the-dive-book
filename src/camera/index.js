@@ -18,9 +18,9 @@ export function Camera({ onCapture, onClear }) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [isCanvasEmpty, setIsCanvasEmpty] = useState(true)
   const [isFlashing, setIsFlashing] = useState(false)
+  const [aspectRatio, calculateRatio] = useCardRatio(1.586)
 
   const mediaStream = useUserMedia(CAPTURE_OPTIONS)
-  const [aspectRatio, calculateRatio] = useCardRatio(1.586)
   const offsets = useOffsets(
     videoRef.current && videoRef.current.videoWidth,
     videoRef.current && videoRef.current.videoHeight,
@@ -30,52 +30,6 @@ export function Camera({ onCapture, onClear }) {
 
   if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
     videoRef.current.srcObject = mediaStream
-  }
-
-  function handleResize(contentRect) {
-    setContainer({
-      width: contentRect.bounds.width,
-      height: Math.round(contentRect.bounds.width / aspectRatio),
-    })
-  }
-
-  function handleCanPlay() {
-    calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth)
-    setIsVideoPlaying(true)
-    videoRef.current.play()
-  }
-
-  function handleCapture() {
-    const context = canvasRef.current.getContext('2d')
-
-    context.drawImage(
-      videoRef.current,
-      offsets.x,
-      offsets.y,
-      container.width,
-      container.height,
-      0,
-      0,
-      container.width,
-      container.height
-    )
-
-    canvasRef.current.toBlob((blob) => onCapture(blob), 'image/jpeg', 1)
-
-    context.save()
-    console.log(context)
-    const dataURL = context.toDataURL
-    console.log(dataURL)
-
-    setIsCanvasEmpty(false)
-    setIsFlashing(true)
-  }
-
-  function handleClear() {
-    const context = canvasRef.current.getContext('2d')
-    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-    setIsCanvasEmpty(true)
-    onClear()
   }
 
   if (!mediaStream) {
@@ -140,6 +94,49 @@ export function Camera({ onCapture, onClear }) {
       )}
     </Measure>
   )
+  
+  function handleResize(contentRect) {
+    setContainer({
+      width: contentRect.bounds.width,
+      height: Math.round(contentRect.bounds.width / aspectRatio),
+    })
+  }
+
+  function handleCanPlay() {
+    calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth)
+    setIsVideoPlaying(true)
+    videoRef.current.play()
+  }
+
+  function handleCapture() {
+    const context = canvasRef.current.getContext('2d')
+
+    context.drawImage(
+      videoRef.current,
+      offsets.x,
+      offsets.y,
+      container.width,
+      container.height,
+      0,
+      0,
+      container.width,
+      container.height
+    )
+
+    canvasRef.current.toBlob((blob) => onCapture(blob), 'image/jpeg', 1)
+
+    context.save()
+
+    setIsCanvasEmpty(false)
+    setIsFlashing(true)
+  }
+
+  function handleClear() {
+    const context = canvasRef.current.getContext('2d')
+    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    setIsCanvasEmpty(true)
+    onClear()
+  }
 }
 
 const flashAnimation = keyframes`
