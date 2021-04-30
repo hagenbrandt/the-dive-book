@@ -250,7 +250,7 @@ export default function LogBook() {
           placeholderName="--choose water type--"
           registerForSelect={register({ required: true })}
           register={register}
-        ></StyledSelect>
+        />
         {errors.watertype && (
           <p className="error">Please set a type of water</p>
         )}
@@ -370,7 +370,7 @@ export default function LogBook() {
           name="description"
           placeholder="Describe your dive..."
           ref={register({ maxLength: 1000 })}
-        ></Description>
+        />
         {errors.description && errors.description.type === 'maxLength' && (
           <p className="error">Please dont write a book.</p>
         )}
