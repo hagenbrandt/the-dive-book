@@ -14,8 +14,8 @@ export default function Slider({
   unit,
   register,
 }) {
-  const handleRangeChange = (e) => {
-    setRangeState(e.target.value)
+  const handleRangeChange = (event) => {
+    setRangeState(event.target.value)
   }
 
   return (
