@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import exampleImg from './assets/img/diving_example.jpg'
-import portrait from './assets/img/portrait.jpg'
+import exampleImg from '../assets/img/diving_example.jpg'
+import portrait from '../assets/img/portrait.jpg'
 
 export default function DiveLogs({ country, city, divesite, point, id, img }) {
   return (
