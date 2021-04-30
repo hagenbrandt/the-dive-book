@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { storage } from './firebase'
+import { storage } from './config/firebase/firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
 import { postLogs } from './services'

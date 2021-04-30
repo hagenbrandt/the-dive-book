@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { logsRef } from './firebase'
+import { logsRef } from './config/firebase/firebase'
 
 export function getDives(documentId = '') {
   return fetchLogs(documentId)
