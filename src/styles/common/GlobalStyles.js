@@ -13,8 +13,6 @@ const GlobalStyle = createGlobalStyle`
         height: 100vh;
         width: 100vw;
         font-family: "Sonorous";
-        /* font-family: "Lovelo"; */
-        /* font-family: "Aquarius"; */
         color: #000d41;
     }
     a {
