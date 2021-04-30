@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
-import { getDives } from './services'
-import countDuration from './helper/countDuration/countDuration'
-import exampleImg from './assets/img/diving_example.jpg'
-import goggles from './assets/img/icons/goggles.svg'
-import watch from './assets/img/icons/watch.svg'
-import depth from './assets/img/icons/depth.svg'
+import { getDives } from '../services'
+import countDuration from '../helper/countDuration/countDuration'
+import exampleImg from '../assets/img/diving_example.jpg'
+import goggles from '../assets/img/icons/goggles.svg'
+import watch from '../assets/img/icons/watch.svg'
+import depth from '../assets/img/icons/depth.svg'
 
 const DetailLog = () => {
   let { id } = useParams()
