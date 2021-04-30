@@ -28,11 +28,6 @@ const Input = styled.input`
 
 const Label = styled.label`
   color: rgba(62, 100, 255, 0.3);
-  /* font-size: 1.25em;
-  font-weight: 700;
-  color: white;
-  background-color: black;
-  display: inline-block; */
 `
 
 export default FileInput
