@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import img from './assets/img/app_pg_one_bg.svg'
+import img from '../assets/img/app_pg_one_bg.svg'
 
 const BackgroundLog = styled.div`
   background-image: url(${img});
