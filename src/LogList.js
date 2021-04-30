@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import DiveLogs from './diveLog/DiveLog'
 import uuid from 'react-uuid'
 
-export default function LogList() {
+export const LogList = () => {
   const [dives, setDives] = useState([])
 
   useEffect(() => {
@@ -38,3 +38,5 @@ const DiveList = styled.section`
   height: 100%;
   padding-bottom: 120px;
 `
+
+export default LogList
