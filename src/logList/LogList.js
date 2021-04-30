@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { getDives } from './services'
+import { getDives } from '../services'
 import styled from 'styled-components'
-import DiveLogs from './diveLog/DiveLog'
+import DiveLogs from '../diveLog/DiveLog'
 import uuid from 'react-uuid'
 
 export const LogList = () => {
