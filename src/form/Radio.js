@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Radio = ({ name, labelID, categories, children, id, register }) => (
+const Radio = ({ name, categories, id, register }) => (
   <RadioWrapper>
     {categories.map((category) => (
       <Label htmlFor={id} id={category}>
