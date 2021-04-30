@@ -4,8 +4,8 @@ import styled from 'styled-components'
 const Radio = ({ name, categories, id, register }) => (
   <RadioWrapper>
     {categories.map((category) => (
-      <Label htmlFor={id} id={category}>
-        <Input type="radio" name={name} id={category} value={category} ref={register} />
+      <Label htmlFor={id} id={category} key={category}>
+        <Input type="radio" name={name} id={category} key={category} value={category} ref={register} />
         <Mark />
         <Text>{category}</Text>
       </Label>

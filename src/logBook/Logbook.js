@@ -352,7 +352,7 @@ export default function LogBook() {
         </label>
         <div className="form__dive__checkboxes">
           {diveTypes.map((diveType) => (
-            <Checkbox name={diveType} id={diveType} register={register} />
+            <Checkbox name={diveType} id={diveType} key={diveType} register={register} />
           ))}
         </div>
       </Container>

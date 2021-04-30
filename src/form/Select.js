@@ -10,27 +10,27 @@ export default function Select({
   register,
 }) {
   return (
-    <StyledSelect name={name} id={id} ref={registerForSelect}>
+    <StyledSelect name={name} id={id} key={name} ref={registerForSelect}>
       <Option
         disabled
-        selected
+        defaultValue
         value=""
+        key='default'
         className="selectOption"
         name="default"
       >
         {placeholderName}
       </Option>
       {names.map((name) => (
-        <>
           <Option
             value={name.split(' ').join('')}
             name={name.split(' ').join('')}
+            key={name}
             className="selectOption"
             ref={register}
           >
             {name}
           </Option>
-        </>
       ))}
     </StyledSelect>
   )
