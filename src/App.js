@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LogList from './LogList'
-import BackgroundLog from './BackgroundLog/BackgroundLog'
+import BackgroundLog from './backgroundLog/BackgroundLog'
 import DetailLog from './DetailLog'
 import LogBook from './Logbook'
 import { CameraSite } from './camera/CameraSite'
