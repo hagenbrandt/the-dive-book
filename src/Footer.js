@@ -10,15 +10,9 @@ export default function Footer() {
       <Link to="/" className="footer__link__icon">
         <img src={diver} alt="home" />
       </Link>
-      {/* <a className="footer__link__icon" href="/">
-        <img src={lens} alt="lens" />
-      </a> */}
       <Link to="/LogBook" className="footer__link__icon">
         <img src={logbook} alt="book" />
       </Link>
-      {/* <a className="footer__link__icon" href="/">
-        <img src={profile} alt="world" />
-      </a> */}
     </FooterStyle>
   )
 }
