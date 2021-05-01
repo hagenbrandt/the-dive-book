@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {auth} from '../config/firebase/firebase'
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -11,9 +12,20 @@ const PasswordReset = () => {
       setEmail(value);
     }
   };
+
   const sendResetEmail = event => {
     event.preventDefault();
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        setEmailHasBeenSent(true);
+        setTimeout(() => {setEmailHasBeenSent(false)}, 3000);
+      })
+      .catch(() => {
+        setError("Error resetting password");
+      });
   };
+
   return (
     <div>
       <h2>
@@ -43,6 +55,7 @@ const PasswordReset = () => {
             onChange={onChangeHandler}
           />
           <button
+            onClick={() => sendResetEmail()}
           >
             Send me a reset link
           </button>
