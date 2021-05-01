@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom'
 import App from './app/App'
 import * as serviceWorker from './serviceWorker'
 import GlobalStyle from './styles/common/GlobalStyles'
+import UserProvider from './providers/UserProvider'
 
 ReactDOM.render(
-  <>
+  <UserProvider>
     <GlobalStyle />
     <App />
-  </>,
+  </UserProvider>,
   document.getElementById('root')
 )
 
