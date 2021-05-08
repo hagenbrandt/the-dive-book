@@ -7,6 +7,7 @@ import LogBook from '../logBook/Logbook'
 import { CameraSite } from '../camera/CameraSite'
 import Footer from '../footer/Footer'
 import SignIn from '../auth/SignIn'
+import SignOut from '../auth/SignOut'
 import {UserContext} from '../providers/UserProvider'
 import {auth} from '../config/firebase/firebase'
 
@@ -17,7 +18,7 @@ export default function App() {
       {!user ? <Redirect to='/signIn'/> : null}
         <Route path="/signIn" component={SignIn}/>
       <BackgroundLog>
-        <button onClick={() => auth.signOut()}>X</button>
+        {user ? <SignOut clickFunction={() => auth.signOut()} content={'X'} /> : null}
         <Switch>
           <Route exact path="/" component={LogList} />
           <Route exact path="/DetailLog/:id" component={DetailLog} />
