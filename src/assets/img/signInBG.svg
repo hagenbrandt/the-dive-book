@@ -1,0 +1,27 @@
+<svg width="375" height="812" viewBox="0 0 375 812" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 4">
+<g id="iPhone 11 Pro Copy" clip-path="url(#clip0)">
+<rect width="375" height="812" fill="white"/>
+<g id="app_pg_one">
+<g id="bg">
+<rect id="Rectangle" width="375" height="812" fill="#001A83"/>
+</g>
+</g>
+<ellipse id="Ellipse 1" cx="72" cy="430.5" rx="29" ry="28.5" fill="#3E64FF"/>
+<ellipse id="Ellipse 2" cx="176.5" cy="553" rx="11.5" ry="14" fill="#3E64FF"/>
+<ellipse id="Ellipse 3" cx="228.5" cy="614.5" rx="6.5" ry="7.5" fill="#3E64FF"/>
+<ellipse id="Ellipse 4" cx="300.5" cy="489.5" rx="23.5" ry="26.5" fill="#3E64FF"/>
+<ellipse id="Ellipse 5" cx="196.5" cy="148.5" rx="8.5" ry="10.5" fill="#3E64FF"/>
+<path id="Vector 1" d="M-15.5 263.5C30.0622 261.852 54.3971 265.633 92 295C123.617 333.654 144.586 351.064 187 375.5C267.025 406.12 313.112 408.476 397 392.5C456.418 347.097 471.634 311.605 486.5 241.5C505.318 155.16 503.092 105.583 486.5 16L380 -33.5H201.5C180.985 -1.17356 180.874 16.7179 187 48.5C256.761 78.9899 271.377 111.12 290 173C307.043 206.39 264.5 226 290 258.5C315.5 291 232 289.5 187 279C147.423 274.834 137.5 239 114.5 216.5C88 176 83.1362 168.907 45 164.5C10.5354 161.074 -5.22326 157.647 -15.5 144V263.5Z" fill="#3E64FF"/>
+<ellipse id="Ellipse 6" cx="299.5" cy="346.5" rx="24.5" ry="26.5" fill="#001A83"/>
+<ellipse id="Ellipse 7" cx="62" cy="231.5" rx="10" ry="11.5" fill="#001A83"/>
+<ellipse id="Ellipse 8" cx="316" cy="98.5" rx="41" ry="39.5" fill="#001A83"/>
+<path id="Vector 2" d="M-31 639.5V834H416.5V784C368.748 761.494 334.869 753.588 243.5 760C170.07 757.777 105.5 659 70 707C34.5 755 11.8958 686.172 -5.5 651L-31 639.5Z" fill="#3E64FF"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="375" height="812" fill="white"/>
+</clipPath>
+</defs>
+</svg>
