@@ -15,13 +15,11 @@ import {auth} from '../config/firebase/firebase'
 export default function App() {
   const user = useContext(UserContext);
   return (
-    !user ? <Router>
-        <Redirect to='/signIn'/>
+    <Router>
+      {!user ? <Redirect to='/signIn'/> : null}
         <Route path="/signUp" component={SignUp} />
         <Route path="/signIn" component={SignIn}/>
         <Route path="/passwordReset" component={PasswordReset}/>
-      </Router> :
-    <Router>
       <BackgroundLog>
         <button onClick={() => auth.signOut()}>X</button>
         <Switch>
