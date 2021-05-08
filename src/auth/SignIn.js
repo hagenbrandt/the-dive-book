@@ -1,81 +1,84 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import {signInWithGoogle, auth} from '../config/firebase/firebase'
+import styled from 'styled-components'
+import { signInWithGoogle} from '../config/firebase/firebase'
+import signInBG from '../assets/img/signInBG.svg'
+import googleIcon from '../assets/img/google-icon.svg'
 
 const SignIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
-  const signInWithEmailAndPasswordHandler = (event,email, password) => {
-      event.preventDefault();
-      auth.signInWithEmailAndPassword(email, password).catch(error => {
-        setError("Error signing in with password and email!");
-        console.error("Error signing in with password and email", error);
-      });
-    };
-
-  const onChangeHandler = (event) => {
-    const {name, value} = event.currentTarget;
-
-    if(name === 'userEmail') {
-      setEmail(value);
-    }
-    else if(name === 'userPassword'){
-      setPassword(value);
-    }
-  };
 
   return (
-    <div>
-      <h2>Sign In:</h2>
+    <SignInBackground>
+      <SignInCard>
+      <h2>Sign In</h2>
       <div>
         {error !== null && <span>{error}</span>}
-        <form>
-          <label htmlFor="userEmail" className="block">
-            Email:
-          </label>
-          <input
-            type="email"
-            name="userEmail"
-            value = {email}
-            placeholder="mail"
-            id="userEmail"
-            onChange = {(event) => onChangeHandler(event)}
-          />
-          <label htmlFor="userPassword" className="block">
-            Password:
-          </label>
-          <input
-            type="password"
-            name="userPassword"
-            value= {password}
-            placeholder="Password"
-            id="userPassword"
-            onChange = {(event) => onChangeHandler(event)}
-          />
-          <button onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
-            Sign in
-          </button>
-        </form>
-        <p>or</p>
         <button
           onClick={() => signInWithGoogle()}>
+          <img class='sign-in-icon' src={googleIcon} alt={'sign in with google'}/>
           Sign in with Google
         </button>
-        <p className="text-center my-3">
-          Don't have an account?{" "}
-          <Link to="signUp" >
-            Sign up here
-          </Link>{" "}
-          <br />{" "}
-          <Link to = "passwordReset" >
-            Forgot Password?
-          </Link>
-        </p>
       </div>
-    </div>
+      </SignInCard>
+    </SignInBackground>
   )
 }
+
+const SignInBackground = styled.section`
+  display: flex;
+  justify-content: center;
+  background: url(${signInBG});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+`
+
+const SignInCard = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  height: 60vh;
+  margin: 80px 0 0;
+  box-shadow: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+
+  h2 {
+    font-size: 40px;
+    margin: -20px 0 0;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    padding: 14px 30px;
+    background: white;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    
+    &:hover {
+      cursor: pointer;
+    }
+    
+  .sign-in-icon {
+    width: 3vw;
+    height: 100%;
+    margin: 0 14px 0 0;
+  }
+  }
+`
 
 export default SignIn
