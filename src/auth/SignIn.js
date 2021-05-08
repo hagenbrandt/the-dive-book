@@ -1,14 +1,17 @@
-import React, {useState} from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { signInWithGoogle} from '../config/firebase/firebase'
 import signInBG from '../assets/img/signInBG.svg'
 import googleIcon from '../assets/img/google-icon.svg'
+import { UserContext } from '../providers/UserProvider'
+import { Redirect } from 'react-router-dom'
 
 const SignIn = () => {
   const [error, setError] = useState(null)
-
-
+  const user = useContext(UserContext);
   return (
+    <>
+    {user ? <Redirect to='/'/> : null}
     <SignInBackground>
       <SignInCard>
       <h2>Sign In</h2>
@@ -22,6 +25,7 @@ const SignIn = () => {
       </div>
       </SignInCard>
     </SignInBackground>
+    </>
   )
 }
 
@@ -58,7 +62,7 @@ const SignInCard = styled.div`
     text-transform: uppercase;
     letter-spacing: 0.5rem;
   }
-  
+
   button {
     display: flex;
     align-items: center;
@@ -68,11 +72,11 @@ const SignInCard = styled.div`
     border: none;
     border-radius: 20px;
     font-size: 16px;
-    
+
     &:hover {
       cursor: pointer;
     }
-    
+
   .sign-in-icon {
     width: 3vw;
     height: 100%;
