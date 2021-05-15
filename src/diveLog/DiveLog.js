@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { blue } from '../styles/utils/colors'
 import exampleImg from '../assets/img/diving_example.jpg'
 import portrait from '../assets/img/portrait.jpg'
 
@@ -33,16 +34,16 @@ export default function DiveLogs({ country, city, divesite, point, id, img }) {
 }
 
 const DiveLog = styled.div`
-  background-color: #ecfcff;
+  background-color: ${blue['twilightBlue']};
   display: grid;
   gap: 5px;
   grid-template-rows: 50% auto auto auto;
-  color: #000d41;
+  color: ${blue['stratosDark']};
   width: 287px;
   height: 500;
   margin-top: 50px;
   border-radius: 12px;
-  box-shadow: 3px 5px 7px #000d41;
+  box-shadow: 3px 5px 7px ${blue['stratosDark']};
 
   .dive__log__img {
     height: 100px;
@@ -58,7 +59,7 @@ const DiveLog = styled.div`
     padding-left: 8px;
     margin: 12px 8px;
     font-size: 0.75rem;
-    color: #000d41;
+    color: ${blue['stratosDark']};
     text-align: left;
     margin-left: 8px;
   }
@@ -86,7 +87,7 @@ const DiveLog = styled.div`
 
   .dive__log__name__header {
     font-size: 10px;
-    color: #000d41;
+    color: ${blue['stratosDark']};
   }
 
   .dive__log__icon {
@@ -105,6 +106,6 @@ const DiveLog = styled.div`
 
   .dive__log__icon__counter {
     font-size: 6px;
-    color: #3e64ff;
+    color: ${blue['dodgerBlue']};
   }
 `
