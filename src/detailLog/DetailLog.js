@@ -124,9 +124,9 @@ const LogBackground = styled.article`
       height: 1px;
       background-image: linear-gradient(
         to right,
-        rgba(0, 13, 65, 0),
-        rgba(0, 13, 65, 0.75),
-        rgba(0, 13, 65, 0)
+        ${blue['stratosGradientOne']},
+        ${blue['stratosGradientTwo']},
+        ${blue['stratosGradientOne']}
       );
     }
   }
@@ -191,8 +191,8 @@ const LogBackground = styled.article`
       padding-left: 0;
 
       li {
-        background-color: rgb(0, 13, 65);
-        color: rgb(236, 252, 255);
+        background-color: ${blue['stratosGradientFull']};
+        color: ${blue['twilightBlue']};
         border-radius: 8px;
         padding: 4px;
         margin-right: 12px;
