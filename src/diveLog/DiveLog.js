@@ -25,7 +25,7 @@ export default function DiveLogs({ country, city, divesite, point, id, img }) {
             <img className="dive__log__portrait" src={portrait} alt="" />
           </div>
           <div className="dive__log__name">
-            <h3 className="dive__log__name__header">Hagen Brandt</h3>
+            <p className="dive__log__name__header">Hagen Brandt</p>
           </div>
         </div>
       </a>
@@ -85,8 +85,8 @@ const DiveLog = styled.div`
   }
 
   .dive__log__name__header {
-    font-size: 10px;
     color: ${blue['stratosDark']};
+    font-weight: bold;
   }
 
   .dive__log__icon {
