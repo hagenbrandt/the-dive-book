@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { blue } from '../styles/utils/colors'
 
 const FileInput = ({ name, onChange, handleUpload, text }) => (
   <>
@@ -27,7 +28,7 @@ const Input = styled.input`
 `
 
 const Label = styled.label`
-  color: rgba(62, 100, 255, 0.3);
+  color: ${blue['dodgerBlueLight']};
 `
 
 export default FileInput
