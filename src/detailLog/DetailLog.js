@@ -43,26 +43,26 @@ const DetailLog = () => {
         <section className="log__detail__icons">
           <div>
             <img src={depth} alt="depth" />
-            <p>{`${dive.depth}`}</p>
-            <h4>Depth</h4>
+            <h3>{`${dive.depth}`}</h3>
+            <h3>Depth</h3>
           </div>
           <div>
             <img src={watch} alt="watch" />
-            <p>
+            <h3>
               {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
-            </p>
-            <h4>Duration</h4>
+            </h3>
+            <h3>Duration</h3>
           </div>
           <div>
             <img src={goggles} alt="goggles" />
-            <p>{`${dive.visability}`}</p>
-            <h4>Visability</h4>
+            <h3>{`${dive.visability}`}</h3>
+            <h3 className='category'>Visability</h3>
           </div>
         </section>
         <section className="log__detail__description">
-          <p className="log__detail__description__text">
+          <h3 className="log__detail__description__text">
             {`${dive.description}`}
-          </p>
+          </h3>
           <ul className="log__detail__tags">
             {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
             {!!dive.Fun ? <li>fun</li> : ''}
@@ -117,6 +117,7 @@ const LogBackground = styled.article`
 
     .log__detail__header__three {
       text-align: center;
+      margin: 20px 0;
     }
 
     .log__detail__hr {
@@ -140,7 +141,7 @@ const LogBackground = styled.article`
 
     > div {
       display: grid;
-      justify-items: start;
+      justify-items: center;
       align-items: center;
       padding: 4px;
       grid-template-columns: 30px auto;
@@ -164,6 +165,10 @@ const LogBackground = styled.article`
         margin-top: 6px;
       }
     }
+
+    .category {
+      grid-column: span 2;
+    }
   }
 
   .log__detail__description {
@@ -172,9 +177,10 @@ const LogBackground = styled.article`
     justify-content: flex-start;
     padding: 20px;
 
-    > p {
+    > h3 {
       text-align: justify;
       line-height: 1.5;
+      margin: 0 0 20px;
     }
 
     .stamp {
@@ -193,8 +199,8 @@ const LogBackground = styled.article`
       li {
         background-color: ${blue['stratosGradientFull']};
         color: ${blue['twilightBlue']};
-        border-radius: 8px;
-        padding: 4px;
+        border-radius: 20px;
+        padding: 8px;
         margin-right: 12px;
       }
     }
