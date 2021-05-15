@@ -37,9 +37,8 @@ const DiveList = styled.section`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  overflow: scroll;
   height: 100%;
-  padding-bottom: 120px;
+  margin-bottom: 300px;
 `
 
 export default LogList

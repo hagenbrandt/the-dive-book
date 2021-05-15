@@ -7,5 +7,6 @@ const BackgroundLog = styled.div`
   background-size: cover;
   background-position: center;
   height: 100vh;
+  overflow: scroll;
 `
 export default BackgroundLog
