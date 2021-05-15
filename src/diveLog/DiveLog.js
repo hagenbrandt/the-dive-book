@@ -34,19 +34,19 @@ export default function DiveLogs({ country, city, divesite, point, id, img }) {
 }
 
 const DiveLog = styled.div`
-  background-color: ${blue['twilightBlue']};
   display: grid;
   gap: 5px;
   grid-template-rows: 50% auto auto auto;
   color: ${blue['stratosDark']};
+  background-color: ${blue['twilightBlue']};
   width: 287px;
-  height: 500;
+  height: 220px;
   margin-top: 50px;
   border-radius: 12px;
   box-shadow: 3px 5px 7px ${blue['stratosDark']};
 
   .dive__log__img {
-    height: 100px;
+    height: 120px;
     width: auto;
     border-radius: 12px 12px 0 0;
     background-repeat: no-repeat;
