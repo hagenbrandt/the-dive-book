@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { blue } from '../styles/utils/colors'
 import { useParams } from 'react-router-dom'
 import BackgroundLog from '../backgroundLog/BackgroundLog'
 import { getDives } from '../data/fetch/services'
@@ -90,12 +91,11 @@ const DetailLog = () => {
 
 const LogBackground = styled.article`
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   flex-direction: column;
-  overflow: scroll;
-  margin: 0 auto;
-  padding-bottom: 50px;
+  background-color: ${blue['twilightBlueLight']};
+  padding-bottom: 54px;
 
   .log__detail__container {
     width: 100%;
@@ -114,7 +114,6 @@ const LogBackground = styled.article`
 
   .log__detail__header__text {
     height: auto;
-    background-color: rgba(236, 252, 255, 0.8);
 
     .log__detail__header__three {
       text-align: center;
@@ -138,7 +137,6 @@ const LogBackground = styled.article`
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 24px;
-    background-color: rgba(236, 252, 255, 0.8);
 
     > div {
       display: grid;
@@ -173,7 +171,6 @@ const LogBackground = styled.article`
     flex-direction: column;
     justify-content: flex-start;
     padding: 20px;
-    background-color: rgba(236, 252, 255, 0.8);
 
     > p {
       text-align: justify;
