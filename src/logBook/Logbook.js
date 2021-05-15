@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { storage } from '../config/firebase/firebase'
 import uuid from 'react-uuid'
 import styled from 'styled-components'
-import BackgroundLog from '../backgroundLog/BackgroundLog'
+import { blue, red } from '../styles/utils/colors'
 import { postLogs } from '../data/fetch/services'
 import StyledSelect from '../form/Select'
 import Slider from '../form/Slider'
@@ -394,14 +394,14 @@ const LogBookForm = styled.form`
   justify-items: center;
   width: 100vw;
   margin: 0;
-  background-color: #001a83;
-  color: #3e64ff;
+  background-color: ${blue['resolutionBlueLight']};
+  color: ${blue['dodgerBlue']};
   padding: 12px;
   padding-bottom: 80px;
   gap: 12px;
 
   .error {
-    color: #bf1650;
+    color: ${red['maroonFlush']};
   }
   .error::before {
     display: inline;
@@ -429,8 +429,8 @@ const Container = styled.article`
   justify-items: center;
   flex-direction: column;
   align-items: center;
-  background: #001a83;
-  box-shadow: inset 13px 13px 50px #00166f, inset -13px -13px 50px #001e97;
+  background: ${blue['resolutionBlueLight']};
+  box-shadow: inset 13px 13px 50px ${blue['resolutionBlueDark']}, inset -13px -13px 50px ${blue['resolutionBlueMedium']};
   border-radius: 50px;
   padding: 40px;
   margin: 40px 10px 10px;
@@ -438,40 +438,36 @@ const Container = styled.article`
 `
 
 const Description = styled.textarea`
-  background-color: hsla(227, 96%, 26%, 1);
-  color: rgb(236, 252, 255, 1);
+  background-color: ${blue['resolutionBlue']};
+  color: ${blue['twilightBlue']};
   border: none;
   border-radius: 40px;
   padding: 14px;
   width: 95%;
   ::placeholder {
-    color: rgb(236, 252, 255, 0.3);
+    color: ${blue['twilightBlueLighter']};
   }
 `
 
 const Input = styled.input`
   border-radius: 4px;
-  background: #001a83;
+  background: ${blue['resolutionBlueLight']};
   border: none;
   height: 28px;
   width: 80%;
   margin-bottom: 16px;
   padding: 1em;
-  color: rgb(236, 252, 255, 0.8);
-  box-shadow: inset 3px 3px 5px #00166f, inset -3px -3px 5px #001e97;
+  color: ${blue['twilightBlueLight']};
+  box-shadow: inset 3px 3px 5px ${blue['resolutionBlueDark']}, inset -3px -3px 5px ${blue['resolutionBlueMedium']};
 
-  ::-webkit-datetime-edit-text {
-    color: rgb(236, 252, 255, 0.3);
+  ::-webkit-datetime-edit-text,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-year-field
+  {
+    color: ${blue['twilightBlueLighter']}
   }
-  ::-webkit-datetime-edit-month-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-datetime-edit-day-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
-  ::-webkit-datetime-edit-year-field {
-    color: rgb(236, 252, 255, 0.3);
-  }
+  
   ::-webkit-inner-spin-button {
     display: none;
   }
@@ -480,17 +476,17 @@ const Input = styled.input`
     margin: 0;
   }
   ::placeholder {
-    color: rgb(236, 252, 255, 0.3);
+    color: ${blue['twilightBlueLighter']};
   }
 `
 
 const ImageName = styled.p`
   font-size: 10px;
-  color: rgb(236, 252, 255, 1);
+  color: ${blue['twilightBlue']};
 `
 
 const Button = styled.button`
-  color: rgba(236, 252, 255, 1);
+  color: ${blue['twilightBlue']};
   height: auto;
   width: 80%;
   padding: 6px;
@@ -498,7 +494,7 @@ const Button = styled.button`
   border: none;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: linear-gradient(145deg, #001c8c, #001776);
-  box-shadow: 5px 5px 10px rgba(0, 15, 77, 1),
-    -5px -5px 10px rgba(0, 37, 185, 1);
+  background: linear-gradient(145deg, ${blue['resolutionBlueDefault']}, ${blue['resolutionBlueDefaultDarker']});
+  box-shadow: 5px 5px 10px ${blue['stratosLight']},
+    -5px -5px 10px ${blue['internationalKleinBlueLight']};
 `
