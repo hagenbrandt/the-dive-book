@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getDives } from '../data/fetch/services'
+import BackgroundLog from '../backgroundLog/BackgroundLog'
 import styled from 'styled-components'
 import DiveLogs from '../diveLog/DiveLog'
 import uuid from 'react-uuid'
@@ -14,6 +15,7 @@ export const LogList = () => {
   }, [])
 
   return (
+    <BackgroundLog>
     <DiveList>
       {dives.map(dive => (
         <DiveLogs
@@ -26,6 +28,7 @@ export const LogList = () => {
         />
       ))}
     </DiveList>
+    </BackgroundLog>
   )
 }
 

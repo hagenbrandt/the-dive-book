@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+import BackgroundLog from '../backgroundLog/BackgroundLog'
 import { getDives } from '../data/fetch/services'
 import countDuration from '../helper/countDuration/countDuration'
 import exampleImg from '../assets/img/diving_example.jpg'
@@ -22,64 +23,66 @@ const DetailLog = () => {
   let dive = dives ? dives[0] : ''
 
   return !!dives && !!dive && !!dive.img ? (
-    <LogBackground className="log__detail">
-      <header className="log__detail__container">
-        <div
-          className="log__detail__header"
-          style={{
-            backgroundImage: !!dive.img
-              ? `url(${dive.img})`
-              : `url(${exampleImg})`,
-          }}
-        />
-      </header>
-      <section className="log__detail__header__text">
-        <h2 className="log__detail__header__three">{`${dive.divesite}`}</h2>
-        <hr className="log__detail__hr" />
-      </section>
-      <section className="log__detail__icons">
-        <div>
-          <img src={depth} alt="depth" />
-          <p>{`${dive.depth}`}</p>
-          <h4>Depth</h4>
-        </div>
-        <div>
-          <img src={watch} alt="watch" />
-          <p>
-            {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
+    <BackgroundLog>
+      <LogBackground className="log__detail">
+        <header className="log__detail__container">
+          <div
+            className="log__detail__header"
+            style={{
+              backgroundImage: !!dive.img
+                ? `url(${dive.img})`
+                : `url(${exampleImg})`,
+            }}
+          />
+        </header>
+        <section className="log__detail__header__text">
+          <h2 className="log__detail__header__three">{`${dive.divesite}`}</h2>
+          <hr className="log__detail__hr" />
+        </section>
+        <section className="log__detail__icons">
+          <div>
+            <img src={depth} alt="depth" />
+            <p>{`${dive.depth}`}</p>
+            <h4>Depth</h4>
+          </div>
+          <div>
+            <img src={watch} alt="watch" />
+            <p>
+              {countDuration(`${dive.entryDateTime}`, `${dive.exitDateTime}`)}
+            </p>
+            <h4>Duration</h4>
+          </div>
+          <div>
+            <img src={goggles} alt="goggles" />
+            <p>{`${dive.visability}`}</p>
+            <h4>Visability</h4>
+          </div>
+        </section>
+        <section className="log__detail__description">
+          <p className="log__detail__description__text">
+            {`${dive.description}`}
           </p>
-          <h4>Duration</h4>
-        </div>
-        <div>
-          <img src={goggles} alt="goggles" />
-          <p>{`${dive.visability}`}</p>
-          <h4>Visability</h4>
-        </div>
-      </section>
-      <section className="log__detail__description">
-        <p className="log__detail__description__text">
-          {`${dive.description}`}
-        </p>
-        <ul className="log__detail__tags">
-          {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
-          {!!dive.Fun ? <li>fun</li> : ''}
-          {!!dive.Drift ? <li>drift</li> : ''}
-          {!!dive.Night ? <li>night</li> : ''}
-          {!!dive.Deep ? <li>deep</li> : ''}
-          {!!dive.Cave ? <li>cave</li> : ''}
-          {!!dive.Wreck ? <li>wreck</li> : ''}
-          {!!dive.Rescue ? <li>rescue</li> : ''}
-          {!!dive.Ice ? <li>ice</li> : ''}
-        </ul>
-      </section>
-      <section className="log__detail__description">
-        {!!dive.camPic ? (
-          <img src={`${dive.camPic}`} alt="" className="stamp" />
-        ) : (
-          ''
-        )}
-      </section>
-    </LogBackground>
+          <ul className="log__detail__tags">
+            {!!dive.watertype ? <li>{`${dive.watertype}`}</li> : ''}
+            {!!dive.Fun ? <li>fun</li> : ''}
+            {!!dive.Drift ? <li>drift</li> : ''}
+            {!!dive.Night ? <li>night</li> : ''}
+            {!!dive.Deep ? <li>deep</li> : ''}
+            {!!dive.Cave ? <li>cave</li> : ''}
+            {!!dive.Wreck ? <li>wreck</li> : ''}
+            {!!dive.Rescue ? <li>rescue</li> : ''}
+            {!!dive.Ice ? <li>ice</li> : ''}
+          </ul>
+        </section>
+        <section className="log__detail__description">
+          {!!dive.camPic ? (
+            <img src={`${dive.camPic}`} alt="" className="stamp" />
+          ) : (
+            ''
+          )}
+        </section>
+      </LogBackground>
+    </BackgroundLog>
   ) : (
     'no dives'
   )
