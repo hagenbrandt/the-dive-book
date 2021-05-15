@@ -16,7 +16,7 @@ export const blue = {
   internationalKleinBlueLight: 'rgba(0, 37, 185, 1)',
   internationalKleinBlue: '#0020a2',
   twilightBlueLighter: 'rgba(236, 252, 255, 0.3)',
-  twilightBlueLight: 'rgb(236, 252, 255, 0.8)',
+  twilightBlueLight: 'rgba(236, 252, 255, 0.8)',
   twilightBlue: '#ECFCFF',
   dodgerBlue: '#3e64ff',
   dodgerBlueLight: 'rgba(62, 100, 255, 0.3)'
