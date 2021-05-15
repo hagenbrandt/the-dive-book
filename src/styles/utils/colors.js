@@ -5,6 +5,7 @@ export const blue = {
   stratosDarker: '#000a31',
   stratosGradientOne: 'rgba(0, 13, 65, 0)',
   stratosGradientTwo: 'rgba(0, 13, 65, 0.75)',
+  stratosGradientFull: 'rgba(0, 13, 65, 1)',
   resolutionBlueDefault: '#001c8c',
   resolutionBlueDefaultDarker: '#001776',
   resolutionBlueLight: '#001a83',
