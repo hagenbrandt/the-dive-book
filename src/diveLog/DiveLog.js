@@ -15,9 +15,9 @@ export default function DiveLogs({ country, city, divesite, point, id, img }) {
         className="dive__log__img"
       />
       <Link to={'/DetailLog/' + id} className="dive__log__header__link">
-        <h1 className="dive__log__header">
+        <h3 className="dive__log__header">
           {country} - {city} - {divesite}
-        </h1>
+        </h3>
       </Link>
       <a className="dive__log__user__link" href="/">
         <div className="dive__log__user">
@@ -58,7 +58,6 @@ const DiveLog = styled.div`
     position: relative;
     padding-left: 8px;
     margin: 12px 8px;
-    font-size: 0.75rem;
     color: ${blue['stratosDark']};
     text-align: left;
     margin-left: 8px;
