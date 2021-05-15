@@ -104,7 +104,6 @@ const DiveLog = styled.div`
   }
 
   .dive__log__icon__counter {
-    font-size: 6px;
     color: ${blue['dodgerBlue']};
   }
 `
