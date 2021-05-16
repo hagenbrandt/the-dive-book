@@ -119,7 +119,7 @@ export default function LogBook() {
             ref={register}
           />
           <label htmlFor="diveNumber">
-            <h4>Dive No.</h4>
+            <h3>Dive No.</h3>
           </label>
           <Input
             type="number"
@@ -129,12 +129,12 @@ export default function LogBook() {
             ref={register({ min: 1, max: 10000 })}
           />
           {errors.diveNumber && errors.diveNumber.type === 'min' && (
-            <p className="error">Sorry buddy, but I need a valid number.</p>
+            <h4 className="error">Sorry buddy, but I need a valid number.</h4>
           )}
           {errors.diveNumber && errors.diveNumber.type === 'max' && (
-            <p className="error">Are you a fish or a human?</p>
+            <h4 className="error">Are you a fish or a human?</h4>
           )}
-          <h4>Buddy</h4>
+          <h3>Buddy</h3>
           <Input
             type="text"
             className="form__input"
@@ -143,14 +143,14 @@ export default function LogBook() {
             ref={register({ maxLength: 30, pattern: /[A-Za-z]/ })}
           />
           {errors.buddy && errors.buddy.type === 'maxLength' && (
-            <p className="error">Nice try bot!</p>
+            <h4 className="error">Nice try bot!</h4>
           )}
           {errors.buddy && errors.buddy.type === 'pattern' && (
-            <p className="error">You sure, this is a human?</p>
+            <h4 className="error">You sure, this is a human?</h4>
           )}
         </Container>
         <Container>
-          <h4>Location</h4>
+          <h3>Location</h3>
           <Input
             type="text"
             className="form__input"
@@ -159,13 +159,13 @@ export default function LogBook() {
             ref={register({ required: true, maxLength: 74, pattern: /[A-Za-z]/ })}
           />
           {errors.country && errors.country.type === 'required' && (
-            <p className="error">Please set a country</p>
+            <h4 className="error">Please set a country</h4>
           )}
           {errors.country && errors.country.type === 'maxLength' && (
-            <p className="error">Nice try bot!</p>
+            <h4 className="error">Nice try bot!</h4>
           )}
           {errors.country && errors.country.type === 'pattern' && (
-            <p className="error">You sure, this is a country?</p>
+            <h4 className="error">You sure, this is a country?</h4>
           )}
           <Input
             type="text"
@@ -175,13 +175,13 @@ export default function LogBook() {
             ref={register({ required: true, maxLength: 28, pattern: /[A-Za-z]/ })}
           />
           {errors.city && errors.city.type === 'required' && (
-            <p className="error">Please set a city</p>
+            <h4m className="error">Please set a city</h4m>
           )}
           {errors.city && errors.city.type === 'maxLength' && (
-            <p className="error">Nice try bot!</p>
+            <h4 className="error">Nice try bot!</h4>
           )}
           {errors.city && errors.city.type === 'pattern' && (
-            <p className="error">You sure, this is a city?</p>
+            <h4 className="error">You sure, this is a city?</h4>
           )}
           <Input
             type="text"
@@ -191,13 +191,13 @@ export default function LogBook() {
             ref={register({ required: true, maxLength: 40, pattern: /[A-Za-z]/ })}
           />
           {errors.divesite && errors.divesite.type === 'required' && (
-            <p className="error">Please set a Dive Site</p>
+            <h4 className="error">Please set a Dive Site</h4>
           )}
           {errors.divesite && errors.divesite.type === 'maxLength' && (
-            <p className="error">Nice try bot!</p>
+            <h4 className="error">Nice try bot!</h4>
           )}
           {errors.divesite && errors.divesite.type === 'pattern' && (
-            <p className="error">You sure, this is a Dive Site?</p>
+            <h4 className="error">You sure, this is a Dive Site?</h4>
           )}
           <Input
             type="text"
@@ -207,18 +207,18 @@ export default function LogBook() {
             ref={register({ required: true, maxLength: 40, pattern: /[A-Za-z]/ })}
           />
           {errors.divecenter && errors.divecenter.type === 'required' && (
-            <p className="error">Please set a Dive Center</p>
+            <h4 className="error">Please set a Dive Center</h4>
           )}
           {errors.divecenter && errors.divecenter.type === 'maxLength' && (
-            <p className="error">Nice try bot!</p>
+            <h4 className="error">Nice try bot!</h4>
           )}
           {errors.divecenter && errors.divecenter.type === 'pattern' && (
-            <p className="error">You sure, this is a Dive Center?</p>
+            <h4 className="error">You sure, this is a Dive Center?</h4>
           )}
         </Container>
         <Container>
           <label htmlFor="suit">
-            <h4>Suit Type</h4>
+            <h3>Suit Type</h3>
           </label>
           <StyledSelect
             name="suitType"
@@ -227,7 +227,7 @@ export default function LogBook() {
             placeholderName="--choose suit type--"
             register={register}
           />
-          <h4>Diving Weights</h4>
+          <h3>Diving Weights</h3>
           <Slider
             type="range"
             className="form__input"
@@ -242,7 +242,7 @@ export default function LogBook() {
             register={register}
           />
           <label htmlFor="waterType">
-            <h4>Water type</h4>
+            <h3>Water type</h3>
           </label>
           <StyledSelect
             name="watertype"
@@ -253,9 +253,9 @@ export default function LogBook() {
             register={register}
           />
           {errors.watertype && (
-            <p className="error">Please set a type of water</p>
+            <h4 className="error">Please set a type of water</h4>
           )}
-          <h4>Visability</h4>
+          <h3>Visability</h3>
           <Slider
             type="range"
             className="form__input"
@@ -269,7 +269,7 @@ export default function LogBook() {
             setRangeState={setVisability}
             register={register}
           />
-          <h4>Depth</h4>
+          <h3>Depth</h3>
           <Slider
             type="range"
             className="form__input"
@@ -284,15 +284,15 @@ export default function LogBook() {
             registerForSelect={register}
             register={register}
           />
-          <h4>Weather Conditions</h4>
+          <h3>Weather Conditions</h3>
           <Radio name="weather" categories={weatherTypes} value={weatherTypes} register={register} />
         </Container>
         <Container>
           <label htmlFor="entryTime">
-            <h4>Entry</h4>
+            <h3>Entry</h3>
           </label>
           <label htmlFor="entryDate">
-            <h4>Date / Time</h4>
+            <h3>Date / Time</h3>
           </label>
           <Input
             type="datetime-local"
@@ -301,7 +301,7 @@ export default function LogBook() {
             ref={register}
           />
           <label htmlFor="entryAir">
-            <p>Air</p>
+            <h4>Air</h4>
           </label>
           <Input
             type="number"
@@ -311,18 +311,18 @@ export default function LogBook() {
             ref={register({ min: 30, max: 300 })}
           />
           {errors.entryAir && errors.entryAir.type === 'min' && (
-            <p className="error">It seems, that this is really dangerous!</p>
+            <h4 className="error">It seems, that this is really dangerous!</h4>
           )}
           {errors.entryAir && errors.entryAir.type === 'max' && (
-            <p className="error">Are you sure, you need that much?</p>
+            <h4 className="error">Are you sure, you need that much?</h4>
           )}
         </Container>
         <Container>
           <label htmlFor="exitTime">
-            <h4>Exit</h4>
+            <h3>Exit</h3>
           </label>
           <label htmlFor="exitDate">
-            <p>Date / Time</p>
+            <h4>Date / Time</h4>
           </label>
           <Input
             type="datetime-local"
@@ -331,7 +331,7 @@ export default function LogBook() {
             ref={register}
           />
           <label htmlFor="exitAir">
-            <p>Air</p>
+            <h4>Air</h4>
           </label>
           <Input
             type="number"
@@ -341,15 +341,15 @@ export default function LogBook() {
             ref={register({ min: 0, max: 290 })}
           />
           {errors.exitAir && errors.exitAir.type === 'min' && (
-            <p className="error">Sorry buddy, but I need a valid number.</p>
+            <h4 className="error">Sorry buddy, but I need a valid number.</h4>
           )}
           {errors.exitAir && errors.exitAir.type === 'max' && (
-            <p className="error">You sure, you didn't breathe?</p>
+            <h4 className="error">You sure, you didn't breathe?</h4>
           )}
         </Container>
         <Container>
           <label htmlFor="typeOfDive">
-            <h4>Type of Dive</h4>
+            <h3>Type of Dive</h3>
           </label>
           <div className="form__dive__checkboxes">
             {diveTypes.map((diveType) => (
@@ -358,7 +358,7 @@ export default function LogBook() {
           </div>
         </Container>
         <Container>
-          <h4>Upload a picture</h4>
+          <h3>Upload a picture</h3>
           <FileInput name="image" onChange={handleChange} text="Upload" />
           <ImageName>{image ? image.name : ''}</ImageName>
         </Container>
@@ -373,11 +373,11 @@ export default function LogBook() {
             ref={register({ maxLength: 1000 })}
           />
           {errors.description && errors.description.type === 'maxLength' && (
-            <p className="error">Please dont write a book.</p>
+            <h4 className="error">Please dont write a book.</h4>
           )}
         </Container>
         <Container>
-          <h4>Save your stamp</h4>
+          <h3>Save your stamp</h3>
           <CameraSite
             handleCamUpload={handleCamUpload}
             cardImage={cardImage}
@@ -415,12 +415,16 @@ const LogBookForm = styled.form`
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
-    gap: 5px;
+    gap: 15px;
   }
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  
+  input {
+    margin: 16px 10px;
   }
 `
 
@@ -435,6 +439,10 @@ const Container = styled.article`
   padding: 40px;
   margin: 40px 10px 10px;
   width: 80%;
+  
+  h3 {
+    margin: 12px 0;
+  }
 `
 
 const Description = styled.textarea`
